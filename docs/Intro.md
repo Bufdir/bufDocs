@@ -7,7 +7,7 @@ tags:
 
 # Skrive docs i bufdocs
 
-File layout
+### File layout
 Your documentation source should be written as regular Markdown files (see Writing with Markdown below), and placed in the documentation directory. By default, this directory will be named docs and will exist at the top level of your project, alongside the mkdocs.yml configuration file.
 
 The simplest project you can create will look something like this:
@@ -17,7 +17,7 @@ docs/
     index.md
 By convention your project homepage should be named index.md (see Index pages below for details). Any of the following file extensions may be used for your Markdown source files: markdown, mdown, mkdn, mkd, md. All Markdown files included in your documentation directory will be rendered in the built site regardless of any settings.
 
-Note
+### Note
 
 Files and directories with names which begin with a dot (for example: .foo.md or .bar/baz.md) are ignored by MkDocs. This can be overridden with the exclude_docs config.
 
@@ -48,14 +48,14 @@ Source files inside nested directories will cause pages to be generated with nes
 /license/
 Any files which are not identified as Markdown files (by their file extension) within the documentation directory are copied by MkDocs to the built site unaltered. See how to link to images and media below for details.
 
-Index pages
+### Index pages
 When a directory is requested, by default, most web servers will return an index file (usually named index.html) contained within that directory if one exists. For that reason, the homepage in all of the examples above has been named index.md, which MkDocs will render to index.html when building the site.
 
 Many repository hosting sites provide special treatment for README files by displaying the contents of the README file when browsing the contents of a directory. Therefore, MkDocs will allow you to name your index pages as README.md instead of index.md. In that way, when users are browsing your source code, the repository host can display the index page of that directory as it is a README file. However, when MkDocs renders your site, the file will be renamed to index.html so that the server will serve it as a proper index file.
 
 If both an index.md file and a README.md file are found in the same directory, then the index.md file is used and the README.md file is ignored.
 
-Configure Pages and Navigation
+### Configure Pages and Navigation
 The nav configuration setting in your mkdocs.yml file defines which pages are included in the global site navigation menu as well as the structure of that menu. If not provided, the navigation will be automatically created by discovering all the Markdown files in the documentation directory. An automatically created navigation configuration will always be sorted alphanumerically by file name (except that index files will always be listed first within a sub-section). You will need to manually define your navigation configuration if you would like your navigation menu sorted differently.
 
 A minimal navigation configuration could look like this:
@@ -88,7 +88,7 @@ Note that a section cannot have a page assigned to it. Sections are only contain
 
 Any pages not listed in your navigation configuration will still be rendered and included with the built site, however, they will not be linked from the global navigation and will not be included in the previous and next links. Such pages will be "hidden" unless linked to directly.
 
-Writing with Markdown
+## Writing with Markdown
 MkDocs pages must be authored in Markdown, a lightweight markup language which results in easy-to-read, easy-to-write plain text documents that can be converted to valid HTML documents in a predictable manner.
 
 MkDocs uses the Python-Markdown library to render Markdown documents to HTML. Python-Markdown is almost completely compliant with the reference implementation, although there are a few very minor differences.
@@ -97,16 +97,16 @@ In addition to the base Markdown syntax which is common across all Markdown impl
 
 MkDocs includes some extensions by default, which are highlighted below.
 
-Internal links
+### Internal links
 MkDocs allows you to interlink your documentation by using regular Markdown links. However, there are a few additional benefits to formatting those links specifically for MkDocs as outlined below.
 
-Linking to pages
+### Linking to pages
 When linking between pages in the documentation you can simply use the regular Markdown linking syntax, including the relative path to the Markdown document you wish to link to.
 
 Please see the [project license](license.md) for further details.
 When the MkDocs build runs, these Markdown links will automatically be transformed into an HTML hyperlink to the appropriate HTML page.
 
-Warning
+### Warning
 
 Using absolute paths with links is not officially supported. Relative paths are adjusted by MkDocs to ensure they are always relative to the page. Absolute paths are not modified at all. This means that your links using absolute paths might work fine in your local environment but they might break once you deploy them to your production server.
 
@@ -120,7 +120,7 @@ Note that IDs are created from the text of a header. All text is converted to lo
 
 There are a few configuration settings provided by the toc extension which you can set in your mkdocs.yml configuration file to alter the default behavior:
 
-permalink
+### permalink
 
 Generate permanent links at the end of each header. Default: False.
 
@@ -140,7 +140,7 @@ markdown_extensions:
       baselevel: 2
 Then any headers in your document would be increased by 1. For example, the header # Header would be rendered as a level 2 header (<h2>) in the HTML output.
 
-separator
+### separator
 
 Word separator. Default: -.
 
@@ -156,7 +156,8 @@ markdown_extensions:
       permalink: "#"
       baselevel: 2
       separator: "_"
-Linking to images and media
+
+### Linking to images and media
 As well as the Markdown source files, you can also include other file types in your documentation, which will be copied across when generating your documentation site. These might include images and other media.
 
 For example, if your project documentation needed to include a GitHub Pages CNAME file and a PNG formatted screenshot image then your file layout might look as follows:
@@ -178,21 +179,21 @@ Cupcake indexer is a snazzy new project for indexing small cakes.
 *Above: Cupcake indexer in progress*
 Your image will now be embedded when you build the documentation, and should also be previewed if you're working on the documentation with a Markdown editor.
 
-Linking from raw HTML
+### Linking from raw HTML
 Markdown allows document authors to fall back to raw HTML when the Markdown syntax does not meets the author's needs. MkDocs does not limit Markdown in this regard. However, as all raw HTML is ignored by the Markdown parser, MkDocs is not able to validate or convert links contained in raw HTML. When including internal links within raw HTML, you will need to manually format the link appropriately for the rendered document.
 
-Meta-Data
+### Meta-Data
 MkDocs includes support for both YAML and MultiMarkdown style meta-data (often called front-matter). Meta-data consists of a series of keywords and values defined at the beginning of a Markdown document, which are stripped from the document prior to it being processing by Python-Markdown. The key/value pairs are passed by MkDocs to the page template. Therefore, if a theme includes support, the values of any keys can be displayed on the page or used to control the page rendering. See your theme's documentation for information about which keys may be supported, if any.
 
 In addition to displaying information in a template, MkDocs includes support for a few predefined meta-data keys which can alter the behavior of MkDocs for that specific page. The following keys are supported:
 
-template
+### template
 
 The template to use with the current page.
 
 By default, MkDocs uses the main.html template of a theme to render Markdown pages. You can use the template meta-data key to define a different template file for that specific page. The template file must be available on the path(s) defined in the theme's environment.
 
-title
+### title
 
 The "title" to use for the document.
 
@@ -209,7 +210,7 @@ The filename of a document.
 
 Upon finding a title for a page, MkDoc does not continue checking any additional sources in the above list.
 
-YAML Style Meta-Data
+### YAML Style Meta-Data
 YAML style meta-data consists of YAML key/value pairs wrapped in YAML style delimiters to mark the start and/or end of the meta-data. The first line of a document must be ---. The meta-data ends at the first line containing an end deliminator (either --- or ...). The content between the delimiters is parsed as YAML.
 
 ---
@@ -224,7 +225,7 @@ some_url: https://example.com
 This is the first paragraph of the document.
 YAML is able to detect data types. Therefore, in the above example, the values of title, summary and some_url are strings, the value of authors is a list of strings and the value of date is a datetime.date object. Note that the YAML keys are case sensitive and MkDocs expects keys to be all lowercase. The top level of the YAML must be a collection of key/value pairs, which results in a Python dict being returned. If any other type is returned or the YAML parser encounters an error, then MkDocs does not recognize the section as meta-data, the page's meta attribute will be empty, and the section is not removed from the document.
 
-MultiMarkdown Style Meta-Data
+### MultiMarkdown Style Meta-Data
 MultiMarkdown style meta-data uses a format first introduced by the MultiMarkdown project. The data consists of a series of keywords and values defined at the beginning of a Markdown document, like this:
 
 Title:   My Document
@@ -246,7 +247,7 @@ Note
 
 MkDocs does not support YAML style delimiters (--- or ...) for MultiMarkdown style meta-data. In fact, MkDocs relies on the the presence or absence of the delimiters to determine whether YAML style meta-data or MultiMarkdown style meta-data is being used. If the delimiters are detected, but the content between the delimiters is not valid YAML meta-data, MkDocs does not attempt to parse the content as MultiMarkdown style meta-data.
 
-Tables
+### Tables
 The tables extension adds a basic table syntax to Markdown which is popular across multiple implementations. The syntax is rather simple and is generally only useful for simple tabular data.
 
 A simple table looks like this:
@@ -271,7 +272,7 @@ Note that table cells cannot contain any block level elements and cannot contain
 
 Additionally, a table must be surrounded by blank lines. There must be a blank line before and after the table.
 
-Fenced code blocks
+### Fenced code blocks
 The fenced code blocks extension adds an alternate method of defining code blocks without indentation.
 
 The first line should contain 3 or more backtick (`) characters, and the last line should contain the same number of backtick characters (`):
