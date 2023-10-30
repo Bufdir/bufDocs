@@ -1,4 +1,10 @@
-# BufdirWeb
+---
+tags:
+  - README
+  - Setup
+---
+
+# BufdirWeb README
 
 BufdirWeb is the solution containing the codebase for the web portal Bufdir.no -
 an average/normal CMS site based on Episerver.

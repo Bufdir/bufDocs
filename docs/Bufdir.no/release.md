@@ -1,3 +1,9 @@
+---
+tags:
+  - Release
+  - Version
+---
+
 # Releasing and deploy this project
 
 ## Make release branch
