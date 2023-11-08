@@ -13,14 +13,26 @@ description.
 
 ### Fixed
 
-- Fixed bug with linklist block not supporting horizontal mode and hide arrows
-- Upgraded to optimizely 12.23
-
 ### Added
-- added functionality to preview blocks
+
 ### Removed
 
 ### Changed
+
+
+## [2.24.0] - 2023-11-03
+
+### Fixed
+- Fixed bug with linklist block not supporting horizontal mode and hide arrows
+- Upgraded to optimizely 12.23
+- Updated License file for test 
+
+### Added
+- added functionality to preview blocks
+- Added (dedicated) pagetype for contacting foster care offices 
+
+### Changed
+- Start using new fosterhjem api in test environment
 
 
 ## [2.23.0] - 2023-10-13
