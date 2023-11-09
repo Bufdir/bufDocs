@@ -12,7 +12,7 @@ description.
 ## [Unreleased] - YYYY-MM-DD
 
 ### Fixed
-
+ - made notfound handler available for all editors
 ### Added
 
 ### Removed
