@@ -12,32 +12,38 @@ description.
 ## [Unreleased] - YYYY-MM-DD
 
 ### Fixed
- - made notfound handler available for all editors
+
+- made notfound handler available for all editors
+
 ### Added
+
+- Online Library with pseudo pagination (Step 2)
 
 ### Removed
 
 ### Changed
 
-
 ## [2.24.0] - 2023-11-03
 
 ### Fixed
+
 - Fixed bug with linklist block not supporting horizontal mode and hide arrows
 - Upgraded to optimizely 12.23
-- Updated License file for test 
+- Updated License file for test
 
 ### Added
+
 - added functionality to preview blocks
-- Added (dedicated) pagetype for contacting foster care offices 
+- Added (dedicated) pagetype for contacting foster care offices
 
 ### Changed
-- Start using new fosterhjem api in test environment
 
+- Start using new fosterhjem api in test environment
 
 ## [2.23.0] - 2023-10-13
 
 ### Fixed
+
 - Reconfigured Serilog to log to new seq-instance
 - Changed how title is displayed for program block program items
 - updated bufdir_stat to v3.0.2
@@ -608,7 +614,7 @@ Missing changelog documentation...
   [^1]
 
 | Package                 | From    | To      |
-| ----------------------- | ------- | ------- |
+|-------------------------|---------|---------|
 | bufdir_stat             | 1.1.5   | 1.1.6   |
 | bulma                   | 0.9.3   | 0.9.4   |
 | @babel/core             | 7.17.7  | 7.18.9  |
@@ -742,7 +748,7 @@ Missing changelog documentation...
 - Upgraded backend to dotnet 5.0
 - Upgraded CMS to new version
 - Lots of changes to Elastic Search implementation
-  - Moved away from Epinova module, now custom implementation.
+    - Moved away from Epinova module, now custom implementation.
 
 ## [1.3.1] - 2022-02-DD
 
@@ -825,9 +831,9 @@ Missing changelog documentation...
 ## [1.1.0] -2021-12-01
 
 - Major pipeline changes
-  - Config changes to KV secrets
-  - ES6 building frontend
-  - Npm cache
+    - Config changes to KV secrets
+    - ES6 building frontend
+    - Npm cache
 - Structure reformatting in frontend
 - Oslo integration
 - "Fant du det du lette etter" started
@@ -838,7 +844,7 @@ Missing changelog documentation...
 
 - Technical YELL
 - Bugfixes
-  - Fosterhjem release bugs
+    - Fosterhjem release bugs
 - Authentication to API
 - GTM changes
 - Package management
