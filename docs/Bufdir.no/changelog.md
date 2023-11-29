@@ -13,11 +13,15 @@ description.
 
 ### Fixed
 
+- Fixed issue with tabs in component props
+
 ### Added
 
 ### Removed
 
 ### Changed
+
+- Replaced IMemoryCache with IObjectInstanceCache
 
 - Updated buflib
 
