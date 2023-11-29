@@ -19,6 +19,8 @@ description.
 
 ### Changed
 
+- Updated buflib
+
 ## [2.25.0] - 2023-11-23
 
 ### Fixed
@@ -621,7 +623,7 @@ Missing changelog documentation...
   [^1]
 
 | Package                 | From    | To      |
-| ----------------------- | ------- | ------- |
+|-------------------------|---------|---------|
 | bufdir_stat             | 1.1.5   | 1.1.6   |
 | bulma                   | 0.9.3   | 0.9.4   |
 | @babel/core             | 7.17.7  | 7.18.9  |
@@ -755,7 +757,7 @@ Missing changelog documentation...
 - Upgraded backend to dotnet 5.0
 - Upgraded CMS to new version
 - Lots of changes to Elastic Search implementation
-  - Moved away from Epinova module, now custom implementation.
+    - Moved away from Epinova module, now custom implementation.
 
 ## [1.3.1] - 2022-02-DD
 
@@ -838,9 +840,9 @@ Missing changelog documentation...
 ## [1.1.0] -2021-12-01
 
 - Major pipeline changes
-  - Config changes to KV secrets
-  - ES6 building frontend
-  - Npm cache
+    - Config changes to KV secrets
+    - ES6 building frontend
+    - Npm cache
 - Structure reformatting in frontend
 - Oslo integration
 - "Fant du det du lette etter" started
@@ -851,7 +853,7 @@ Missing changelog documentation...
 
 - Technical YELL
 - Bugfixes
-  - Fosterhjem release bugs
+    - Fosterhjem release bugs
 - Authentication to API
 - GTM changes
 - Package management
