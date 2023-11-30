@@ -9,15 +9,23 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
+
 ## [Unreleased] - YYYY-MM-DD
 
 ### Fixed
 
-- Fixed issue with tabs in component props
-
 ### Added
 
 ### Removed
+
+### Changed
+
+
+## [2.26.0] - 2023-11-30
+
+### Fixed
+
+- Fixed issue with tabs in component props
 
 ### Changed
 
