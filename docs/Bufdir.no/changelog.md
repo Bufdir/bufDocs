@@ -20,6 +20,11 @@ description.
 
 ### Changed
 
+## [2.27.0] - 2023-12-06
+
+### Fixed
+
+- Change how V8 engine is created to avoid cache issues
 
 ## [2.26.0] - 2023-11-30
 
