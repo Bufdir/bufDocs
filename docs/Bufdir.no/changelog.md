@@ -9,7 +9,6 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
-
 ## [Unreleased] - YYYY-MM-DD
 
 ### Fixed
@@ -19,6 +18,8 @@ description.
 ### Removed
 
 ### Changed
+
+- Updated bufdir_stat to version 3.0.5
 
 ## [2.27.0] - 2023-12-06
 
