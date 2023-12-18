@@ -13,10 +13,13 @@ description.
 
 ### Fixed
 
-### Added
-- Online Library step 3 (document page, pagination)
+- Navigation issue caused by using relative routes instead of absolute routes in nettbibliotek
 
- - Added google site verification file 
+### Added
+
+- Online Library step 3 (document page, pagination)
+-
+- Added google site verification file
 
 ### Removed
 
