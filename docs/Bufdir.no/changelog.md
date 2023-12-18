@@ -15,6 +15,8 @@ description.
 
 ### Added
 
+ - Added google site verification file 
+
 ### Removed
 
 ### Changed
