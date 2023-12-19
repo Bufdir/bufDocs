@@ -18,7 +18,7 @@ description.
 ### Added
 
 - Online Library step 3 (document page, pagination)
--
+
 - Added google site verification file
 
 ### Removed
