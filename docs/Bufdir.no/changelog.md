@@ -26,6 +26,7 @@ description.
 ### Changed
 
 - Updated bufdir_stat to version 3.0.5
+- Updated Buflib to 3.1.4
 
 ## [2.27.0] - 2023-12-06
 
