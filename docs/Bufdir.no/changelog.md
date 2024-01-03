@@ -18,8 +18,9 @@ description.
 ### Added
 
 - Online Library step 3 (document page, pagination)
-
+- Redesigned Search page and zero hits
 - Added google site verification file
+- Added tracking of search terms
 
 ### Removed
 
