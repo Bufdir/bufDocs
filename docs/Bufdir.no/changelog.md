@@ -21,6 +21,7 @@ description.
 - Redesigned Search page and zero hits
 - Added google site verification file
 - Added tracking of search terms
+- Added tracking to nettbibliotek search and clicks 
 
 ### Removed
 
