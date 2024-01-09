@@ -21,14 +21,14 @@ description.
 - Redesigned Search page and zero hits
 - Added google site verification file
 - Added tracking of search terms
-- Added tracking to nettbibliotek search and clicks 
+- Added tracking to nettbibliotek search and clicks
 
 ### Removed
 
 ### Changed
 
 - Updated bufdir_stat to version 3.0.5
-- Updated Buflib to 3.1.4
+- Updated Buflib to 3.1.5
 
 ## [2.27.0] - 2023-12-06
 
