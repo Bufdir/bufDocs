@@ -13,7 +13,19 @@ description.
 
 ### Fixed
 
+### Added
+
+### Removed
+
+### Changed
+
+
+## [2.28.0] - 2023-12-20
+
+### Fixed
+
 - Navigation issue caused by using relative routes instead of absolute routes in nettbibliotek
+- Wrong number of documents sometimes shown when using online library pagination.
 
 ### Added
 
@@ -22,8 +34,6 @@ description.
 - Added google site verification file
 - Added tracking of search terms
 - Added tracking to nettbibliotek search and clicks
-
-### Removed
 
 ### Changed
 
