@@ -12,6 +12,7 @@ description.
 ## [Unreleased] - YYYY-MM-DD
 
 ### Fixed
+- Wrong number of search items shown in online library
 
 ### Added
 
