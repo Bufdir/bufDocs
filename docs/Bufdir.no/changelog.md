@@ -15,6 +15,7 @@ description.
 - Wrong number of search items shown in online library
 
 ### Added
+- Show only tagged/whitelisted documents from online library
 
 ### Removed
 
