@@ -20,26 +20,30 @@ description.
 
 ### Changed
 
+## [2.29.0] - 2023-01-15
+
+### Fixed
+- Wrong number of documents sometimes shown when using online library pagination.
+
+### Added
+- Online Library step 3 (document page, pagination)
+- Redesigned Search page and zero hits
+- Added tracking of search terms
+- Added tracking to nettbibliotek search and clicks
+
+### Changed
+- Updated Buflib to 3.1.5
 
 ## [2.28.0] - 2023-12-20
 
 ### Fixed
 
 - Navigation issue caused by using relative routes instead of absolute routes in nettbibliotek
-- Wrong number of documents sometimes shown when using online library pagination.
-
-### Added
-
-- Online Library step 3 (document page, pagination)
-- Redesigned Search page and zero hits
-- Added google site verification file
-- Added tracking of search terms
-- Added tracking to nettbibliotek search and clicks
 
 ### Changed
 
 - Updated bufdir_stat to version 3.0.5
-- Updated Buflib to 3.1.5
+
 
 ## [2.27.0] - 2023-12-06
 
