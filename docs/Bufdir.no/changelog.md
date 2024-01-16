@@ -40,6 +40,16 @@ description.
 ### Fixed
 
 - Navigation issue caused by using relative routes instead of absolute routes in nettbibliotek
+- Fixed UU issues on foreldrestiltest
+- Wrong number of documents sometimes shown when using online library pagination.
+
+### Added
+
+- Online Library step 3 (document page, pagination)
+- Redesigned Search page and zero hits
+- Added google site verification file
+- Added tracking of search terms
+- Added tracking to nettbibliotek search and clicks
 
 ### Changed
 
