@@ -14,6 +14,8 @@ description.
 ### Fixed
 
 - Wrong number of search items shown in online library
+- guidelinechaptercontent error
+- Fix Application Insights config bug
 - Wrong error message displayed when document is not found in online library
 
 ### Added
@@ -21,8 +23,9 @@ description.
 - Show only tagged/whitelisted documents from online library
 
 ### Removed
-
+- Remove Archive Page template/controller 
 ### Changed
+- Disabled PermanentLinkKeeper Init code from Bufdir.SEO
 
 ## [2.29.0] - 2023-01-15
 
