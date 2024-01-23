@@ -48,7 +48,14 @@ reading/writing the data used by the controllers via the `Data` layer etc. It al
 
 ## Getting Started
 
-`appsettings.json` has a local db connection string. To set up a local environment, download [Sql Server developer edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) and install the [`ef core` tools](https://learn.microsoft.com/en-us/ef/core/cli/dotnet). Create a `dsmapi` database (for instance using [SSMS](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16)) and run `dotnet ef database update` in the `Data` project directory to apply the database schema.
+To set up a local environment, you need an instance of SQL Server - you can for example download [Sql Server developer edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads), or use LocalDB if you have that available.
+
+For MacOS you probably need to use docker to start an sql database.
+
+`appsettings.json` has a local db connection string which must be updated accordingly.
+
+In development when starting the API The schema and database should automatically be created,
+the api provides an endpoint to seed the database with some hard coded questions, this endpoint can for now be called from the swagger page.
 
 ### Key vault
 
@@ -71,5 +78,6 @@ In addition to the client credentials flow protecting the web api, we needed a t
 We do this by adding a `x-bufdir-personno` http header containing a salted hash of the current users person number in the FSA backend. We can then verify that the person number in the header matches the person number in the json body, and that the header was added by the FSA using a secret preshared salt.
 
 # Database
+
 The version of EF core tools are defined in the manifest file `dotnet-tools.json`. To get the correct version of EF core tools execute the CLI command `dotnet restore`.
 When changing the database model a new migration file can be created by executing the CLI command; `dotnet ef migrations add <ChangeDescription>`.
