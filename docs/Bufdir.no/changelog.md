@@ -27,6 +27,8 @@ description.
 ### Changed
 - Disabled PermanentLinkKeeper Init code from Bufdir.SEO
 
+- Updated buflib to 3.1.6
+
 ## [2.29.0] - 2023-01-15
 
 ### Fixed
