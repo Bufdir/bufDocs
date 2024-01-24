@@ -24,3 +24,4 @@
 | Fosterhjem Api |       |        |               |                              |
 |                | dev   | x      | Web App       | crbufdirnodevtest.azurecr.io |
 
+Feature: https://dev.azure.com/Smidig/Bufdir.no/_workitems/edit/22820
