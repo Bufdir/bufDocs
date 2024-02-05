@@ -13,6 +13,18 @@ description.
 
 ### Fixed
 
+### Added
+
+### Removed
+
+### Changed
+
+
+
+## [2.30.0] - 2024-02-01
+
+### Fixed
+
 - Wrong number of search items shown in online library
 - guidelinechaptercontent error
 - Fix Application Insights config bug
