@@ -12,7 +12,7 @@ description.
 ## [Unreleased] - YYYY-MM-DD
 
 ### Fixed
-
+ - Prevent error box from blinking in document details for online library
 ### Added
 
 ### Removed
