@@ -12,14 +12,17 @@ description.
 ## [Unreleased] - YYYY-MM-DD
 
 ### Fixed
- - Prevent error box from blinking in document details for online library
+
 ### Added
 
 ### Removed
 
 ### Changed
 
+## [2.31.0] - 2024-02-05
 
+### Fixed
+ - Prevent error box from blinking in document details for online library
 
 ## [2.30.0] - 2024-02-01
 
