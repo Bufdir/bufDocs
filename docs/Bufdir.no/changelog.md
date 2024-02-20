@@ -18,6 +18,7 @@ description.
 ### Removed
 
 ### Changed
+ - Changed survey result wording for take test again 
 
 ## [2.31.0] - 2024-02-05
 
