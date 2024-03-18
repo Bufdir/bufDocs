@@ -14,15 +14,6 @@ We do not find snapshot tests useful.
 
 ## Notes
 
-### Fetch error
-
-Tests run in Node. Node does not support fetch natively atm, so polyfill it by
-importing whatwg-fetch:
-
-```javascript
-import 'whatwg-fetch';
-```
-
 ### Google ReCaptcha
 
 Mock google recaptcha api like this:

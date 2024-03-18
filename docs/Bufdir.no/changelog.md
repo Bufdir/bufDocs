@@ -13,6 +13,12 @@ description.
 
 ### Fixed
 
+- Wrong number of search items shown in online library
+- Removed unneccessary spacing
+
+### Added
+
+
 ### Added
 
 ### Removed
@@ -41,6 +47,10 @@ description.
 ### Added
 
 - Show only tagged/whitelisted documents from online library
+- go to main content and main menu links
+- logic for conditional rendering of small teaser
+- forced teaserlist to be small
+- Spacing to Guidline page
 
 ### Removed
 
@@ -56,6 +66,7 @@ description.
 
 ### Fixed
 
+- Wrong number of documents sometimes shown when using online library pagination.
 - Wrong number of documents sometimes shown when using online library
   pagination.
 
@@ -65,6 +76,7 @@ description.
 - Redesigned Search page and zero hits
 - Added tracking of search terms
 - Added tracking to nettbibliotek search and clicks
+- margin bottom to accordion list
 
 ### Changed
 
