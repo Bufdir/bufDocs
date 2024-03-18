@@ -14,10 +14,7 @@ description.
 ### Fixed
 
 - Wrong number of search items shown in online library
-- Removed unneccessary spacing
-
-### Added
-
+- Changed survey result wording for take test again
 
 ### Added
 
@@ -27,7 +24,7 @@ description.
 
 ### Changed
 
-- Changed survey result wording for take test again
+- Rewrote the frontend framework from ReactJs.NET to Next.js
 
 ## [2.31.0] - 2024-02-05
 
@@ -66,7 +63,6 @@ description.
 
 ### Fixed
 
-- Wrong number of documents sometimes shown when using online library pagination.
 - Wrong number of documents sometimes shown when using online library
   pagination.
 
