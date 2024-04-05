@@ -9,6 +9,8 @@ First, start up the dotnet backend server:
 dotnet run
 ```
 
+Copy the .env.example to .env.local and ask a teammember for the AZURE_AD_CLIENT_SECRET
+
 Then, run the Next.js development server:
 
 ```bash
