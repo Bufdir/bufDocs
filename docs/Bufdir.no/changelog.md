@@ -17,7 +17,9 @@ description.
 - Changed survey result wording for take test again
 
 ### Added
+
 - Added title of current environment in the top bar in edit mode
+- Added siteimprove script
 
 ### Removed
 
