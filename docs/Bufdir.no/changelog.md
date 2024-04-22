@@ -28,6 +28,7 @@ description.
 ### Changed
 
 - Rewrote the frontend framework from ReactJs.NET to Next.js
+- Making headers in yellow tile areas smaller.
 
 ## [2.31.0] - 2024-02-05
 
