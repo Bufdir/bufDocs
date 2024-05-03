@@ -24,6 +24,8 @@ description.
 ### Removed
 
 - Removed Bing Ads and Google Floodlight scripts
+- Remove flag useSecondary from the Link List block (needs to be cleaned from db
+  manually via cms gui)
 
 ### Changed
 
