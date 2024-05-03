@@ -29,6 +29,8 @@ description.
 
 - Rewrote the frontend framework from ReactJs.NET to Next.js
 - Making headers in yellow tile areas smaller.
+- Slightly changed the design of the guideline page to be able to have alot
+  cleaner code.
 
 ## [2.31.0] - 2024-02-05
 
