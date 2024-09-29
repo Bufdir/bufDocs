@@ -13,6 +13,69 @@ description.
 
 ### Fixed
 
+- fix simple address not redirecting to actual url
+
+### Added
+
+- Added breadcrumbs to Statistics Monitor pages
+- added Link styles in tinymce editor
+
+### Removed
+
+- removed media button from tinymce editor
+- moved aria-live for child service results to h2
+- updated buflib to v5 (new links and teasers)
+- updated bufdir_stat to version 6 (better NextJs support and support for buflib
+  v5)
+
+### Removed
+
+- removed media button from tinymce editor
+
+### Changed
+
+- running each page of bufdir_stat in dedicated Nextjs routes
+
+## [3.1.0] - 2024-09-02
+
+### Fixed
+
+- remove space under block if is rich-text followed by another rich-text block
+- fixed html rendering without content (missing/lacking null checks)
+- hide unused fields in guideline chapter page
+- add icons and favico files - add link to manifest file
+- fixed wss csp issue for hotjar
+- Bug 42751: Veiledere: interne lenker er brutt
+- fixed html rendering without content (missing/lacking null checks)
+- add missing application insights key
+- fixed bug where carousel was rendered even when images were missing
+- add hotjar domain to csp
+- upgrade node version of frontendcontainer to handle memory leak
+- update license for qa and production
+
+### Added
+
+- upgrades to veileder mal to handle rettsdata content
+- add new fields to guideline section
+
+## [3.0.1] - 2024-08-21
+
+### Fixed
+
+- Exception on imageblock when key is missing on dictionary
+- Guidelinepager failing on external links
+- Mediaflow - CSP error
+
+### Added
+
+- Additional logging on CDA errors
+
+## [3.0.0] - 2024-08-20
+
+### Fixed
+
+- #42644 - fix barnevern-filter
+- #42186 - add print button to focus order
 - Wrong number of search items shown in online library
 - Changed survey result wording for take test again
 
@@ -29,6 +92,7 @@ description.
 
 ### Changed
 
+- relase.md updated to new procedure
 - Rewrote the frontend framework from ReactJs.NET to Next.js
 - Making headers in yellow tile areas smaller.
 - Slightly changed the design of the guideline page to be able to have alot

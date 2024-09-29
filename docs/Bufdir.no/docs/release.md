@@ -10,7 +10,7 @@ The version should follow [semver](https://semver.org/).
 
 ## Update version number
 
-Update version number in ./src/Site/Frontend/package.json to the same as you
+Update version number in ./src/NextJs/package.json to the same as you
 chose for the project when creating the release branch (for example 1.2.3).
 
 package.json example:
@@ -21,7 +21,7 @@ package.json example:
   "version": "1.2.3",
 ```
 
-and then run `npm run i` and `npm run build` in /src/Site/Frontend.
+and then run `npm i` and `npm run build` in /src/NextJs.
 
 ## Update the changelog
 
