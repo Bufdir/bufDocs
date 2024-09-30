@@ -17,7 +17,6 @@ description.
 
 ### Added
 
-- Added breadcrumbs to Statistics Monitor pages
 - added Link styles in tinymce editor
 
 ### Removed
