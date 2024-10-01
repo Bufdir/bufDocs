@@ -14,6 +14,8 @@ description.
 ### Fixed
 
 - fix simple address not redirecting to actual url
+- guideline pages: drop side menu heading from focus order
+- guideline pages: fix focus styling for side menu links
 
 ### Added
 
@@ -27,13 +29,10 @@ description.
 - updated bufdir_stat to version 6 (better NextJs support and support for buflib
   v5)
 
-### Removed
-
-- removed media button from tinymce editor
-
 ### Changed
 
 - running each page of bufdir_stat in dedicated Nextjs routes
+- guideline pages: updated styling on side menu, using "menu links"
 
 ## [3.1.0] - 2024-09-02
 
