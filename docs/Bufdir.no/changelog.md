@@ -28,6 +28,7 @@ description.
 - updated buflib to v5 (new links and teasers)
 - updated bufdir_stat to version 6 (better NextJs support and support for buflib
   v5)
+- removed all code concerning youtube
 
 ### Changed
 
