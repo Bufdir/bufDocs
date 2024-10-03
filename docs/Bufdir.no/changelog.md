@@ -20,6 +20,7 @@ description.
 ### Added
 
 - added Link styles in tinymce editor
+- added subtext field to WelcomeBlock
 
 ### Removed
 
@@ -34,6 +35,7 @@ description.
 
 - running each page of bufdir_stat in dedicated Nextjs routes
 - guideline pages: updated styling on side menu, using "menu links"
+- TranportLink/WelcomeBlock: updated styling according to new design
 
 ## [3.1.0] - 2024-09-02
 
