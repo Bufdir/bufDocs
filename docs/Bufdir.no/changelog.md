@@ -20,15 +20,12 @@ description.
 ### Added
 
 - added Link styles in tinymce editor
+- guideline pages: added search to side menu
 - added subtext field to WelcomeBlock
 
 ### Removed
 
 - removed media button from tinymce editor
-- moved aria-live for child service results to h2
-- updated buflib to v5 (new links and teasers)
-- updated bufdir_stat to version 6 (better NextJs support and support for buflib
-  v5)
 - removed all code concerning youtube
 
 ### Changed
@@ -36,6 +33,10 @@ description.
 - running each page of bufdir_stat in dedicated Nextjs routes
 - guideline pages: updated styling on side menu, using "menu links"
 - TranportLink/WelcomeBlock: updated styling according to new design
+- moved aria-live for child service results to h2
+- updated buflib to v5 (new links and teasers)
+- updated bufdir_stat to version 6 (better NextJs support and support for buflib
+  v5)
 
 ## [3.1.0] - 2024-09-02
 
