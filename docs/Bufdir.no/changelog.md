@@ -14,8 +14,12 @@ description.
 ### Fixed
 
 - fix simple address not redirecting to actual url
+
+- increase max upload file size to 140 MB 
+
 - guideline pages: drop side menu heading from focus order
 - guideline pages: fix focus styling for side menu links
+
 
 ### Added
 
