@@ -11,19 +11,19 @@ description.
 
 ## [Unreleased] - YYYY-MM-DD
 
+### Added
+
+- guideline pages: added search hits per section
+
+## [3.2.0] - YYYY-MM-DD
+
 ### Fixed
 
 - fix simple address not redirecting to actual url
-
-
 - fix pdf pages not displaying on transport page
-
-- increase max upload file size to 140 MB 
-
-
+- increase max upload file size to 140 MB
 - guideline pages: drop side menu heading from focus order
 - guideline pages: fix focus styling for side menu links
-
 
 ### Added
 
