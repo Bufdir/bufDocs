@@ -23,6 +23,16 @@ description.
 
 ### Fixed
 
+### Added
+
+### Removed
+
+### Changed
+
+## [3.2.0] - 2024-10-10
+
+### Fixed
+
 - fix simple address not redirecting to actual url
 - fix pdf pages not displaying on transport page
 - increase max upload file size to 140 MB
