@@ -13,7 +13,11 @@ description.
 
 ### Added
 
+
 - guideline pages: added search hits per section
+
+### Changed
+- changed trailing slash to be default because links from optimizely has it 
 
 ## [3.2.0] - YYYY-MM-DD
 
