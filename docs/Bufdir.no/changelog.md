@@ -14,6 +14,7 @@ description.
 ### Added
 
 - guideline pages: added search hits per section
+- added CSP Rules to allow Hotjar fonts and images
 
 ### Changed
 
