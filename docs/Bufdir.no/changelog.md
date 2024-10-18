@@ -11,6 +11,16 @@ description.
 
 ## [Unreleased] - YYYY-MM-DD
 
+### Fixed
+
+### Added
+
+### Removed
+
+### Changed
+
+## [3.3.0] - 2024-10-18
+
 ### Added
 
 - guideline pages: added search hits per section
