@@ -11,7 +11,9 @@ description.
 
 ## [Unreleased] - YYYY-MM-DD
 
+
 ### Fixed
+- fix a bug in online library due to url change and possibly due to enabling trailing slashes
 
 ### Added
 
