@@ -32,6 +32,7 @@ description.
 
 - guideline pages: added search hits per section
 - added CSP Rules to allow Hotjar fonts and images
+- added Feedback (Fant du det du lette etter?) to all statistics pages
 
 ### Changed
 
