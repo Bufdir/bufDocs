@@ -9,17 +9,22 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
+
 ## [Unreleased] - YYYY-MM-DD
 
 
 ### Fixed
-- fix a bug in online library due to url change and possibly due to enabling trailing slashes
 
 ### Added
 
 ### Removed
 
 ### Changed
+
+## [3.3.1] - 2024-10-21
+
+### Fixed
+- fix a bug in online library due to url change and possibly due to enabling trailing slashes
 
 ## [3.3.0] - 2024-10-18
 
