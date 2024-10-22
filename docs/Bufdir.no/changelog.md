@@ -9,11 +9,13 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
-
 ## [Unreleased] - YYYY-MM-DD
 
-
 ### Fixed
+
+- Guideline search: show number of hits, even when search term has below 3 chars
+- Guideline search: do not show separate hits for separate words in the same
+  search term
 
 ### Added
 
@@ -24,7 +26,9 @@ description.
 ## [3.3.1] - 2024-10-21
 
 ### Fixed
-- fix a bug in online library due to url change and possibly due to enabling trailing slashes
+
+- fix a bug in online library due to url change and possibly due to enabling
+  trailing slashes
 
 ## [3.3.0] - 2024-10-18
 
