@@ -20,6 +20,7 @@ description.
 ### Added
 
 ### Removed
+ - removed old views for pages which were used when optimizely was responsible for rendering pages
 
 ### Changed
 
