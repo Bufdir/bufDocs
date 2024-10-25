@@ -16,6 +16,7 @@ description.
 - Guideline search: show number of hits, even when search term has below 3 chars
 - Guideline search: do not show separate hits for separate words in the same
   search term
+- fix search from menu issues with menu not closing and query terms not updating
 
 ### Added
 
