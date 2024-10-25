@@ -20,6 +20,8 @@ description.
 
 ### Added
 
+- Guideline pages: added detailed table of content
+
 ### Removed
  - removed old views for pages which were used when optimizely was responsible for rendering pages
 

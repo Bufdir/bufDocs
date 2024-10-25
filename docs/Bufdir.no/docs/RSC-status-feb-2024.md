@@ -242,8 +242,8 @@ via callback prop opp til `Survey` og kjørt `finishTest` der. Uansett:
 ## TableOfContentGuideline
 
 CC Kunne nok fått inn `MenuInfo` og `MenuItems` som children/props i `Guideline`
-page templaten, slik at de kunne vært RSC. De er direkte importert i
-`TableContentMenu` i dag
+page templaten, slik at de kunne vært RSC. De er direkte importert i `SideMenu`
+i dag
 
 ## TransportLink
 
