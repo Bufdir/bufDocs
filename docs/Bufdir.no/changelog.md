@@ -17,9 +17,12 @@ description.
 - Guideline search: do not show separate hits for separate words in the same
   search term
 - fix search from menu issues with menu not closing and query terms not updating
+- updated buflib to v5.1.3 (fix for carousel caption in full screen, 1px pointer
+  link hover issue and accordion list toggle-all z-index issue)
 
 ### Added
- - added matomo tracking of global search and online library search
+
+- added matomo tracking of global search and online library search
 
 - Guideline pages: added detailed table of content with search/filter
 
