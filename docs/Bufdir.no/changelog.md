@@ -19,6 +19,7 @@ description.
 - fix search from menu issues with menu not closing and query terms not updating
 
 ### Added
+ - added matomo tracking of global search and online library search
 
 - Guideline pages: added detailed table of content with search/filter
 
