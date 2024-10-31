@@ -20,10 +20,12 @@ description.
 
 ### Added
 
-- Guideline pages: added detailed table of content
+- Guideline pages: added detailed table of content with search/filter
 
 ### Removed
- - removed old views for pages which were used when optimizely was responsible for rendering pages
+
+- removed old views for pages which were used when optimizely was responsible
+  for rendering pages
 
 ### Changed
 
