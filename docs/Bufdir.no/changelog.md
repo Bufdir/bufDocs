@@ -25,6 +25,9 @@ description.
 ### Added
 
 - added matomo tracking of global search and online library search
+
+- added support for ingress in linklistblock and add job to migrate to new property
+
 - Guideline pages: added detailed table of content with search/filter
 
 ### Removed
