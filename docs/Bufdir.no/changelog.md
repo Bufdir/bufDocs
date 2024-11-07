@@ -13,6 +13,16 @@ description.
 
 ### Fixed
 
+### Added
+
+### Removed
+
+### Changed
+
+## [3.4.0] - 2024-11-04
+
+### Fixed
+
 - guideline search: show number of hits, even when search term has below 3 chars
 - guideline search: do not show separate hits for separate words in the same
   search term
@@ -26,7 +36,8 @@ description.
 
 - added matomo tracking of global search and online library search
 
-- added support for ingress in linklistblock and add job to migrate to new property
+- added support for ingress in linklistblock and add job to migrate to new
+  property
 
 - Guideline pages: added detailed table of content with search/filter
 
@@ -34,8 +45,6 @@ description.
 
 - removed old views for pages which were used when optimizely was responsible
   for rendering pages
-
-### Changed
 
 ## [3.3.1] - 2024-10-21
 
