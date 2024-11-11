@@ -13,6 +13,9 @@ description.
 
 ### Fixed
 
+ - fixed header/footer (layout) to work correct on no/en pages
+ - refactored feedback-props
+
 ### Added
 
 ### Removed
