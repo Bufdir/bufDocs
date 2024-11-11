@@ -16,7 +16,8 @@ description.
 ### Added
 
 ### Removed
-
+ - removed customized handling of 404,500 from Optimizely
+ 
 ### Changed
 
 ## [3.4.0] - 2024-11-04
