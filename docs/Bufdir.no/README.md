@@ -50,6 +50,10 @@ a site built with Optimizely and NextJs.
 
 ## General
 
+Remember to authenticate with the nuget feed. Install the credential provider
+from here:
+https://github.com/microsoft/artifacts-credprovider#azure-artifacts-credential-provider
+
 1. Build the solution (right click the "Site" project and click "Build" in
    Visual Studio or `dotnet restore --interactive` and `dotnet build` in CLI)
 2. Run the site by using the menus in VS or Ctrl+F5 or `dotnet run` or
