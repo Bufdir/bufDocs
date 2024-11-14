@@ -17,6 +17,7 @@ description.
  - refactored feedback-props
 
 ### Added
+ - added big links option for linklist block
 
 ### Removed
  - removed customized handling of 404,500 from Optimizely
