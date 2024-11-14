@@ -25,6 +25,22 @@ window.grecaptcha = {
 };
 ```
 
+### Mobile & Remote Testing
+
+By using Ngrok, you can test on mobile and share the development server with
+team members remotely, making it easy to share & co-work.
+
+**Configuration Ngrok**
+
+Download and install Ngrok from this link [Ngrok](https://ngrok.com/)
+
+Ensure `USE_NGROK=true` is set in `.env.local` as your local env file.
+
+Run `ngrok http https://localhost:3000` in the terminal.
+
+Then, use & share the link that auto generated from Ngrok app. (ex.
+https://0f03-80-232-32-53.ngrok-free.app)
+
 ## Useful Links
 
 - React Testing Library
