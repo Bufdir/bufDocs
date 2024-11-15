@@ -15,6 +15,9 @@ description.
 
  - fixed header/footer (layout) to work correct on no/en pages
  - refactored feedback-props
+ - feedback dashboard
+ - feedback endpoints moved from function apps into feedbackapicontroller
+ 
 
 ### Added
  - added big links option for linklist block
