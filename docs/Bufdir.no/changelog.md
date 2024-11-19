@@ -15,6 +15,7 @@ description.
 
  - fixed header/footer (layout) to work correct on no/en pages
  - refactored feedback-props
+ - new design on search in page on mobile
  - feedback dashboard
  - feedback endpoints moved from function apps into feedbackapicontroller
  
@@ -24,7 +25,7 @@ description.
 
 ### Removed
  - removed customized handling of 404,500 from Optimizely
- 
+
 ### Changed
 
 ## [3.4.0] - 2024-11-04
