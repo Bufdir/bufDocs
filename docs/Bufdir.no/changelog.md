@@ -13,6 +13,10 @@ description.
 
 ### Fixed
 
+- fixed header/footer (layout) to work correct on no/en pages
+- refactored feedback-props
+- feedback dashboard
+- feedback endpoints moved from function apps into feedbackapicontroller
  - fixed header/footer (layout) to work correct on no/en pages
  - refactored feedback-props
  - new design on search in page on mobile
@@ -21,9 +25,14 @@ description.
  
 
 ### Added
- - added big links option for linklist block
+
+- added big links option for linklist block
+- added tests for PostalSearchHandler
+- added tests for PostalSearchModal
 
 ### Removed
+
+- removed customized handling of 404,500 from Optimizely
  - removed customized handling of 404,500 from Optimizely
 
 ### Changed
