@@ -36,6 +36,10 @@ description.
 
 ### Changed
 
+### Added
+
+- added input result message to detailed table of contents in guideline pages
+
 ## [3.4.0] - 2024-11-04
 
 ### Fixed
