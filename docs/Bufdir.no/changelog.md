@@ -9,7 +9,7 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
-## [Unreleased] - YYYY-MM-DD
+## [3.5.0] - 2024-11-20
 
 ### Fixed
 
@@ -17,12 +17,11 @@ description.
 - refactored feedback-props
 - feedback dashboard
 - feedback endpoints moved from function apps into feedbackapicontroller
- - fixed header/footer (layout) to work correct on no/en pages
- - refactored feedback-props
- - new design on search in page on mobile
- - feedback dashboard
- - feedback endpoints moved from function apps into feedbackapicontroller
- 
+- fixed header/footer (layout) to work correct on no/en pages
+- refactored feedback-props
+- new design on search in page on mobile
+- feedback dashboard
+- feedback endpoints moved from function apps into feedbackapicontroller
 
 ### Added
 
@@ -33,7 +32,7 @@ description.
 ### Removed
 
 - removed customized handling of 404,500 from Optimizely
- - removed customized handling of 404,500 from Optimizely
+- removed customized handling of 404,500 from Optimizely
 
 ### Changed
 
