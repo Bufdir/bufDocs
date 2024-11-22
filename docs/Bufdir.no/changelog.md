@@ -9,6 +9,21 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
+## [Unreleased] - YYYY-MM-DD
+
+### Fixed
+
+- Fixed bug where hits were still marked after closing search on mobile and desktop
+- Fixed bug where accordion icon was visible in front of the search in page on mobile
+
+### Added
+
+
+### Removed
+
+
+### Changed
+
 ## [3.5.0] - 2024-11-20
 
 ### Fixed
