@@ -13,22 +13,28 @@ description.
 
 ### Fixed
 
-- Fixed bug where hits were still marked after closing search on mobile and desktop
-- Fixed bug where accordion icon was visible in front of the search in page on mobile
+- Added tests for the Xhtmlstring component (render method of content areas and
+  rich text areas)
+- Fixed bug where hits were still marked after closing search on mobile and
+  desktop
+- Fixed bug where accordion icon was visible in front of the search in page on
+  mobile
 - feedback-dashboard | fix filter-bug when editing feedback
 - changed to using bufdirno scss variables instead of buflib variables
 
 ### Added
 
+### Added
 
 ### Removed
 
-
 ### Changed
+
 - feedback-dashboard | preserve filter-state
 - feedback-dashboard | width on filter-inputs increased
 - feedback-dashboard | new column - Oppdatert
-- feedback-dashboard | moved expander button from own column to inside comment column
+- feedback-dashboard | moved expander button from own column to inside comment
+  column
 - feedback-dashboard | break-word and white space to show more of the feedback
 - Updated the design on table of contents on mobile
 

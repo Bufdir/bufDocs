@@ -25,6 +25,25 @@ window.grecaptcha = {
 };
 ```
 
+### Testing async RSC
+
+React testing library does not have support for async RSC, but we can still
+manage to do it by awaiting and rendering the component as a function instead of
+rendering as jsx, like so:
+
+```typescript
+const Result = await Xhtmlstring(props);
+render(Result);
+```
+
+and then testing what is rendered by using the ´screen´ class supplied by RTL,
+like so:
+
+```typescript
+const text = screen.getByText('This is a test');
+expect(text).toBeInTheDocument();
+```
+
 ### Mobile & Remote Testing
 
 By using Ngrok, you can test on mobile and share the development server with
