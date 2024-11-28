@@ -48,3 +48,13 @@ export default tseslint.config({
   },
 })
 ```
+
+## Uvikling lokalt
+
+npm run build
+se siden på https://localhost:44320/Feedback/Dashboard
+data hentes og oppdateres i database
+
+npm run dev 
+se siden på http://localhost:5173/
+data hentes fra lokal.json fil og data lagres ikke tilbake, nedlasting fungerer ikke
