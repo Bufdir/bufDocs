@@ -12,6 +12,7 @@ description.
 ## [Unreleased] - YYYY-MM-DD
 
 ### Fixed
+ - fixed issue with stats pages not displaying 404 when pages not found
 
 ### Added
 
