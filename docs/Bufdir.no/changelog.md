@@ -12,11 +12,16 @@ description.
 ## [Unreleased] - YYYY-MM-DD
 
 ### Fixed
- - fixed issue with stats pages not displaying 404 when pages not found
+
+- fixed issue with stats pages not displaying 404 when pages not found
 
 ### Added
 
 ### Added
+
+- New global menu configuration
+- New global menu GUI
+- Feature toggle for new global menu
 
 ### Removed
 
