@@ -15,6 +15,7 @@ description.
 - Fixed bug where side menu showed in front of menu
 - Fixed search in page on mobile, which did not show any more when triggered
  - fixed issue with stats pages not displaying 404 when pages not found
+ - fixed issue with robots.txt not returning anything
 
 - fixed issue with stats pages not displaying 404 when pages not found
 
