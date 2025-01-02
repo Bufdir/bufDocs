@@ -16,9 +16,15 @@ section so that the log lines don't mix upon finishing the started release.
 
 ### Fixed
 
-- Fixed issue with robots.txt not returning anything
+- Fixed bug where side menu showed in front of menu
+- Fixed search in page on mobile, which did not show any more when triggered
+ - fixed issue with robots.txt not returning anything
+ - fixed issue with metadata description not being presented which was provided by optimizely
+- fixed issue with stats pages not displaying 404 when pages not found
+
 - Updated buflib to v6 beta (highlights: new button styles, new media query
   breakpoints)
+
 
 ### Added
 
