@@ -13,14 +13,10 @@ description.
 
 Note: 3.6.0 is not released at the time of writing, but starting new unreleased
 section so that the log lines don't mix upon finishing the started release.
-### Fixed
-- Fixed bug where side menu showed in front of menu
-- Fixed search in page on mobile, which did not show any more when triggered
- - fixed issue with stats pages not displaying 404 when pages not found
- - fixed issue with robots.txt not returning anything
 
 ### Fixed
 
+- Fixed issue with robots.txt not returning anything
 - Updated buflib to v6 beta (highlights: new button styles, new media query
   breakpoints)
 
