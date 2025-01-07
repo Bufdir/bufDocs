@@ -29,6 +29,8 @@ section so that the log lines don't mix upon finishing the started release.
 ### Removed
 
 ### Changed
+- Started using the Portal component in the EventSignup, PostalSearchModal and
+  CookieSettings components
 
 ## [3.6.0] - 2024-12-20
 
