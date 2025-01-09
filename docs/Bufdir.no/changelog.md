@@ -21,6 +21,7 @@ section so that the log lines don't mix upon finishing the started release.
   by optimizely
 - Updated buflib to v6 beta (highlights: new button styles, new media query
   breakpoints)
+- Document details page: display text as abstract when supported by reIndex
 - Add a 300ms delay before showing loading state on button for contact forms,
   feedback, newsletters and postal searches
 
