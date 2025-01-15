@@ -17,6 +17,7 @@ section so that the log lines don't mix upon finishing the started release.
 ### Fixed
 
 - Fixed issue with robots.txt not returning anything
+- fixed issue with shadow not showing no sticky top on menu v2
 - Fixed issue with metadata description not being presented which was provided
   by optimizely
 - Updated buflib to v6 beta (highlights: new button styles, new media query
