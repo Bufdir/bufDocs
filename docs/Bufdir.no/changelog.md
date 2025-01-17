@@ -11,6 +11,17 @@ description.
 
 ## [Unreleased] - YYYY-MM-DD
 
+### Fixed
+
+### Added
+
+### Removed
+
+### Changed
+
+
+## [3.7.0] - 2025-01-16
+
 Note: 3.6.0 is not released at the time of writing, but starting new unreleased
 section so that the log lines don't mix upon finishing the started release.
 
@@ -27,10 +38,6 @@ section so that the log lines don't mix upon finishing the started release.
   feedback, newsletters and postal searches
 - Fixed styling for CTA buttons
 - Fixed styling for all buttons that do not use the BlButton component
-
-### Added
-
-### Removed
 
 ### Changed
 - Started using the Portal component in the EventSignup, PostalSearchModal and
