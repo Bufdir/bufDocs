@@ -2,15 +2,19 @@
 
 ## Make release branch
 
-Start by pulling the latest changes from the develop and main branch and then
-run from develop: `git flow release start` followed by the new version number
-for the project (for example 1.2.3).
+Start by pulling the latest changes from the main and develop branches and then
+(from develop) run:
 
-The version should follow [semver](https://semver.org/).
+```bash
+$ git flow release start [version]
+```
+
+The version is the new version number for the project (for example 1.2.3) and
+should follow [semver](https://semver.org/).
 
 ## Update version number
 
-Update version number in ./src/NextJs/package.json to the same as you
+Update the version number in ./src/NextJs/package.json to the same as you
 chose for the project when creating the release branch (for example 1.2.3).
 
 package.json example:
@@ -18,10 +22,15 @@ package.json example:
 ```json
 {
   "name": "projectname",
-  "version": "1.2.3",
+  "version": "1.2.3"
+}
 ```
 
-and then run `npm i` and `npm run build` in /src/NextJs.
+Then go to /src/NextJs and run
+```bash
+$ npm i
+$ npm run build
+```
 
 ## Update the changelog
 
@@ -41,11 +50,16 @@ this release.
 The lead tester will prompt for QA releases. If we need to release without being
 prompted by the lead tester, then make sure to notice him/her.
 
-Commit the changes and make the commit message be the same as the version of the
+Commit the changes and make the commit message the same as the new version of the
 project (for example 1.2.3).
 
-Run `git flow release publish` from the release branch to trigger a deploy to
-QA.
+While on the release branch, run the following to trigger a deploy to QA:
+```bash
+$ git flow release publish
+```
+
+You can check the progress of the builds (one for frontend and one for backend)
+in Azure devops pipelines.
 
 ## Deploy to PROD
 
@@ -54,10 +68,15 @@ the release on the QA environment.
 
 Pull latest changes on the current release branch (in case someone else has made
 "patches" on the active release branch), the `main` branch, and the `develop`
-branch (to avoid merge conflicts) and then run `git flow release finish`.
+branch (to avoid merge conflicts) and then run:
+```bash
+$ git flow release finish
+```
 
-**If you are prompted by the terminal to write in a file, write the same as the
-commit message (version of the project, for example 1.2.3), save and close.**
+**You will most likely be prompted several times by the terminal to write in a
+file.** Check the following list to see the steps `git flow release finish` goes
+through. For the merge commits add the version number (for example 1.2.3) to the
+message and for the tag, just write the version number before you save and close.
 
 `git flow release finish` will:
 
@@ -66,12 +85,22 @@ commit message (version of the project, for example 1.2.3), save and close.**
 - back-merge the release into 'develop'
 - remove the release branch
 
-Now push the changes from the develop branch with `git push` (this will trigger
-a deploy to DevTest).
+Now make sure you are on the develop branch, where you will trigger a deploy to
+DevTest by pushing the changes with:
 
-Then checkout the `main` branch and push the changes and the tags with
-`git push && git push --tags` to trigger a deploy to PROD.
+```bash
+$ git push
+```
 
-The release will first go to a "staging slot", which will have to be "swapped"
-for the "prod slot" in the azure prod webapp settings, after the staging slots
-url has been tested by a tester and approved for swapping.
+Then check out the `main` branch and trigger a deploy to PROD by push the changes
+and the tags with:
+```bash
+git push && git push --tags
+```
+
+You can check the progress of the builds (one for frontend and one for backend)
+in Azure devops pipelines.
+
+The release will be deployed as a container to a docker registry, the pipeline will
+then trigger a revision update to a container app in Azure. This update takes some
+time and will usually finish a few minutes after the pipeline has finished.
