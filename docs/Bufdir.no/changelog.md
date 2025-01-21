@@ -12,6 +12,8 @@ description.
 ## [Unreleased] - YYYY-MM-DD
 
 ### Fixed
+ - upgrade bufdir stat to 7.1.0 which fixes switching graphs not working for downloading,
+   and icons not displaying on graph buttons
 
 ### Added
 
