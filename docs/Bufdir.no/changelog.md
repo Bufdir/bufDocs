@@ -16,6 +16,7 @@ description.
    and icons not displaying on graph buttons
 
 ### Added
+ - Add robots meta tag to all pages with a default value and overwrites from Optimizely
 
 ### Removed
 
