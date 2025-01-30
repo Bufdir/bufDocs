@@ -12,17 +12,22 @@ description.
 ## [Unreleased] - YYYY-MM-DD
 
 ### Fixed
- - upgrade bufdir stat to 7.1.0 which fixes switching graphs not working for downloading,
-   and icons not displaying on graph buttons
- - removed empty h2 tags from video blocks
+
+- upgrade bufdir stat to 7.1.0 which fixes switching graphs not working for
+  downloading, and icons not displaying on graph buttons
+- removed empty h2 tags from video blocks
 
 ### Added
- - Add robots meta tag to all pages with a default value and overwrites from Optimizely
+
+- Add robots meta tag to all pages with a default value and overwrites from
+  Optimizely
+- Add matomo tracking when opening signup form
 
 ### Removed
 
 ### Changed
 
+- Updated version of unused blocks and media
 
 ## [3.7.0] - 2025-01-16
 
@@ -44,6 +49,7 @@ section so that the log lines don't mix upon finishing the started release.
 - Fixed styling for all buttons that do not use the BlButton component
 
 ### Changed
+
 - Started using the Portal component in the EventSignup, PostalSearchModal and
   CookieSettings components
 
