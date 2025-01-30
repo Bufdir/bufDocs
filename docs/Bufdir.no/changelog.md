@@ -14,6 +14,7 @@ description.
 ### Fixed
  - upgrade bufdir stat to 7.1.0 which fixes switching graphs not working for downloading,
    and icons not displaying on graph buttons
+ - removed empty h2 tags from video blocks
 
 ### Added
  - Add robots meta tag to all pages with a default value and overwrites from Optimizely
