@@ -17,6 +17,7 @@ description.
   downloading, and icons not displaying on graph buttons
 - removed empty h2 tags from video blocks
 - Fix hypenation issue on title in the Footer component via buflib 6.0.0 upgrade
+- Remove empty list (EventListComponent)
 
 ### Added
 
