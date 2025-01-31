@@ -16,6 +16,7 @@ description.
 - upgrade bufdir stat to 7.1.0 which fixes switching graphs not working for
   downloading, and icons not displaying on graph buttons
 - removed empty h2 tags from video blocks
+- Fix hypenation issue on title in the Footer component via buflib 6.0.0 upgrade
 
 ### Added
 
@@ -28,6 +29,7 @@ description.
 ### Changed
 
 - Updated version of unused blocks and media
+- Upgraded buflib to 6.0.0
 
 ## [3.7.0] - 2025-01-16
 
@@ -824,7 +826,7 @@ section so that the log lines don't mix upon finishing the started release.
 - Institutions now shows contact info even if only address info is set
 - Removed punctuation after day in foster care event listing.
 - Updated bufdir_stat package from 1.1.9 to v1.1.11.
-- Updated Statistics.ApiUrl to https://statistikk.bufdir.no in the production
+- Updated Statistics.ApiUrl to <https://statistikk.bufdir.no> in the production
   app settings.
 
 ### Removed
@@ -899,7 +901,7 @@ section so that the log lines don't mix upon finishing the started release.
 
 ### Fixed
 
-- Routing logo and breadcrumb start to relative root, instead of www.bufdir.no
+- Routing logo and breadcrumb start to relative root, instead of <www.bufdir.no>
 
 ## [2.9.0] - 2022-09-23
 
