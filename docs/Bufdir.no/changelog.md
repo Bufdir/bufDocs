@@ -13,6 +13,7 @@ description.
 
 ### Fixed
 
+- upgrade bufdir stat to 8.0.0 for switching to strapi 5
 - upgrade bufdir stat to 7.1.0 which fixes switching graphs not working for
   downloading, and icons not displaying on graph buttons
 - removed empty h2 tags from video blocks
