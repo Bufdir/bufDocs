@@ -14,6 +14,17 @@ description.
 ### Fixed
 
 - upgrade bufdir stat to 8.0.0 for switching to strapi 5
+### Added
+
+### Removed
+
+### Changed
+
+
+## [3.8.0] - 2025-02-03
+
+### Fixed
+
 - upgrade bufdir stat to 7.1.0 which fixes switching graphs not working for
   downloading, and icons not displaying on graph buttons
 - removed empty h2 tags from video blocks
@@ -25,8 +36,6 @@ description.
 - Add robots meta tag to all pages with a default value and overwrites from
   Optimizely
 - Add matomo tracking when opening signup form
-
-### Removed
 
 ### Changed
 
