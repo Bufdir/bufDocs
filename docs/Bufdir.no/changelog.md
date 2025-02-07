@@ -13,12 +13,17 @@ description.
 
 ### Fixed
 
-- upgrade bufdir stat to 8.0.0 for switching to strapi 5
 ### Added
 
 ### Removed
 
 ### Changed
+
+## [3.9.0] - 2025-02-05
+
+### Fixed
+
+- upgrade bufdir stat to 8.0.0 for switching to strapi 5
 
 
 ## [3.8.0] - 2025-02-03
