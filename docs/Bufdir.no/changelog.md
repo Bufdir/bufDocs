@@ -14,7 +14,7 @@ description.
 ### Fixed
 
 ### Added
-
+ - added more options to the remove format button 
 ### Removed
 
 ### Changed
