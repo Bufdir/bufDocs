@@ -14,17 +14,30 @@ description.
 ### Fixed
 
 ### Added
- - added more options to the remove format button 
+
 ### Removed
 
 ### Changed
+
+## [Unreleased] - YYYY-MM-DD
+
+### Fixed
+
+### Added
+
+- added more options to the remove format button
+
+### Removed
+
+### Changed
+
+- upgrade Buflib 6.1.1
 
 ## [3.9.0] - 2025-02-05
 
 ### Fixed
 
 - upgrade bufdir stat to 8.0.0 for switching to strapi 5
-
 
 ## [3.8.0] - 2025-02-03
 
