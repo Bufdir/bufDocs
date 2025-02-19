@@ -15,7 +15,12 @@ description.
 
 ### Added
 
+- implemented filtering on onlinelibrary
+- implemented termlist/search/record fetch in next-js backend
+
 ### Removed
+
+- removed reindex code from cms-backend
 
 ### Changed
 
