@@ -12,7 +12,7 @@ description.
 ## [Unreleased] - YYYY-MM-DD
 
 ### Fixed
-
+ - change priority for ingress in link list block so that locally set ingress triumphs linked ingress
 ### Added
 
 - implemented filtering on onlinelibrary
