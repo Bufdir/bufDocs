@@ -14,6 +14,7 @@ description.
 ### Fixed
  - change priority for ingress in link list block so that locally set ingress triumphs linked ingress
  - disable preview content from appearing on stats pages
+ - increased z-index so that "Go to content / menu works"
 ### Added
 
 - implemented filtering on onlinelibrary
