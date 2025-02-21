@@ -13,6 +13,7 @@ description.
 
 ### Fixed
  - change priority for ingress in link list block so that locally set ingress triumphs linked ingress
+ - disable preview content from appearing on stats pages
 ### Added
 
 - implemented filtering on onlinelibrary
