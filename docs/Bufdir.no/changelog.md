@@ -26,6 +26,8 @@ description.
 
 ### Changed
 
+- removed external link icon from menu links
+
 ## [Unreleased] - YYYY-MM-DD
 
 ### Fixed
