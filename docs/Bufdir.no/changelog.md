@@ -8,13 +8,24 @@ and this project adheres to
 
 See ./docs/release.md for release description. See README.md for release
 description.
-
 ## [Unreleased] - YYYY-MM-DD
+
+### Fixed
+
+### Added
+
+### Removed
+
+### Changed
+
+
+## [3.10.0] - 2025-02-25
 
 ### Fixed
  - change priority for ingress in link list block so that locally set ingress triumphs linked ingress
  - disable preview content from appearing on stats pages
  - increased z-index so that "Go to content / menu works"
+
 ### Added
 
 - implemented filtering on onlinelibrary
@@ -28,17 +39,7 @@ description.
 
 - removed external link icon from menu links
 
-## [Unreleased] - YYYY-MM-DD
-
-### Fixed
-
-### Added
-
 - added more options to the remove format button
-
-### Removed
-
-### Changed
 
 - upgrade Buflib 6.1.1
 
