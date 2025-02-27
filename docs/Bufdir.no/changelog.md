@@ -13,7 +13,7 @@ description.
 ### Fixed
 
 ### Added
-
+  - added region icons for welcome blocks
 ### Removed
 
 ### Changed
