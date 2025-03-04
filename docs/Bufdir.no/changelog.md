@@ -8,23 +8,32 @@ and this project adheres to
 
 See ./docs/release.md for release description. See README.md for release
 description.
+
 ## [Unreleased] - YYYY-MM-DD
 
 ### Fixed
 
+- "Utgiver" filter on rapporter
+- Width on header for servicestart-pages
+- Back-button on document page in rapporter
+
 ### Added
-  - added region icons for welcome blocks
+
+- added region icons for welcome blocks
+- metadata for breadcrumb added to CDA
+
 ### Removed
 
 ### Changed
 
-
 ## [3.10.0] - 2025-02-25
 
 ### Fixed
- - change priority for ingress in link list block so that locally set ingress triumphs linked ingress
- - disable preview content from appearing on stats pages
- - increased z-index so that "Go to content / menu works"
+
+- change priority for ingress in link list block so that locally set ingress
+  triumphs linked ingress
+- disable preview content from appearing on stats pages
+- increased z-index so that "Go to content / menu works"
 
 ### Added
 
