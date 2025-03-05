@@ -9,7 +9,20 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
+
 ## [Unreleased] - YYYY-MM-DD
+
+### Fixed
+
+### Added
+
+### Removed
+
+### Changed
+
+
+
+## [3.11.0] - 2025-03-04
 
 ### Fixed
 
@@ -21,10 +34,6 @@ description.
 
 - added region icons for welcome blocks
 - metadata for breadcrumb added to CDA
-
-### Removed
-
-### Changed
 
 ## [3.10.0] - 2025-02-25
 
