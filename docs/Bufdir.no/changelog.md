@@ -18,7 +18,7 @@ description.
 - correct head title on 404
 
 ### Added
-
+ - new style breadcrumb
 ### Removed
 
 ### Changed
