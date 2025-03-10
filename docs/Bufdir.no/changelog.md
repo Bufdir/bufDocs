@@ -9,19 +9,26 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
+
 ## [Unreleased] - YYYY-MM-DD
 
 ### Fixed
-
-- Localization on close megamenu
-- matomoscript src from .env
-- correct head title on 404
 
 ### Added
  - new style breadcrumb
 ### Removed
 
 ### Changed
+
+
+## [3.12] - 2025-03-07
+
+### Fixed
+
+- Localization on close megamenu
+- matomoscript src from .env
+- correct head title on 404
+- heading spacing in guidelines
 
 ## [3.11.0] - 2025-03-04
 
