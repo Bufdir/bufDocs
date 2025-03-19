@@ -9,17 +9,30 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
-
 ## [Unreleased] - YYYY-MM-DD
 
 ### Fixed
 
 ### Added
- - new style breadcrumb
+
 ### Removed
 
 ### Changed
 
+## [3.13.0] - 2025-03-18
+
+### Fixed
+
+- Image carousel responsive image mapping
+- Empty markup when <ul> lists are empty
+
+### Added
+
+- new style breadcrumb
+
+### Removed
+
+- Old menu code
 
 ## [3.12] - 2025-03-07
 
