@@ -10,12 +10,12 @@ $ git flow release start [version]
 ```
 
 The version is the new version number for the project (for example 1.2.3) and
-should follow [semver](https://semver.org/).
+should follow [semver](https://semver.org/). Check the last ver. in changelog.md
 
 ## Update version number
 
-Update the version number in ./src/NextJs/package.json to the same as you
-chose for the project when creating the release branch (for example 1.2.3).
+Update the version number in ./src/NextJs/package.json to the same as you choose
+for the project when creating the release branch (for example 1.2.3).
 
 package.json example:
 
@@ -27,6 +27,7 @@ package.json example:
 ```
 
 Then go to /src/NextJs and run
+
 ```bash
 $ npm i
 $ npm run build
@@ -50,12 +51,13 @@ this release.
 The lead tester will prompt for QA releases. If we need to release without being
 prompted by the lead tester, then make sure to notice him/her.
 
-Commit the changes and make the commit message the same as the new version of the
-project (for example 1.2.3).
+Commit the changes and make the commit message the same as the new version of
+the project (for example 1.2.3).
 
 While on the release branch, run the following to trigger a deploy to QA:
+
 ```bash
-$ git flow release publish
+$ git flow release publish [version]
 ```
 
 You can check the progress of the builds (one for frontend and one for backend)
@@ -69,14 +71,16 @@ the release on the QA environment.
 Pull latest changes on the current release branch (in case someone else has made
 "patches" on the active release branch), the `main` branch, and the `develop`
 branch (to avoid merge conflicts) and then run:
+
 ```bash
-$ git flow release finish
+$ git flow release finish [version]
 ```
 
 **You will most likely be prompted several times by the terminal to write in a
 file.** Check the following list to see the steps `git flow release finish` goes
 through. For the merge commits add the version number (for example 1.2.3) to the
-message and for the tag, just write the version number before you save and close.
+message and for the tag, just write the version number before you save and
+close.
 
 `git flow release finish` will:
 
@@ -92,8 +96,9 @@ DevTest by pushing the changes with:
 $ git push
 ```
 
-Then check out the `main` branch and trigger a deploy to PROD by push the changes
-and the tags with:
+Then check out the `main` branch and trigger a deploy to PROD by push the
+changes and the tags with:
+
 ```bash
 git push && git push --tags
 ```
@@ -101,6 +106,7 @@ git push && git push --tags
 You can check the progress of the builds (one for frontend and one for backend)
 in Azure devops pipelines.
 
-The release will be deployed as a container to a docker registry, the pipeline will
-then trigger a revision update to a container app in Azure. This update takes some
-time and will usually finish a few minutes after the pipeline has finished.
+The release will be deployed as a container to a docker registry, the pipeline
+will then trigger a revision update to a container app in Azure. This update
+takes some time and will usually finish a few minutes after the pipeline has
+finished.

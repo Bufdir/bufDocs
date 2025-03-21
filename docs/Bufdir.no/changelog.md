@@ -19,6 +19,8 @@ description.
 
 ### Changed
 
+- Family services event duration display
+
 ## [3.13.0] - 2025-03-18
 
 ### Fixed
