@@ -17,6 +17,12 @@ description.
 
 ## [3.13.0] - 2025-03-18
 
+### Changed
+
+- NextJs upgrade to 14.2.25 to include a security patch
+
+## [3.13.0] - 2025-03-18
+
 ### Fixed
 
 - Image carousel responsive image mapping
