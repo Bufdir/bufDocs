@@ -11,15 +11,9 @@ description.
 
 ## [Unreleased] - YYYY-MM-DD
 
-### Fixed
-
-### Added
-
-### Removed
-
 ### Changed
 
-- Family services event duration display
+- uppgraded NextJS from 14.1.4 to 14.2.25 to include a security patch
 
 ## [3.13.0] - 2025-03-18
 
