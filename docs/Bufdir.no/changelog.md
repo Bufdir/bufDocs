@@ -11,15 +11,17 @@ description.
 
 ## [Unreleased] - YYYY-MM-DD
 
-### Changed
+## [3.14.0] - 2025-03-18
 
-- uppgraded NextJS from 14.1.4 to 14.2.25 to include a security patch
+### Added
 
 ## [3.13.0] - 2025-03-18
+- Generere dokumentstruktur fra worddokument med liste av kapitler
 
 ### Changed
 
 - NextJs upgrade to 14.2.25 to include a security patch
+- Visning av dato og klokkeslett på familie kursene
 
 ## [3.13.0] - 2025-03-18
 
