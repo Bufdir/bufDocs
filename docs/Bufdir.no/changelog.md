@@ -14,13 +14,16 @@ description.
 ### Changed
 
 - Refactored EventDuration into a reusable component
+- Cookie modal allways on top and visible in mobile
+- Cookie modal links and buttons focusable first
+- Added [disableCookieModalAutoOpenUrls] field in Optimizely Footer section
 
 ## [3.14.0] - 2025-03-18
 
 ### Changed
 
 - NextJs upgrade to 14.2.25 to include a security patch
-- Visning av dato og klokkeslett på familie kursene
+- Date and time display in family services courses
 
 ## [3.13.0] - 2025-03-18
 
