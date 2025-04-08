@@ -11,6 +11,26 @@ description.
 
 ## [Unreleased] - YYYY-MM-DD
 
+### Added
+
+- disableCookieModalAutoOpenUrls
+
+### Changed
+
+- Cookies UU - Adapt to small screens
+- Cookies UU - Focus on top
+- Cookies UU - Don't show on exceptionsPage - disableCookieModalAutoOpenUrls
+- Refactored EventDuration into a reusable component
+- Family services event duration display
+- using buflib 3.3.1
+- sending eventLevels to the new BLAccordion
+
+## [3.14.0] - 2025-03-18
+
+### Changed
+
+- NextJs upgrade to 14.2.25 to include a security patch
+- Visning av dato og klokkeslett på familie kursene
 ### Changed
 
 - Refactored EventDuration into a reusable component
