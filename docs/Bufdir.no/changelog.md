@@ -27,6 +27,10 @@ description.
 - Display "Finner ikke artikkel" as title when document isn't found on
   DocumentDetailsPage
 
+### Fixed
+
+- Fix displaying report when there is one header in abstract
+
 ## [3.14.0] - 2025-03-18
 
 ### Changed
