@@ -30,6 +30,7 @@ description.
 ### Fixed
 
 - Fix displaying report when there is one header in abstract
+- Fix aria-hidden attribute in breadcrumbs
 
 ## [3.14.0] - 2025-03-18
 
