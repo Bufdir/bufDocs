@@ -24,6 +24,8 @@ description.
 - Family services event duration display
 - using buflib 3.3.1
 - sending eventLevels to the new BLAccordion
+- Display "Finner ikke artikkel" as title when document isn't found on
+  DocumentDetailsPage
 
 ## [3.14.0] - 2025-03-18
 
@@ -31,6 +33,7 @@ description.
 
 - NextJs upgrade to 14.2.25 to include a security patch
 - Visning av dato og klokkeslett på familie kursene
+
 ### Changed
 
 - Refactored EventDuration into a reusable component
