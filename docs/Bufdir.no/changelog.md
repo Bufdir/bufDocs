@@ -22,7 +22,8 @@ description.
 - Cookies UU - Don't show on exceptionsPage - disableCookieModalAutoOpenUrls
 - Refactored EventDuration into a reusable component
 - Family services event duration display
-- using buflib 3.3.1
+- Bump buflib to v.3.3.1
+- Bump bufdir_stat to v.8.0.3
 - sending eventLevels to the new BLAccordion
 - Display "Finner ikke artikkel" as title when document isn't found on
   DocumentDetailsPage
