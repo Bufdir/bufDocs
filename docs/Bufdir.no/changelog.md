@@ -27,6 +27,7 @@ description.
 - sending eventLevels to the new BLAccordion
 - Display "Finner ikke artikkel" as title when document isn't found on
   DocumentDetailsPage
+- Use standard code TinyMCE plugin for WebAdmins
 
 ### Fixed
 
