@@ -23,6 +23,7 @@ description.
 - Removed unused APIs
 - Protect public APIs with bearer token, Optimizely authorization or reCaptcha
 - Report pages uses path based URLs instead of query parameters
+- Implement canonical tags
 
 ## [3.15.0] - 2025-04-22
 
