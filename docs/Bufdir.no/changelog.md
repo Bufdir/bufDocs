@@ -11,6 +11,16 @@ description.
 
 ## [Unreleased] - YYYY-MM-DD
 
+### Fixed
+
+### Added
+
+### Removed
+
+### Changed
+
+## [3.15.0] - YYYY-MM-DD
+
 ### Added
 
 - disableCookieModalAutoOpenUrls
@@ -22,9 +32,9 @@ description.
 - Cookies UU - Don't show on exceptionsPage - disableCookieModalAutoOpenUrls
 - Refactored EventDuration into a reusable component
 - Family services event duration display
-- Bump buflib to v.3.3.1
-- Bump bufdir_stat to v.8.0.3
-- sending eventLevels to the new BLAccordion
+- Bump buflib to v.6.4.2 - New Accordions
+- Bump bufdir_stat to v.8.0.4 - New Accordions
+- sending eventLevels to the new BlAccordion
 - Display "Finner ikke artikkel" as title when document isn't found on
   DocumentDetailsPage
 - Use standard code TinyMCE plugin for WebAdmins
