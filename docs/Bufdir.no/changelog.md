@@ -19,7 +19,10 @@ description.
 
 ### Changed
 
-## [3.15.0] - YYYY-MM-DD
+- Removed unused APIs
+- Protect public APIs with bearer token, Optimizely authorization or reCaptcha
+
+## [3.15.0] - 2025-04-22
 
 ### Added
 
