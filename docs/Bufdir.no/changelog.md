@@ -21,7 +21,8 @@ description.
 
 ### Changed
 
-- Bump bufdir_stat to v.8.0.6 - Stat Accordions adjustments
+- Bump Buflib to v.6.4.6
+- Bump bufdir_stat to v.8.0.7 - Stat Accordions adjustments
 - Removed unused APIs
 - Protect public APIs with bearer token, Optimizely authorization or reCaptcha
 - Report pages uses path based URLs instead of query parameters
