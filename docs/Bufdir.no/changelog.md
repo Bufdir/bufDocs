@@ -13,6 +13,8 @@ description.
 
 ### Fixed
 
+- NewsList list header from heading instead of name
+
 ### Added
 
 ### Removed
