@@ -19,7 +19,13 @@ description.
 
 ### Changed
 
-## [3.16.0] - YYYY-MM-DD
+## [3.16.0] - 2025-04-29
+
+### Fixed
+
+- MegaMenu not closing when clicking a link
+
+## [3.16.0] - 2025-04-29
 
 ### Fixed
 
