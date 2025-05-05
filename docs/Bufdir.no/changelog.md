@@ -13,6 +13,8 @@ description.
 
 ### Fixed
 
+- Revert removal of /api/framework/GetBufdirFramework endpoint
+
 ### Added
 
 ### Removed
