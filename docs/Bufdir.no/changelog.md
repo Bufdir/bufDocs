@@ -26,6 +26,11 @@ description.
 ### Fixed
 
 - MegaMenu closing when clicking a link using <Link> and client side rendering
+## [3.16.2] - 2025-04-30
+
+### Fixed
+
+- Added Next <Link> back in Megamenu
 
 ## [3.16.1] - 2025-04-29
 
