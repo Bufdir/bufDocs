@@ -19,6 +19,8 @@ description.
 
 ### Changed
 
+- Updated CSP with new mediaflow entries
+
 ## [3.16.3] - 2025-05-05
 
 ### Fixed
