@@ -13,6 +13,8 @@ description.
 
 ### Fixed
 
+- Redirect urls with docId parameter to url with docId as segment
+
 ### Added
 
 ### Removed
