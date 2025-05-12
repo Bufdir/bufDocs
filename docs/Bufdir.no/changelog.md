@@ -13,11 +13,17 @@ description.
 
 ### Fixed
 
-- Redirect urls with docId parameter to url with docId as segment
-
 ### Added
 
 ### Removed
+
+### Changed
+
+## [3.16.4] - 2025-05-09
+
+### Fixed
+
+- Redirect urls with docId parameter to url with docId as segment
 
 ### Changed
 
