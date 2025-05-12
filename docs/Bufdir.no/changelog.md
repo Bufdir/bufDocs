@@ -13,6 +13,8 @@ description.
 
 ### Fixed
 
+- Add null check in ReplaceProp method
+
 ### Added
 
 ### Removed
