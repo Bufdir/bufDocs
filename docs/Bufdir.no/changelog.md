@@ -21,6 +21,8 @@ description.
 
 ### Changed
 
+- Improve overview over unused blocks and media
+
 ## [3.16.4] - 2025-05-09
 
 ### Fixed
