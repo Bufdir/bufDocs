@@ -21,6 +21,11 @@ description.
 
 ### Changed
 
+## [3.16.3] - 2025-05-08
+
+### Changed
+
+- refactor code: Footer, CookieSettings components
 - Improve overview over unused blocks and media
 
 ## [3.16.4] - 2025-05-09
