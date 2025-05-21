@@ -25,6 +25,12 @@ description.
 
 ### Changed
 
+- refactor code for mobile speed test: Footer, CookieSettings
+
+## [3.16.3] - 2025-05-08
+
+### Changed
+
 - refactor code: Footer, CookieSettings components
 - Improve overview over unused blocks and media
 
