@@ -21,6 +21,8 @@ description.
 
 ### Changed
 
+- bufdir_stat version bump top 8.0.9
+
 ## [3.16.3] - 2025-05-08
 
 ### Changed
