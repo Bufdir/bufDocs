@@ -14,6 +14,7 @@ description.
 ### Fixed
 
 - Add null check in ReplaceProp method
+- AccordionList header dynamic class based on headingLevels
 
 ### Added
 
