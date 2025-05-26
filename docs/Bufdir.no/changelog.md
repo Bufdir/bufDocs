@@ -22,7 +22,13 @@ description.
 
 ### Changed
 
-- bufdir_stat version bump top 8.0.9
+## [3.16.3] - 2025-05-22
+
+### Changed
+
+- refactor code: Footer, CookieSettings
+- added cookie settings hook
+- created context for cookie settings
 
 ## [3.16.3] - 2025-05-08
 
