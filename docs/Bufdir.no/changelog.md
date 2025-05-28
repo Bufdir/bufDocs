@@ -20,7 +20,13 @@ description.
 
 ### Removed
 
+- Second event signup button in information meeting and course pages under
+  familievern and fosterhjem
+
 ### Changed
+
+- Event signup button type and styling in information meeting and course pages
+  under familievern and fosterhjem
 
 ## [3.16.3] - 2025-05-22
 
