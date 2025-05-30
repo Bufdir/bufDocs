@@ -15,6 +15,7 @@ description.
 
 - Add null check in ReplaceProp method
 - AccordionList header dynamic class based on headingLevels
+- Bump bufdir_stat to v.8.1.0 - Respect ".." and show only decimals gt 0
 
 ### Added
 
@@ -28,27 +29,6 @@ description.
 - Event signup button type and styling in information meeting and course pages
   under familievern and fosterhjem
 
-## [3.16.3] - 2025-05-22
-
-### Changed
-
-- refactor code: Footer, CookieSettings
-- added cookie settings hook
-- created context for cookie settings
-
-## [3.16.3] - 2025-05-08
-
-### Changed
-
-- refactor code for mobile speed test: Footer, CookieSettings
-
-## [3.16.3] - 2025-05-08
-
-### Changed
-
-- refactor code: Footer, CookieSettings components
-- Improve overview over unused blocks and media
-
 ## [3.16.4] - 2025-05-09
 
 ### Fixed
@@ -59,12 +39,21 @@ description.
 
 - Updated CSP with new mediaflow entries
 
-## [3.16.3] - 2025-05-05
+## [3.16.3] - 2025-05-22
 
 ### Fixed
 
 - Revert removal of /api/framework/GetBufdirFramework endpoint
 - Added Next <Link> back in Megamenu missing changes
+
+### Changed
+
+- refactor code: Footer, CookieSettings
+- added cookie settings hook
+- created context for cookie settings
+- Improve overview over unused blocks and media
+- Event signup button type and styling in information meeting and course pages
+  under familievern and fosterhjem
 
 ## [3.16.2] - 2025-05-05
 
