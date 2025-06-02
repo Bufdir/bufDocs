@@ -16,6 +16,7 @@ description.
 - Add null check in ReplaceProp method
 - AccordionList header dynamic class based on headingLevels
 - Bump bufdir_stat to v.8.1.0 - Respect ".." and show only decimals gt 0
+- Pride logo animation fix
 
 ### Added
 
