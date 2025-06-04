@@ -9,6 +9,18 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
+## [unreleased] - 2025-06-02
+
+### Fixed
+
+### Added
+
+### Removed
+
+### Changed
+
+- Bump bufdir_stat to v.8.1.1 - globalUnitsName save fix
+
 ## [3.16.5] - 2025-06-02
 
 ### Fixed
