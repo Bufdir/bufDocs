@@ -20,6 +20,7 @@ description.
 ### Changed
 
 - Bump bufdir_stat to v.8.1.1 - globalUnitsName save fix
+- Remove common content from info meeting page
 
 ## [3.16.5] - 2025-06-02
 
