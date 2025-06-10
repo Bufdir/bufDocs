@@ -13,6 +13,8 @@ description.
 
 ### Fixed
 
+- Fix info page rendering when main body has a block
+
 ### Added
 
 ### Removed
