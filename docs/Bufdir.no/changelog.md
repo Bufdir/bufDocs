@@ -19,6 +19,7 @@ description.
 ### Added
 
 - Implement default template for info meetings
+- Implement below event list area in Office page (familievern)
 
 ### Removed
 
