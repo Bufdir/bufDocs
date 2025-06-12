@@ -17,6 +17,8 @@ description.
 
 ### Added
 
+- Implement default template for info meetings
+
 ### Removed
 
 ### Changed
