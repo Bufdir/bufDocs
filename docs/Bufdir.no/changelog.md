@@ -9,7 +9,17 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
-## [unreleased] - 2025-06-02
+## [Unreleased] - YYYY-MM-DD
+
+### Fixed
+
+### Added
+
+### Removed
+
+### Changed
+
+## [3.16.6] - 2025-06-18
 
 ### Fixed
 
@@ -21,10 +31,9 @@ description.
 - Implement default template for info meetings
 - Implement below event list area in Office page (familievern)
 
-### Removed
-
 ### Changed
 
+- Bump bufdir_stat to v.8.1.2 - Respect ".." in multidimension xls docs
 - Bump bufdir_stat to v.8.1.1 - globalUnitsName save fix
 - Remove common content from info meeting page
 
@@ -36,8 +45,6 @@ description.
 - AccordionList header dynamic class based on headingLevels
 - Bump bufdir_stat to v.8.1.0 - Respect ".." and show only decimals gt 0
 - Pride logo animation fix
-
-### Added
 
 ### Removed
 
@@ -93,10 +100,6 @@ description.
 
 - NewsList list header from heading instead of name
 - Header levels in some accordions
-
-### Added
-
-### Removed
 
 ### Changed
 
