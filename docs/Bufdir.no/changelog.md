@@ -19,6 +19,15 @@ description.
 
 ### Changed
 
+## [3.16.7] - 2025-06-25
+
+### Changed
+
+- buflib, bufdir_stat, next, react and more pkg updates
+- refactored code that was breaking changes.
+- refactored imports in scss files
+- bugfixs, refactor few components for better performance and code quality
+
 ## [3.16.6] - 2025-06-18
 
 ### Fixed
