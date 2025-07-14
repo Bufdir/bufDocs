@@ -15,6 +15,8 @@ description.
 
 ### Added
 
+- Fact box block
+
 ### Removed
 
 ### Changed
