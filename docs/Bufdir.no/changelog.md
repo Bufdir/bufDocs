@@ -13,6 +13,9 @@ description.
 
 ### Fixed
 
+- Add www.google.com to CSP connect-src directive
+- Fix contact form GDPR consent checkbox
+
 ### Added
 
 - Fact box block
