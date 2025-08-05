@@ -24,6 +24,8 @@ description.
 
 ### Changed
 
+- Updated NuGet packages (including Optimizely)
+
 ## [3.16.7] - 2025-06-25
 
 ### Changed
