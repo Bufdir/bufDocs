@@ -11,6 +11,10 @@ description.
 
 ## [Unreleased] - YYYY-MM-DD
 
+### Changed
+
+- Bumped Buflib to v.7.1.1
+
 ### Fixed
 
 - ContenTeasers linkText from heading field
