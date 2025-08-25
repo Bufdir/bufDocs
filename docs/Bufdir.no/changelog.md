@@ -20,6 +20,7 @@ description.
 - ContenTeasers linkText from heading field
 - Add www.google.com to CSP connect-src directive
 - Fix contact form GDPR consent checkbox
+- Fix header language issue
 
 ### Added
 
