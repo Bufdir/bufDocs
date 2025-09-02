@@ -11,6 +11,16 @@ description.
 
 ## [Unreleased] - YYYY-MM-DD
 
+### Fixed
+
+### Added
+
+### Removed
+
+### Changed
+
+## [4.0.0] - 2025-08-25
+
 ### Changed
 
 - Bumped Buflib to v.7.1.1
