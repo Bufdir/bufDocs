@@ -13,6 +13,8 @@ description.
 
 ### Fixed
 
+- Print stylesheet
+
 ### Added
 
 ### Removed
