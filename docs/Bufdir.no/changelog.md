@@ -14,6 +14,7 @@ description.
 ### Fixed
 
 - Print stylesheet
+- Fosterhjem contact form in modal
 
 ### Added
 
