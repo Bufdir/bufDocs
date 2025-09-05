@@ -15,6 +15,7 @@ description.
 
 - Print stylesheet
 - Fosterhjem contact form in modal
+- Uncompatible findLastIndex fn
 
 ### Added
 
