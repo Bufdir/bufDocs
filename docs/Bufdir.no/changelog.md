@@ -15,6 +15,7 @@ description.
 
 - Print stylesheet
 - Fosterhjem contact form in modal
+- Optimizely image thumbnails
 - Uncompatible findLastIndex fn
 
 ### Added
