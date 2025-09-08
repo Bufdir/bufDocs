@@ -20,9 +20,13 @@ description.
 
 ### Added
 
+- ResponsiveTebles in Guidelines
+
 ### Removed
 
 ### Changed
+
+- Bumped Buflib to v.7.2.1
 
 ## [4.0.0] - 2025-08-25
 
