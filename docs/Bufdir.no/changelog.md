@@ -9,7 +9,7 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
-## [Unreleased] - YYYY-MM-DD
+## [4.0.1] - 2025-09-08
 
 ### Fixed
 
