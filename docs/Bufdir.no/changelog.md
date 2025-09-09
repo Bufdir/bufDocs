@@ -9,24 +9,24 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
-## [4.0.1] - 2025-09-08
+## [unreleased] - yyyy-mm-dd
+
+### Added
+
+- ResponsiveTebles in Guidelines
+
+### Changed
+
+- Bumped Buflib to v.7.2.2
+
+## [4.0.1] - 2025-09-09
 
 ### Fixed
 
 - Print stylesheet
 - Fosterhjem contact form in modal
 - Optimizely image thumbnails
-- Uncompatible findLastIndex fn
-
-### Added
-
-- ResponsiveTebles in Guidelines
-
-### Removed
-
-### Changed
-
-- Bumped Buflib to v.7.2.1
+- Uncompatible findLastIndex
 
 ## [4.0.0] - 2025-08-25
 
