@@ -14,6 +14,7 @@ description.
 ### Added
 
 - ResponsiveTebles in Guidelines
+- Faktabox and InfoBox thumbs and description
 
 ### Changed
 
