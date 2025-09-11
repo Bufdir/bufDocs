@@ -11,6 +11,10 @@ description.
 
 ## [unreleased] - yyyy-mm-dd
 
+### Fixed
+
+- 'Ongoing course' label instead of datetime in FamilyServices courses
+
 ### Added
 
 - ResponsiveTebles in Guidelines
