@@ -22,7 +22,7 @@ description.
 
 ### Changed
 
-- Bumped Buflib to v.7.2.2
+- Bumped Buflib to v.7.2.3
 
 ## [4.0.1] - 2025-09-09
 
