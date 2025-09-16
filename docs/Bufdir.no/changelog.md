@@ -9,7 +9,17 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
-## [unreleased] - yyyy-mm-dd
+## [Unreleased] - YYYY-MM-DD
+
+### Fixed
+
+### Added
+
+### Removed
+
+### Changed
+
+## [4.0.2] - 2025-09-16
 
 ### Fixed
 
