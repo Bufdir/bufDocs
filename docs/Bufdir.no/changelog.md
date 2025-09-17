@@ -15,7 +15,8 @@ description.
 
 ### Added
 
--React Loading Skeletons
+- React Loading Skeletons
+- Blocks description in NO for Factbox and Infobox
 
 ### Removed
 
