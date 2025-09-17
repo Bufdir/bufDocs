@@ -15,9 +15,13 @@ description.
 
 ### Added
 
+-React Loading Skeletons
+
 ### Removed
 
 ### Changed
+
+- Extended <PostalSearcHandler> to search without form
 
 ## [4.0.2] - 2025-09-16
 
