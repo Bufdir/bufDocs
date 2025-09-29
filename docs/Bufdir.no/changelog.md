@@ -13,13 +13,27 @@ description.
 
 ### Fixed
 
+- Renewed Optimizely license
+
 ### Added
 
 ### Removed
 
 ### Changed
 
-## [4.0.3] - YYYY-MM-DD
+## [4.0.4] - 2025-09-29
+
+### Fixed
+
+- Renewed Optimizely license
+
+### Added
+
+### Removed
+
+### Changed
+
+## [4.0.3] - 2025-09-17
 
 ### Added
 
