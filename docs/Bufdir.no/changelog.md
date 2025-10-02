@@ -13,25 +13,24 @@ description.
 
 ### Fixed
 
-- Renewed Optimizely license
-
 ### Added
 
 ### Removed
 
 ### Changed
+
+## [4.0.5] - 2025-10-02
+
+### Fixed
+
+- phone number links in href
+- fact box spacing in /fosterhjem/informasjonsmoter/
 
 ## [4.0.4] - 2025-09-29
 
 ### Fixed
 
 - Renewed Optimizely license
-
-### Added
-
-### Removed
-
-### Changed
 
 ## [4.0.3] - 2025-09-17
 
