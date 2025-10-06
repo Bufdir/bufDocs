@@ -15,6 +15,8 @@ description.
 
 ### Added
 
+- Subsidy templates
+
 ### Removed
 
 ### Changed
