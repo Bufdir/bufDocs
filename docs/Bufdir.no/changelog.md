@@ -21,6 +21,9 @@ description.
 
 ### Changed
 
+- Update title handling in ParentSupportedMeasuresApiController and
+  SubsidyApiController to prioritize TeaserHeading
+
 ## [4.0.5] - 2025-10-02
 
 ### Fixed
