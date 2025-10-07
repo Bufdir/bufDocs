@@ -23,6 +23,8 @@ description.
 
 - Update title handling in ParentSupportedMeasuresApiController and
   SubsidyApiController to prioritize TeaserHeading
+- Enhance sorting logic in ParentSupportedMeasuresApiController and
+  SubsidyApiController to take ChildSortOrder into account
 
 ## [4.0.5] - 2025-10-02
 
