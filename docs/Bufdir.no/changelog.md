@@ -26,6 +26,12 @@ description.
 - Enhance sorting logic in ParentSupportedMeasuresApiController and
   SubsidyApiController to take ChildSortOrder into account
 
+## [4.0.6] - YYYY-MM-DD
+
+### Fixed
+
+- css spacing in tilskudd
+
 ## [4.0.5] - 2025-10-02
 
 ### Fixed
