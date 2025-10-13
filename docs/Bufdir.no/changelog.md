@@ -16,6 +16,7 @@ description.
 ### Added
 
 - Subsidy templates
+- NonSelected logic to Survey questions
 
 ### Removed
 
