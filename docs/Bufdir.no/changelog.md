@@ -26,6 +26,7 @@ description.
   SubsidyApiController to prioritize TeaserHeading
 - Enhance sorting logic in ParentSupportedMeasuresApiController and
   SubsidyApiController to take ChildSortOrder into account
+- Surveys use now RadioCards and InputGroup components
 
 ## [4.0.6] - YYYY-MM-DD
 
