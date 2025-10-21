@@ -15,10 +15,24 @@ description.
 
 ### Added
 
+### Removed
+
+### Changed
+
+## [5.0.0] - 2025-10-21
+
+### Fixed
+
+- Wrong font in Bufdir / components from statistics folder
+
+### Added
+
+- Moved components from stat-frontend to Bufdir. path:
+  "/NextJs/src/components/statistics"
+- Added functions for styling in statistics charts
+
 - Subsidy templates
 - NonSelected logic to Survey questions
-
-### Removed
 
 ### Changed
 
@@ -28,7 +42,7 @@ description.
   SubsidyApiController to take ChildSortOrder into account
 - Surveys use now RadioCards and InputGroup components
 
-## [4.0.6] - YYYY-MM-DD
+## [4.0.6] - 2025-10-09
 
 ### Fixed
 
