@@ -24,6 +24,7 @@ description.
 ### Fixed
 
 - Wrong font in Bufdir / components from statistics folder
+- Regular weight for paragraphs in bd-box
 
 ### Added
 
