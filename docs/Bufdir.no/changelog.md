@@ -30,9 +30,9 @@ description.
 - Moved components from stat-frontend to Bufdir. path:
   "/NextJs/src/components/statistics"
 - Added functions for styling in statistics charts
-
 - Subsidy templates
 - NonSelected logic to Survey questions
+- SKYRA Survey script
 
 ### Changed
 
