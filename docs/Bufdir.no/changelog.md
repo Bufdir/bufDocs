@@ -19,7 +19,7 @@ description.
 
 ### Changed
 
-## [5.0.0] - 2025-10-21
+## [5.0.0] - 2025-10-27
 
 ### Fixed
 
@@ -1518,7 +1518,7 @@ Missing changelog documentation...
 - Oslo integration
 - "Fant du det du lette etter" started
 - Foreldrestiltest page
-- RTE features turned on
+- RTE features turned on.
 
 ## [1.0.3] - 2021-11-19
 
