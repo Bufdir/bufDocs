@@ -19,6 +19,13 @@ description.
 
 ### Changed
 
+## [5.0.1] - 2025-10-30
+
+### Fixed
+
+svg could not load in Bufdir so i installed: @svgr/webpack and added svg loader
+in next.config.js
+
 ## [5.0.0] - 2025-10-27
 
 ### Fixed
