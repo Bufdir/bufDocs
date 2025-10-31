@@ -23,8 +23,8 @@ description.
 
 ### Fixed
 
-svg could not load in Bufdir so i installed: @svgr/webpack and added svg loader
-in next.config.js
+@svgr/webpack and added svg loader in next.config.js NumberInTen gender chart
+layout fixed
 
 ## [5.0.0] - 2025-10-27
 
