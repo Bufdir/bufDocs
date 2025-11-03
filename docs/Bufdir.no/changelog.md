@@ -19,12 +19,11 @@ description.
 
 ### Changed
 
-## [5.0.1] - 2025-10-30
+## [5.0.1] - 2025-11-03
 
 ### Fixed
 
-@svgr/webpack and added svg loader in next.config.js NumberInTen gender chart
-layout fixed
+@svgr/webpack svg loader in next.config.js NumberInTen gender chart layout fixed
 
 ## [5.0.0] - 2025-10-27
 
