@@ -15,9 +15,13 @@ description.
 
 ### Added
 
+Video block - added title header element level and rich text over video
+Scheduled job for setting default header level in video blocks without header level set
+
 ### Removed
 
 ### Changed
+
 
 ## [5.0.2] - 2025-11-18
 
