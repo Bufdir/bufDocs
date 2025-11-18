@@ -19,6 +19,12 @@ description.
 
 ### Changed
 
+## [Unreleased] - YYYY-MM-DD
+
+### Fixed
+
+page reload/refresh flicker bugfix for header search bar and to top button
+
 ## [5.0.1] - 2025-11-03
 
 ### Fixed
