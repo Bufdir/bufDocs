@@ -105,10 +105,23 @@ page reload/refresh flicker bugfix for header search bar and to top button
 
 - ResponsiveTebles in Guidelines
 - Faktabox and InfoBox thumbs and description
+- New search system that is compatible with new elasticsearch versions (Epinova
+  plugin is limited to Elastic v7.x.x)
+- New event handler to trigger external `cmsextractor` for indexing page content
+  to elastic when pages are created, updated, deleted or moved.
+- Endpoints for `cmsextractor` to extract page content to index
+- Search service and client that support new elasticsearch versions
+- Conditional build with pipeline parameter `useNewSearch` to switch between the
+  old and new search implementation
 
 ### Changed
 
 - Bumped Buflib to v.7.2.3
+
+### Removed
+
+- If useNewSearch=true the Bufdir.ElasticSearch Epinova plugin is removed and
+  replaced by the new search
 
 ## [4.0.1] - 2025-09-09
 
