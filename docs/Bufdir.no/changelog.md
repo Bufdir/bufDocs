@@ -15,13 +15,23 @@ description.
 
 ### Added
 
-Video block - added title header element level and rich text over video
-Scheduled job for setting default header level in video blocks without header level set
-
 ### Removed
 
 ### Changed
 
+## [5.0.3] - YYYY-MM-DD
+
+### Fixed
+
+### Added
+
+Video block - added title header element level and rich text over video
+Scheduled job for setting default header level in video blocks without header
+level set Filter options for /fosterhjem/informasjonsmoter/
+
+### Removed
+
+### Changed
 
 ## [5.0.2] - 2025-11-18
 
