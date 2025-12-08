@@ -15,6 +15,8 @@ description.
 
 ### Added
 
+- Improved Geta NotFoundHandler handling, add support for regex rules
+
 ### Removed
 
 ### Changed
