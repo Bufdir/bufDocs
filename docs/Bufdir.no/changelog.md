@@ -21,6 +21,8 @@ description.
 
 ### Changed
 
+- Display year in event dates
+
 ## [5.0.3] - YYYY-MM-DD
 
 ### Fixed
