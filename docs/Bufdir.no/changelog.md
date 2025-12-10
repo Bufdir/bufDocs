@@ -16,6 +16,7 @@ description.
 ### Added
 
 - Improved Geta NotFoundHandler handling, add support for regex rules
+- Added property for overwriting signup button text in event page type
 
 ### Removed
 
