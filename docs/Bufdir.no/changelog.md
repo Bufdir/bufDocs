@@ -27,11 +27,13 @@ description.
 
 ### Fixed
 
+- Breadcrumbs missing search
+
 ### Added
 
-Video block - added title header element level and rich text over video
-Scheduled job for setting default header level in video blocks without header
-level set Filter options for /fosterhjem/informasjonsmoter/
+- Video block - added title header element level and rich text over video
+- Scheduled job for setting default header level in video blocks without header
+  level set Filter options for /fosterhjem/informasjonsmoter/
 
 ### Removed
 
