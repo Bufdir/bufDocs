@@ -15,8 +15,20 @@ description.
 
 ### Added
 
-- Improved Geta NotFoundHandler handling, add support for regex rules
 - Added property for overwriting signup button text in event page type
+
+### Removed
+
+### Changed
+
+
+## [5.0.4] - YYYY-MM-DD
+
+### Fixed
+
+### Added
+
+- Improved Geta NotFoundHandler handling, add support for regex rules
 
 ### Removed
 
@@ -24,7 +36,7 @@ description.
 
 - Display year in event dates
 
-## [5.0.3] - YYYY-MM-DD
+## [5.0.3] - 2025-12-10
 
 ### Fixed
 
@@ -36,9 +48,10 @@ description.
 - Scheduled job for setting default header level in video blocks without header
   level set Filter options for /fosterhjem/informasjonsmoter/
 
-### Removed
-
 ### Changed
+
+- New search
+
 
 ## [5.0.2] - 2025-11-18
 
