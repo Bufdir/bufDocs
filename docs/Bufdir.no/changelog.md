@@ -13,22 +13,22 @@ description.
 
 ### Fixed
 
-- Removed the 'no search results' warning when search string is empty
-
 ### Added
-
-- Added property for overwriting signup button text in event page type
 
 ### Removed
 
 ### Changed
 
-## [5.0.4] - YYYY-MM-DD
+## [5.0.4] - 2025-12-12
+
+### Fixed
+
+- Removed the 'no search results' warning when search string is empty
 
 ### Added
 
 - Improved Geta NotFoundHandler handling, add support for regex rules
-- Elastic Search
+- Added property for overwriting signup button text in event page type
 
 ### Changed
 
