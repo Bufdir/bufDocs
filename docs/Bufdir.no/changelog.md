@@ -17,7 +17,12 @@ description.
 
 ### Removed
 
+- Removed [VideoBlock] Set default heading levels job
+- Removed legacy search code
+
 ### Changed
+
+- Rewrite language usage plugin
 
 ## [5.0.4] - 2025-12-12
 
