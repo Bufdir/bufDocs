@@ -9,11 +9,17 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
-## [Unreleased] - YYYY-MM-DD
+### Changed
+
+## [5.0.5] - 2026-01-16
 
 ### Fixed
 
+- Font size overriden in FamilyServicesEventListPage
+
 ### Added
+
+- Mobile nested accordions spacing override
 
 ### Removed
 
