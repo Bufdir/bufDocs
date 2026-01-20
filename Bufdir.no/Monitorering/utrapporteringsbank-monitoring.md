@@ -222,14 +222,19 @@ export async function generateReport() {
 
 ## Fase 7: Overvåking av sertifikater og secrets
 
-Utrapporteringsbanken bruker Maskinporten for autentisering og kommuniserer med en PostgreSQL-database. Begge deler krever overvåking av legitimasjon.
+Utrapporteringsbanken bruker ID-porten og Maskinporten for sikker autentisering, noe som krever nøye overvåking av secrets og sertifikater.
 
-### Oppgave 7.1: Overvåk Maskinporten-sertifikater
-- Dersom virksomhetssertifikat eller private nøkler for Maskinporten er lagret i Key Vault, må det settes opp varsling for utløpsdato.
-- Verifiser at autentiseringsflyten varsler (custom event) dersom Maskinporten returnerer feil relatert til utløpt legitimasjon.
+### Oppgave 7.1: Overvåk ID-porten og Maskinporten
+- Sørg for at alle client secrets og virksomhetssertifikater er lagret i Azure Key Vault.
+- Aktiver "CertificateNearExpiry" og "SecretNearExpiry" varsling i Key Vault.
+- Spesielt viktig for:
+    - **ID-porten Client Secret** (`IDPORTEN_CLIENT_SECRET`): Må roteres periodisk.
+    - **Azure AD Client Secret** (`AZURE_CLIENT_SECRET`): Brukes for autentisering.
+    - **Maskinporten Virksomhetssertifikat**: Overvåk utløpsdato nøye for å unngå avbrudd i autentisering.
 
-### Oppgave 7.2: Overvåk Database-secrets
-- Overvåk utløp på passord/secrets som brukes for å koble til Azure Database for PostgreSQL.
+### Oppgave 7.2: Overvåk SSL og Database
+- Sett opp en Availability Test i Application Insights for å overvåke SSL-sertifikatet til `utrapporteringsbank` sitt offentlige endepunkt.
+- Overvåk utløp på passord/secrets som brukes for å koble til Azure Database for PostgreSQL via Drizzle.
 
 ---
 

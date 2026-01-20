@@ -273,7 +273,10 @@ Denne fasen fokuserer på å forhindre nedetid for hovedportalen på grunn av ut
 ### Oppgave 7.2: Aktiver varsling for Key Vault secrets
 - Konfigurer Diagnostic Settings for Key Vault til å sende logger til Log Analytics.
 - Opprett en Log Search Alert som sjekker for `SecretNearExpiry`-hendelser.
-- Spesielt viktig for: Client Secrets til Azure AD App Registrations som brukes av Optimizely og Next.js.
+- Spesielt viktig for:
+    - **Azure AD Client Secret** (`InternalResources:ClientSecret`): Brukes for OAuth2-autentisering. Utløper typisk etter 24 måneder.
+    - **SendGrid API Key** (`FeedbackApi:Mail:SendGridKey`): Brukes for e-postvarsler. Bør roteres årlig.
+    - **Application Insights Connection String**: Sikre at denne er gyldig og tilgjengelig.
 
 ---
 

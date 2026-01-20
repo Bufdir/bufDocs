@@ -101,13 +101,18 @@ builder.Services.AddOpenTelemetry()
 
 ## Fase 5: Overvåking av sertifikater og secrets
 
-Fosterhjem-api kjører som en Container App og er avhengig av sikker tilgang til Azure ressurser.
+Fosterhjem-api kjører som en Container App og har kritiske integrasjoner mot eksterne systemer (ROS og Oslo Kommune).
 
 ### Oppgave 5.1: Overvåk SSL for API-endepunktet
 - Sett opp Availability Test i Application Insights for å overvåke SSL-sertifikatet til API-et.
+- Opprett Availability Tests for eksterne integrasjonsendepunkter for å fange opp SSL-problemer hos parter.
 
-### Oppgave 5.2: Overvåk Managed Identity og Secrets
-- Overvåk utløpsdato på eventuelle secrets i Key Vault som brukes til integrasjoner.
+### Oppgave 5.2: Overvåk API-nøkler og Client Secrets
+- Konfigurer varsling i Key Vault for utløp av secrets.
+- Spesielt viktig for:
+    - **Azure AD Client Secret**: Brukes for autentisering og kommunikasjon med andre Azure-tjenester.
+    - **ROS API Key** (`RosApiKey`): Brukes for integrasjon mot Bufetat ROS-system.
+    - **Oslo Kommune API Key** (`Oslo:ApiKey`): Brukes for integrasjon mot Oslo kommunes system.
 - Verifiser at tilgang via Managed Identity fungerer (logges som teknisk metrikk).
 
 ---

@@ -1,17 +1,17 @@
-# Monitoreringsoppgaver for familievern-api
+# Monitoreringsoppgaver for newsletter-api
 
 ## Gevinst med monitorering (Brukerhistorie)
-**Som** systemforvalter for familievern-api,
-**ønsker jeg** full oversikt over ytelse og integrasjoner i App Service,
-**slik at** vi kan sikre driftsstabilitet og effektivt feilsøke sammenhengen mellom portalen og API-et.
+**Som** kommunikasjonsansvarlig,
+**ønsker jeg** bekreftelse på at nyhetsbrev blir levert og at utsendelseskøen fungerer som den skal,
+**slik at** vi kan sikre at viktig informasjon når ut til alle mottakere uten forsinkelser.
 
 ### Akseptansekriterier
- - API-ets responstid og feilrate overvåkes kontinuerlig.
- - Distributed tracing viser sammenhengen mellom portalen og familievern-api.
- - Det sendes varsel ved høy belastning på App Service (CPU/minne).
- - Integrasjonspunkter logges slik at treghet kan isoleres til spesifikke avhengigheter.
+ - Suksessrate for levering av nyhetsbrev er synlig i et dashboard.
+ - Kø-lengde og prosesseringskapasitet overvåkes for å unngå flaskehalser.
+ - Det sendes varsel hvis utsendelsesbatcher feiler eller tar unormalt lang tid.
+ - Individuelle utsendelser kan spores fra kø til leveranse via traces.
 
-Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering for **familievern-api** (App Service).
+Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering for **newsletter-api** (Container App).
 
 ## Innholdsfortegnelse
 - [Fase 1: Applikasjonsinstrumentering](#fase-1-applikasjonsinstrumentering)
@@ -26,13 +26,13 @@ Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering fo
 ## Fase 1: Applikasjonsinstrumentering
 
 ### Oppgave 1.1: Bruk felles Application Insights
- - Koble `familievern-api` til den felles Application Insights-ressursen for Bufdirno for å sikre distribuert sporing (Distributed Tracing).
+ - Koble `newsletter-api` til den felles Application Insights-ressursen for Bufdirno for å sikre distribuert sporing (Distributed Tracing).
  - Verifiser at `APPLICATIONINSIGHTS_CONNECTION_STRING` i Azure peker til den felles ressursen.
 
 ### Oppgave 1.2: .NET API-instrumentering (OpenTelemetry)
  - Implementer OpenTelemetry i modulen.
  - Sikre at `Distributed Tracing` fungerer mellom portalen og dette API-et ved å bruke W3C Trace Context.
- - Sett `OTEL_SERVICE_NAME=Bufdir.Familievern.API`.
+ - Sett `OTEL_SERVICE_NAME=Bufdir.Newsletter.API`.
 
 #### Implementasjonsveiledning for OpenTelemetry (.NET)
 Legg til følgende pakker:
@@ -44,7 +44,7 @@ using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
-var serviceName = "Bufdir.Familievern.API";
+var serviceName = "Bufdir.Newsletter.API";
 
 builder.Services.AddOpenTelemetry()
     .WithTracing(tracing =>
@@ -73,10 +73,10 @@ builder.Services.AddOpenTelemetry()
 
 ## Fase 2: Infrastrukturmonitorering
 
-### Oppgave 2.1: Azure App Service
- - Aktiver HTTP-logging og diagnostikk til felles Log Analytics Workspace.
- - Overvåk CPU og Minne for App Service Planen.
- - Overvåk antall aktive tilkoblinger og responstider.
+### Oppgave 2.1: Azure Container App
+ - Konfigurer loggstrømming til felles Log Analytics Workspace.
+ - Overvåk container-restarts og status for replicas.
+ - Overvåk CPU og Minne for containeren.
 
 ---
 
@@ -86,40 +86,45 @@ builder.Services.AddOpenTelemetry()
  - Sett opp syntetiske tester (URL ping-test) for helsesjekk-endepunktet (f.eks. `/health`).
  - Varsle dersom responstid overstiger 2 sekunder.
 
-### Oppgave 3.2: Feilrater
- - Varsle ved unormal økning i HTTP 5xx-feil.
+### Oppgave 3.2: Funksjonsfeil
+ - Varsle ved unormal økning i container-restarter.
 
 ---
 
 ## Fase 4: Dokumentasjon og runbooks
 
 ### Oppgave 4.1: Runbooks
- - Opprett runbook for gjenoppretting av API-forbindelser ved nettverksbrudd.
+ - Opprett runbook for feilede bakgrunnsjobber i `newsletter-api`.
  - Se [veiledning for runbooks](./runbook/runbook-guide.md) og [mal](./runbook/runbook-template.md).
 
 ---
 
 ## Fase 5: Overvåking av sertifikater og secrets
 
-Familievern-api benytter Azure App Service og kommuniserer med eksterne ressurser.
+Newsletter-api integrerer med eksterne e-postleverandører (f.eks. SendGrid) og nyhetsbrevsystemer (Make), og krever gyldige API-nøkler.
 
-### Oppgave 5.1: Overvåk SSL for API-endepunktet
-- Sett opp en syntetisk test (Availability Test) i Application Insights som overvåker `https://familievern-api.bufdir.no` (eller tilsvarende) for å fange opp utløpte SSL-sertifikater.
+### Oppgave 5.1: Overvåk API-nøkler og Client Secrets
+- Sørg for at alle API-nøkler er lagret i Azure Key Vault.
+- Aktiver varsling for utløp av secrets i Key Vault.
+- Spesielt viktig for:
+    - **Make (Dialog) API Key** (`Services:Make:ApiKey`): Brukes for integrasjon mot nyhetsbrevsystemet.
+    - **SendGrid API Key**: Brukes for e-postleveranse.
+    - **Azure AD Client Secret**: Brukes for autentisering mot andre moduler.
 
-### Oppgave 5.2: Overvåk Secrets i Key Vault
-- Aktiver varsling for utløp av secrets som brukes til autentisering eller tilgang til Azure Storage.
+### Oppgave 5.2: Overvåk SSL for API-endepunktet
+- Sett opp Availability Test i Application Insights for å overvåke SSL-sertifikatet til API-endepunktet.
 
 ---
 
 ## Fase 6: Spesifikke metrikker og spor (Metrics & Traces)
 
-Dette kapittelet beskriver spesifikke metrikker og spor som er relevante for finspissing av overvåkingsmodellen for familievern-api.
+Dette kapittelet beskriver spesifikke metrikker og spor som er relevante for finspissing av overvåkingsmodellen for newsletter-api.
 
 ### Oppgave 6.1: Implementering
  - Implementer måling av følgende:
     - **Metrikker (Metrics):**
-        - `api.request.size`: Størrelse på innkommende forespørsler.
-        - `api.response.size`: Størrelse på utgående svar.
-        - `api.dependency.latency`: Responstid for underliggende tjenester eller databaser.
+        - `newsletter.delivery.success_rate`: Prosentandel vellykkede utsendelser.
+        - `newsletter.queue.length`: Antall e-poster som venter på utsendelse.
+        - `newsletter.process.duration`: Tid det tar å prosessere en hel utsendelsesbatch.
     - **Sporing (Traces):**
-        - `DataRetrieval`: Sporing av komplekse datahentingsoperasjoner.
+        - `EmailDeliveryTrace`: Full sporbarhet for en enkelt e-post fra kø til SMTP-server.

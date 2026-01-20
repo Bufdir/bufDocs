@@ -222,14 +222,18 @@ const handleSubmit = (data) => {
 
 ## Fase 7: Overvåking av sertifikater og secrets
 
-FSA har kritiske integrasjoner mot Digipost og DSF (Bambus) som er avhengige av gyldige sertifikater og secrets.
+FSA har kritiske integrasjoner mot Digipost og DSF (Bambus), samt bruk av Strapi, som er avhengige av gyldige sertifikater og secrets.
 
 ### Oppgave 7.1: Overvåk integrasjonssertifikater
-- Sørg for at sertifikater som brukes mot Digipost og DSF er lagret i Azure Key Vault som "Certificates" (ikke bare secrets).
+- Sørg for at sertifikater som brukes mot Digipost og DSF er lagret i Azure Key Vault som "Certificates".
 - Aktiver "CertificateNearExpiry" varsling i Key Vault for disse spesifikke sertifikatene.
+- Opprett Availability Tests for integrasjonsendepunkter for å fange opp SSL-feil.
 
 ### Oppgave 7.2: Overvåk ID-porten og Maskinporten Secrets
 - Opprett Log Search Alerts for utløp av secrets som brukes til autentisering mot ID-porten og Maskinporten.
+- Verifiser varsling for:
+    - **Azure AD Client Secret** (`InternalResources:ClientSecret`): Brukes for backend-autentisering.
+    - **Strapi Secrets** (`JWT_SECRET`, `API_TOKEN_SALT` etc.): Selv om disse ikke utløper automatisk, bør de overvåkes for uautorisert tilgang via Key Vault-logger.
 
 ---
 

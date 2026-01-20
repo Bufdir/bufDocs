@@ -10,6 +10,8 @@ Dette dokumentet gir en oversikt over monitoreringsstrategien for hele løsninge
 - [stat-system (Statistikk)](./stat-system-monitoring.md)
 - [Utrapporteringsbank](./utrapporteringsbank-monitoring.md)
 - [Sertifikater og Secrets](#overvåking-av-sertifikater-og-secrets)
+- [Automatisering av Monitorering](./automatisering-av-monitorering.md)
+- [Automatisert Fornyelse (Auto-rotation)](./auto-rotasjon-veiledning.md)
 - [Spesifikke metrikker og spor](#spesifikke-metrikker-og-spor-metrics--traces)
 
 ---
@@ -130,7 +132,7 @@ En Action Group definerer *hvem* som skal varsles og *hvordan*. Det anbefales å
 
 ## Overvåking av Sertifikater og Secrets
 
-For å unngå uforutsett nedetid forårsaket av utløpte sertifikater eller secrets, implementerer Bufdirno automatisert overvåking av Azure Key Vault og eksterne tjenester.
+For å unngå uforutsett nedetid forårsaket av utløpte sertifikater eller secrets, implementerer Bufdirno automatisert overvåking av Azure Key Vault og eksterne tjenester på tvers av alle moduler.
 
 ### 1. Azure Key Vault Overvåking
 Key Vault har innebygd støtte for å sende hendelser til **Azure Event Grid** når en secret eller et sertifikat er nær utløpsdato.
@@ -138,12 +140,21 @@ Key Vault har innebygd støtte for å sende hendelser til **Azure Event Grid** n
 *   **Varsling:** Det settes opp Log Search Alerts som sjekker for hendelser relatert til utløp (Events med ID `SecretNearExpiry` eller `CertificateNearExpiry`).
 
 ### 2. Sertifikater (SSL/TLS)
-*   **App Service:** Azure App Service har innebygd overvåking av Managed Certificates. For eksterne sertifikater må utløpsdato overvåkes manuelt eller via skript.
-*   **Syntetiske tester:** Application Insights "Availability Tests" vil automatisk gi feil hvis et SSL-sertifikat utløper eller er ugyldig for en overvåket URL.
+*   **App Service & Container Apps:** Overvåk SSL-sertifikater for alle moduler via Availability Tests i Application Insights.
+*   **Virksomhetssertifikater:** Spesielt kritisk for Maskinporten-integrasjon i `utrapporteringsbank` og integrasjoner i `bufdirno-fsa`.
 
-### 3. Azure AD App Registrations (Client Secrets)
-*   **Problem:** Client Secrets for Azure AD utløper ofte etter 1-2 år og varsles ikke automatisk via standard Key Vault-logger hvis de kun er lagret som tekst.
-*   **Løsning:** Det anbefales å bruke en Azure Automation Runbook eller en Logic App som periodisk (f.eks. ukentlig) sjekker utløpsdato på alle relevante App Registrations i Azure AD og sender varsel til Action Group hvis utløp er < 30 dager.
+### 3. Modulspesifikk overvåking
+Detaljerte oppgaver for overvåking av secrets (som Azure AD Client Secrets, API-nøkler for SendGrid, ROS, Oslo Kommune, og Make) er beskrevet i de individuelle modul-filene:
+*   [bufdirno (Hovedportal)](./bufdirno-monitoring.md#fase-7-overvåking-av-sertifikater-og-secrets)
+*   [bufdirno-fsa](./bufdirno-fsa-monitoring.md#fase-7-overvåking-av-sertifikater-og-secrets)
+*   [familievern-api](./familievern-api-monitoring.md#fase-5-overvåking-av-sertifikater-og-secrets)
+*   [fosterhjem-api](./fosterhjem-api-monitoring.md#fase-5-overvåking-av-sertifikater-og-secrets)
+*   [newsletter-api](./newsletter-api-monitoring.md#fase-5-overvåking-av-sertifikater-og-secrets)
+*   [stat-system](./stat-system-monitoring.md#fase-7-overvåking-av-sertifikater-og-secrets)
+*   [Utrapporteringsbank](./utrapporteringsbank-monitoring.md#fase-7-overvåking-av-sertifikater-og-secrets)
+
+### 4. Automatisering
+For å skalere overvåkingen av secrets og sertifikater på tvers av alle moduler, bør oppsettet automatiseres ved bruk av Infrastruktur som Kode (IaC) eller Azure Policy. Se [Automatisering av Monitorering](./automatisering-av-monitorering.md) for tekniske detaljer og eksempler.
 
 ---
 

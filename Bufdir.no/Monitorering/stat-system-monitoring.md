@@ -164,14 +164,18 @@ services.AddOpenTelemetry()
 
 ## Fase 7: Overvåking av sertifikater og secrets
 
-Statistikksystemet er avhengig av sikker kommunikasjon mellom Strapi og .NET API-et, samt tilgang til Azure Storage og Cosmos DB.
+Statistikksystemet er avhengig av sikker kommunikasjon mellom Strapi og .NET API-et, samt tilgang til databaser og Azure Storage.
 
-### Oppgave 7.1: Overvåk API-nøkler og Secrets
-- Aktiver varsling for utløp av secrets i Key Vault som brukes til kommunikasjon mellom Strapi og Backend.
-- Overvåk utløpsdato på Client Secrets for Azure AD App Registrations som brukes til autentisering.
+### Oppgave 7.1: Overvåk SSL for API og CMS
+- Sett opp Availability Tests i Application Insights for både `stat-backend` og `stat-content-strapi5` for å overvåke SSL-sertifikater.
 
-### Oppgave 7.2: Overvåk SSL for API-endepunkter
-- Sett opp Availability Tests for både Strapi-endepunktet og Backend-API-et for å sikre at SSL-sertifikatene er gyldige.
+### Oppgave 7.2: Overvåk API-nøkler og Secrets
+- Konfigurer varsling for utløp av secrets i Azure Key Vault.
+- Spesielt viktig for:
+    - **Azure AD Client Secret** (`AzureAd:ClientSecret`): Brukes for autentisering i backend.
+    - **Statistics API Token** (`STATISTICS_API_TOKEN`): Brukes for integrasjonen mellom Strapi og backend.
+    - **Strapi Secrets** (`JWT_SECRET`, `API_TOKEN_SALT` etc.): Overvåk aksesslogger i Key Vault.
+    - **Cosmos DB / MongoDB Connection String**: Sikre at autentisering er gyldig.
 
 ---
 
