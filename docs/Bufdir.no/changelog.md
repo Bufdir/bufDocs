@@ -9,6 +9,17 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
+## [Unreleased] - YYYY-MM-DD
+
+### Fixed
+
+### Added
+
+- Skyra findability feature (FEATURE_TOGGLE_SKYRA_FINDABILITY)
+- Feature toggle functionality. See readme.md
+
+### Removed
+
 ### Changed
 
 ## [5.0.5] - 2026-01-16

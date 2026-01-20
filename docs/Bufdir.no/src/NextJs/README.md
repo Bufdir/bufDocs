@@ -9,7 +9,8 @@ First, start up the dotnet backend server:
 dotnet run
 ```
 
-Copy the .env.example to .env.local and ask a teammember for the AZURE_AD_CLIENT_SECRET
+Copy the .env.example to .env.local and ask a teammember for the
+AZURE_AD_CLIENT_SECRET
 
 Then, run the Next.js development server:
 
@@ -47,3 +48,32 @@ To learn more about Next.js, take a look at the following resources:
 You can check out
 [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your
 feedback and contributions are welcome!
+
+## Feature toggles
+
+The application supports **feature toggles** via environment variables in
+**Azure Container Apps**.
+All toggles must be defined as environment variables using the following prefix:
+
+FEATURE*TOGGLE*<FEATURE_NAME>=true|false
+
+makefile Copy code
+
+Example: FEATURE_TOGGLE_SKYRA_FINDABILITY=true FEATURE_TOGGLE_NEW_CHECKOUT=false
+
+pgsql Copy code
+
+Feature toggles are read **server-side at runtime** and injected into the client
+as `window.__FEATURE_TOGGLES__` during the initial page load. This makes toggles
+available in client-side code **without API calls and without rebuilds**, but
+requires a restart of the Container App and a browser refresh for changes to
+take effect.
+
+Toggles are intended for **simple on/off features** and must **not** be used for
+secrets or user-specific logic.
+
+### Example usage in client components
+
+```ts
+const useSkyraFindability = getClientFeatureToggle('skyraFindability');
+```
