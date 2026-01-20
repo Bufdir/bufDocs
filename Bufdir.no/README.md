@@ -4,7 +4,7 @@ Dette er hovedsiden for dokumentasjon av Bufdir.no-løsningen. Her finner du det
 
 ## Innhold
 
-### [Løsningsarkitektur](./Architecture/Architecture.md)
+### [Løsningsarkitektur](./Architecture/architecture.md)
 Dette dokumentet beskriver den overordnede arkitekturen for Bufdir.no. Det gir en oversikt over systemets moduler (både hovedmodul og støttemoduler), teknologistakk, dataflyt, integrasjoner og fellesmønstre for infrastruktur og sikkerhet.
 
 ### [Monitorering og overvåking](./Monitorering/monitoring.md)
