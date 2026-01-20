@@ -1,6 +1,6 @@
 # Veiledning for import til Microsoft Loop
 
-Dette dokumentet forklarer hvordan du flytter monitoreringsdokumentasjonen fra dette prosjektet over til [Microsoft Loop](https://loop.cloud.microsoft).
+Dette dokumentet forklarer hvordan du flytter monitoreringsdokumentasjonen fra disse modulene over til [Microsoft Loop](https://loop.cloud.microsoft).
 
 ## Metoder for import
 

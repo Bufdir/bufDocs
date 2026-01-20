@@ -1,6 +1,6 @@
 # Mal for Runbooks i Bufdirno
 
-Dette dokumentet fungerer som en standardmal for runbooks (feilsøkingsveiledninger) i Bufdir-prosjektene. En god runbook skal være kortfattet, handlingsorientert og lett å følge under press.
+Dette dokumentet fungerer som en standardmal for runbooks (feilsøkingsveiledninger) i Bufdir-modulene. En god runbook skal være kortfattet, handlingsorientert og lett å følge under press.
 
 ---
 

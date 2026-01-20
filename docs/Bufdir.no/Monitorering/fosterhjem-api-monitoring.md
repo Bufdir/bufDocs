@@ -30,7 +30,7 @@ Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering fo
  - Verifiser at `APPLICATIONINSIGHTS_CONNECTION_STRING` i Azure peker til den felles ressursen.
 
 ### Oppgave 1.2: .NET API-instrumentering (OpenTelemetry)
- - Implementer OpenTelemetry i prosjektet.
+ - Implementer OpenTelemetry i modulen.
  - Sikre at `Distributed Tracing` fungerer mellom portalen og dette API-et ved å bruke W3C Trace Context.
  - Sett `OTEL_SERVICE_NAME=Bufdir.Fosterhjem.API`.
 

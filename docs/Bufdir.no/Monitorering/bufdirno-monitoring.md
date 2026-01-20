@@ -41,7 +41,7 @@ Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering sp
 ## Fase 2: Applikasjonsinstrumentering
 
 ### Oppgave 2.1: Instrumenter Optimizely CMS (.NET)
- - Installer OpenTelemetry NuGet-pakker i `bufdirno` CMS-prosjektet.
+ - Installer OpenTelemetry NuGet-pakker i `bufdirno` CMS-modulen.
  - Konfigurer OpenTelemetry i `Program.cs` for å fange opp Optimizely-spesifikke metrikker og SQL Server-kall.
  - Legg til connection string i `appsettings.json`.
 

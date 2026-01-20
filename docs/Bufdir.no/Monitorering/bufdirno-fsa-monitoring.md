@@ -38,7 +38,7 @@ Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering sp
 ## Fase 2: Applikasjonsinstrumentering
 
 ### Oppgave 2.1: Instrumenter .NET Backend (FSA.Backend.Web)
- - Installer OpenTelemetry NuGet-pakker i `FSA.Backend.Web`-prosjektet.
+ - Installer OpenTelemetry NuGet-pakker i `FSA.Backend.Web`-modulen.
  - Konfigurer OpenTelemetry i `Program.cs` for å fange opp SQL Server-kall og HTTP-trafikk.
  - Legg til connection string fra Key Vault.
 

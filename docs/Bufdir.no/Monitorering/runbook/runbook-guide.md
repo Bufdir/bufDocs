@@ -1,6 +1,6 @@
 # Veiledning: Hvordan opprette gode Runbooks
 
-En runbook er et dokumentert sett med prosedyrer for å løse et spesifikt operasjonelt problem. I Bufdirno-prosjektet bruker vi runbooks for å sikre rask respons ved feil i produksjon.
+En runbook er et dokumentert sett med prosedyrer for å løse et spesifikt operasjonelt problem. I Bufdirno-løsningen bruker vi runbooks for å sikre rask respons ved feil i produksjon.
 
 ## Hva er en runbook?
 I Azure kan "runbooks" referere til to forskjellige konsepter:
@@ -38,7 +38,7 @@ Dette hjelper med å skille mellom tekniske feil (nettverk/database) og logiske 
 ## Kom i gang
 1. Kopier [Runbook-malen](runbook-template.md).
 2. Start med de mest kritiske feilscenariene som er identifisert i monitoreringsplanen.
-3. Lagre den nye runbooken i prosjektets dokumentasjonsmappe (f.eks. under `/docs/runbooks/`).
+3. Lagre den nye runbooken i modulens dokumentasjonsmappe (f.eks. under `/docs/Monitorering/runbook/`).
 4. Lenk til runbooken fra de relevante varslene (alerts) i Azure.
 
 ## Eksempler på runbooks vi trenger for Bufdirno:

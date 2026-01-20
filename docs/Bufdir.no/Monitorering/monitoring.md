@@ -1,6 +1,6 @@
 # Overordnet Plan for Monitorering i Bufdirno
 
-Dette dokumentet gir en oversikt over monitoreringsstrategien for hele prosjektet. Detaljerte oppgaver for hvert delprosjekt finnes i egne filer:
+Dette dokumentet gir en oversikt over monitoreringsstrategien for hele løsningen. Detaljerte oppgaver for hver modul finnes i egne filer:
 
 - [bufdirno (Hovedportal)](./bufdirno-monitoring.md)
 - [bufdirno-fsa (Family Services Application)](./bufdirno-fsa-monitoring.md)
@@ -18,7 +18,7 @@ Dette dokumentet gir en oversikt over monitoreringsstrategien for hele prosjekte
 
 ### Fase 1: Grunnleggende infrastruktur
  - Opprett felles Log Analytics Workspace.
- - Opprett én felles Application Insights-ressurs (Workspace-based) for alle Bufdirno-komponenter for å sikre full korrelasjon (Distributed Tracing).
+ - Opprett én felles Application Insights-ressurs (Workspace-based) for alle moduler for å sikre full korrelasjon (Distributed Tracing).
  - Konfigurer globale handlingsgrupper (Action Groups) for varsling.
  - Implementer Azure Security Center på tvers av alle abonnementer.
 
@@ -84,20 +84,20 @@ De første 31 dagene er inkludert gratis.
 *   **Multi-step web tests:** Kan koste ekstra, men anbefales ikke som startpunkt.
 
 ### Totalt Estimert Månedsbudsjett
-| Kategori | Lavt estimat (Lite trafikk) | Høyt estimat (Høy trafikk/debug) |
-| :--- | :--- | :--- |
-| Datainnsamling (7 moduler) | 250 kr | 1 200 kr |
-| Lagring (90 dager) | 20 kr | 100 kr |
-| Varsling & Tester | 80 kr | 250 kr |
-| **Sum per måned** | **350 kr** | **1 550 kr** |
+| Kategori | Lavt estimat (Lite trafikk) | Høyt estimat (Høy trafikk/debug) | Ved Daily Cap (5GB/dag) |
+| :--- | :--- | :--- | :--- |
+| Datainnsamling (7 moduler) | 250 kr | 1 200 kr | 4 500 kr |
+| Lagring (90 dager) | 20 kr | 100 kr | 360 kr |
+| Varsling & Tester | 80 kr | 250 kr | 250 kr |
+| **Sum per måned** | **350 kr** | **1 550 kr** | **5 110 kr** |
 
-*Merk: Kostnadene er basert på at alle 7 moduler (portal, FSA, API-er, statistikk og utrapporteringsbank) er instrumentert. Kostnadene vil variere sterkt basert på "Logging Level". Hvis man logger all SQL-tekst og har mye trafikk, vil datamengden øke. Det anbefales å sette opp "Daily Cap" (f.eks. 5GB/dag) for å unngå uforutsette kostnader.*
+*Merk: Kostnadene er basert på at alle 7 moduler (portal, FSA, API-er, statistikk og utrapporteringsbank) er instrumentert. Kostnadene vil variere sterkt basert på "Logging Level". Hvis man logger all SQL-tekst og har mye trafikk, vil datamengden øke. Ved å sette en "Daily Cap" på 5GB/dag (ca. 150GB/mnd), vil den maksimale kostnaden ligge rundt 5 000 kr i måneden.*
 
 ---
 
 ## Varslingskonfigurasjon i Azure Monitor
 
-Varsling er den proaktive delen av monitoreringen som sikrer at teamet får beskjed før brukerne merker feil. I Bufdirno-prosjektet brukes Azure Monitor Alerts.
+Varsling er den proaktive delen av monitoreringen som sikrer at teamet får beskjed før brukerne merker feil. I Bufdirno-løsningen brukes Azure Monitor Alerts.
 
 ### 1. Typer varsler
 *   **Metric Alerts:** Brukes for infrastruktur og ytelse (f.eks. CPU > 80%, Responstid > 2s). Disse er raske og reagerer nesten i sanntid.
@@ -163,11 +163,11 @@ Ved å bruke OpenTelemetry-standarden på tvers av alle språk (.NET, Node.js, T
 *   **Forretningsinnsikt:** Ved å logge `customEvents` for kritiske steg i en søknadsprosess, kan vi identifisere hvor brukere faller fra uten å trenge komplekse analyseverktøy.
 
 ### 3. Veien videre
-Hvert delprosjekt har sitt eget kapittel for spesifikke metrikker og spor. Disse bør gjennomgås og finspisses i takt med at applikasjonene utvikles:
+Hver modul har sitt eget kapittel for spesifikke metrikker og spor. Disse bør gjennomgås og finspisses i takt med at applikasjonene utvikles:
 *   Se Fase 7 i [bufdirno](./bufdirno-monitoring.md), [bufdirno-fsa](./bufdirno-fsa-monitoring.md), [stat-system](./stat-system-monitoring.md) og [Utrapporteringsbank](./utrapporteringsbank-monitoring.md).
 *   Se Fase 5 i [familievern-api](./familievern-api-monitoring.md), [fosterhjem-api](./fosterhjem-api-monitoring.md) og [newsletter-api](./newsletter-api-monitoring.md).
 
 ---
 
 ## Implementeringsstatus
-Gå til de spesifikke prosjektfilene for detaljerte oppgaver.
+Gå til de spesifikke filene for detaljerte oppgaver.
