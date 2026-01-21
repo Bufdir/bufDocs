@@ -57,7 +57,36 @@ resource "azurerm_monitor_scheduled_query_rules_alert" "secret_expiry_alert" {
 }
 ```
 
-## 2. Azure Policy (Governance)
+### Terraform: Komplett Automatiseringspakke
+
+For en helhetlig automatisering av Application Insights, Alarmer og Event Grid-overvåking av Key Vault, bruk den ferdige Terraform-modulen og utrullingsskriptet:
+
+1.  **Terraform-modul**: Ligger i `./terraform/`. Den setter opp:
+    *   Application Insights koblet til Log Analytics.
+    *   Action Group for e-postvarsling.
+    *   Log Search Alert for secrets som snart utløper.
+    *   Event Grid System Topic og Subscription for Key Vault-hendelser.
+2.  **Utrullingsskript**: Ligger i `./scripts/deploy-monitoring.ps1`. Dette skriptet forenkler prosessen ved å hente nødvendige ID-er og kjøre Terraform.
+
+Se `./terraform/main.tf` for detaljer om ressursene som opprettes.
+
+## 2. Håndtering av Miljøer
+
+For å bruke automatiseringsskriptene i andre miljøer enn prod (f.eks. test eller dev), støtter både Terraform-modulen og PowerShell-skriptet en `environment` parameter.
+
+### Bruk i andre miljøer:
+- **PowerShell**: Bruk `-Environment` flagget.
+  ```powershell
+  ./scripts/deploy-monitoring.ps1 -ResourceGroup "rg-test" -Environment "test" ...
+  ```
+- **Terraform**: Bruk variabel-filer (`.tfvars`) for hvert miljø.
+  ```bash
+  terraform apply -var-file="test.tfvars"
+  ```
+
+Dette sikrer at ressursene får riktige navn (f.eks. `bufdirno-test-ai`) og havner i riktig ressursgruppe.
+
+## 3. Azure Policy (Governance)
 
 Azure Policy kan brukes til å "tvinge" frem monitorering på alle ressurser i et abonnement.
 
