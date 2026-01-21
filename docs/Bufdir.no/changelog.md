@@ -11,16 +11,15 @@ description.
 
 ## [Unreleased] - YYYY-MM-DD
 
-### Fixed
-
 ### Added
 
+- Table of contents component with smooth scrolling
 - Skyra findability feature (FEATURE_TOGGLE_SKYRA_FINDABILITY)
 - Feature toggle functionality. See readme.md
 
-### Removed
-
 ### Changed
+
+- Updated buflib package to version 7.4.0
 
 ## [5.0.5] - 2026-01-16
 
