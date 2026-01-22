@@ -21,6 +21,10 @@ description.
 
 - Updated buflib package to version 7.4.0
 
+### Fixed
+
+- Adjusted heading levels of accordions in Monitor
+
 ## [5.0.5] - 2026-01-16
 
 ### Fixed
