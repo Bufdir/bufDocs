@@ -9,6 +9,12 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
+## [Unreleased] - YYYY-MM-DD
+
+### Fixed
+
+- Added css utility class to existing Section component
+
 ## [5.0.6] - 2026-01-27
 
 ### Added
