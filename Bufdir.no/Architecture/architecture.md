@@ -14,6 +14,7 @@ Dette dokumentet beskriver arkitekturen til Bufdir.no-løsningen, som består av
      - 2.2.3 [Familievern API - bufdirno-familievern-api](./bufdirno-familievern-api-architecture.md)
      - 2.2.4 [Tilbakemeldinger API - bufdirno-feedback-api](./bufdirno-feedback-api-architecture.md)
      - 2.2.5 [Fosterhjem API - bufdirno-fosterhjem-api](./bufdirno-fosterhjem-api-architecture.md)
+       - [ROS-integrasjon detaljer](./ros-integrasjon.md)
      - 2.2.6 [Nyhetsbrev API - bufdirno-newsletter-api](./bufdirno-newsletter-api-architecture.md)
      - 2.2.7 [Statistikk & Data API - stat-backend](./stat-backend-architecture.md)
      - 2.2.8 [Statistikk Innholdsadministrasjon - stat-content-strapi5](./stat-content-strapi5-architecture.md)
@@ -826,7 +827,7 @@ graph TB
 - Clean Architecture pattern with Infrastructure layer for data access
 
 **External Services Integration**:
-- **ROS (Rekruttering og Oppfølging av Statlige fosterhjem)**: Bufetat's foster home system at https://ros.bufetat.no
+- **ROS (Rekruttering og Oppfølging av Statlige fosterhjem)**: Bufetat's foster home system at https://ros.bufetat.no. Se [detaljert dokumentasjon av ROS-integrasjonen](./ros-integrasjon.md).
   - Handles regions 2-6 (state-managed foster homes)
   - Provides area/region lookups via `/api/Area/list`
   - Form submission endpoint (currently disabled - returns HTTP 410)
