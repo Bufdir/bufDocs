@@ -13,6 +13,14 @@
 
 Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering spesifikt for **bufdirno** (hovedportalen), som består av en Optimizely CMS backend (.NET) og en Next.js frontend.
 
+### Hybrid Monitoreringsstrategi (Anbefalt)
+Bufdirno benytter en hybrid tilnærming for monitorering:
+1.  **Frontend (Next.js Browser): Azure Application Insights SDK**
+    *   **Hvorfor:** Gir best innsikt i brukeropplevelse (RUM), sidevisninger, og klientside-exceptions. Det er optimalisert for nettlesere og krever ingen kompleks proxy-infrastruktur.
+2.  **Backend (Optimizely / Node.js Server): OpenTelemetry**
+    *   **Hvorfor:** Industristandard for server-side telemetri. Sikrer høy ytelse, leverandørnøytralitet og dyp integrasjon med moderne skyplattformer.
+3.  **Sammenheng:** Ved å bruke **W3C Trace Context** på tvers av både AI SDK og OpenTelemetry, oppnår vi sømløs korrelasjon og et komplett "Application Map" i Azure.
+
 ## Innholdsfortegnelse
 
 - [Fase 1: Grunnleggende oppsett](#fase-1-grunnleggende-oppsett)
@@ -41,161 +49,78 @@ Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering sp
 ## Fase 2: Applikasjonsinstrumentering
 
 ### Oppgave 2.1: Instrumenter Optimizely CMS (.NET)
- - Installer OpenTelemetry NuGet-pakker i `bufdirno` CMS-modulen.
- - Konfigurer OpenTelemetry i `Program.cs` for å fange opp Optimizely-spesifikke metrikker og SQL Server-kall.
+ - Installer Application Insights NuGet-pakke i `bufdirno` CMS-modulen.
+ - Konfigurer Application Insights i `ConfigureCoreServices.cs` for å fange opp Optimizely-spesifikke metrikker og SQL Server-kall.
  - Legg til connection string i `appsettings.json`.
 
-#### Implementasjonsveiledning for OpenTelemetry og SQL Server
-For å sette opp OpenTelemetry med SQL Server-overvåking i hovedportalen, legg til følgende pakker:
-`OpenTelemetry.Extensions.Hosting`, `OpenTelemetry.Instrumentation.AspNetCore`, `OpenTelemetry.Instrumentation.SqlClient`, og `Azure.Monitor.OpenTelemetry.AspNetCore`.
+#### Implementasjonsveiledning for OpenTelemetry (.NET)
+For å sette opp OpenTelemetry i hovedportalen, legg til følgende pakke:
+`Azure.Monitor.OpenTelemetry.AspNetCore`.
 
-Eksempel på konfigurasjon i `Program.cs`:
+Eksempel på konfigurasjon i `ConfigureCoreServices.cs`:
 ```csharp
-using OpenTelemetry.Metrics;
+using Azure.Monitor.OpenTelemetry.AspNetCore;
 using OpenTelemetry.Resources;
-using OpenTelemetry.Trace;
 
-// Ressursnavn for portalen
-var serviceName = "Bufdir.Portal.CMS";
-
-builder.Services.AddOpenTelemetry()
-    .WithTracing(tracing =>
+// I AddCoreServices:
+services.AddOpenTelemetry()
+    .ConfigureResource(resource => resource.AddService("Bufdir.Portal.CMS"))
+    .UseAzureMonitor(options =>
     {
-        tracing
-            .AddSource(serviceName)
-            .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(serviceName))
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation()
-            // Aktiverer dyp overvåking av SQL Server-kall (viktig for Optimizely CMS)
-            .AddSqlClientInstrumentation(options =>
-            {
-                options.SetDbStatementForStoredProcedures = true;
-                options.SetDbStatementForText = true; // Inkluderer selve SQL-spørringen
-                options.RecordException = true;
-            })
-            .AddAzureMonitorTraceExporter(o => o.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
-    })
-    .WithMetrics(metrics =>
-    {
-        metrics
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation()
-            .AddRuntimeInstrumentation();
+        options.ConnectionString = configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
     });
 ```
 
-### Oppgave 2.2: Instrumenter Next.js Frontend (Node.js & Browser)
- - Installer OpenTelemetry npm-pakker i frontend-mappen:
+### Oppgave 2.2: Instrumenter Next.js Frontend (Server & Browser)
+ - Installer Application Insights SDK-er:
   ```bash
-  npm install @opentelemetry/api @opentelemetry/sdk-node \
-    @opentelemetry/auto-instrumentations-node \
-    @opentelemetry/sdk-trace-web \
-    @opentelemetry/instrumentation-xml-http-request \
-    @opentelemetry/instrumentation-fetch \
-    @azure/monitor-opentelemetry-exporter
-  ```
- - Aktiver OpenTelemetry i `next.config.js` (eller `.ts`) for Server Side:
-  ```javascript
-  const nextConfig = {
-    experimental: {
-      instrumentationHook: true,
-    },
-    // ... andre innstillinger
-  };
+  npm install @microsoft/applicationinsights-web @microsoft/applicationinsights-node-js
   ```
  - Opprett `instrumentation.ts` for Server Side (SSR/API).
- - Opprett `otel-client.ts` for Browser-instrumentering.
- - Verifiser korrelasjon mellom browser, Next.js server og backend-traces.
+ - Opprett `OTELClient.tsx` (eller `AIClient.tsx`) for Browser-instrumentering.
 
-#### Implementasjonsveiledning for Next.js og OpenTelemetry
+#### Implementasjonsveiledning for Next.js og Application Insights
 
-For å få full sporing i Next.js (både på serveren og i nettleseren) som sender data til Azure Application Insights, må vi dele opp instrumenteringen.
+For å få full sporing i Next.js (både på serveren og i nettleseren), bruker vi Application Insights SDK-er direkte.
 
 **1. Server-side (SSR, API-ruter, Middleware): `src/instrumentation.ts`**
 
 ```typescript
 export async function register() {
   if (process.env.NEXT_RUNTIME === 'nodejs') {
-    const { NodeSDK } = await import('@opentelemetry/sdk-node');
-    const { AzureMonitorTraceExporter } = await import('@azure/monitor-opentelemetry-exporter');
-    const { getNodeAutoInstrumentations } = await import('@opentelemetry/auto-instrumentations-node');
-    const { Resource } = await import('@opentelemetry/resources');
-    const { SemanticResourceAttributes } = await import('@opentelemetry/semantic-conventions');
-
-    const sdk = new NodeSDK({
-      resource: new Resource({
-        [SemanticResourceAttributes.SERVICE_NAME]: 'Bufdir.Portal.Frontend.Server',
-      }),
-      traceExporter: new AzureMonitorTraceExporter({
-        connectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING,
-      }),
-      instrumentations: [
-        getNodeAutoInstrumentations({
-          '@opentelemetry/instrumentation-fs': { enabled: false },
-        }),
-      ],
-    });
-
-    sdk.start();
+    const { NodeSDK } = await import('@microsoft/applicationinsights-node-js');
+    // Konfigurer for Node.js
   }
 }
 ```
 
-**2. Klient-side (Browser): `src/components/OTELClient.tsx`**
-
-For å fange opp det som skjer i brukerens nettleser (f.eks. klikk, ressurslasting, og `fetch`-kall), må vi kjøre en egen SDK i browseren.
+**2. Klient-side (Browser): `src/components/AIClient.tsx`**
 
 ```tsx
 'use client';
 
 import { useEffect } from 'react';
-import { WebTracerProvider } from '@opentelemetry/sdk-trace-web';
-import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-base';
-import { registerInstrumentations } from '@opentelemetry/instrumentation';
-import { getWebAutoInstrumentations } from '@opentelemetry/auto-instrumentations-web';
-import { Resource } from '@opentelemetry/resources';
-import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions';
-import { AzureMonitorTraceExporter } from '@azure/monitor-opentelemetry-exporter';
+import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 
-export function OTELClient() {
+export function AIClient() {
   useEffect(() => {
-    const provider = new WebTracerProvider({
-      resource: new Resource({
-        [SemanticResourceAttributes.SERVICE_NAME]: 'Bufdir.Portal.Frontend.Browser',
-      }),
+    const appInsights = new ApplicationInsights({
+      config: {
+        connectionString: "DIN_CONNECTION_STRING_HER",
+        enableAutoRouteTracking: true,
+      }
     });
-
-    // Merk: AzureMonitorTraceExporter fungerer i browser dersom CORS er satt opp,
-    // men pass på eksponering av Connection String i kildekoden.
-    const exporter = new AzureMonitorTraceExporter({
-      connectionString: "DIN_CONNECTION_STRING_HER", // Bør injiseres via miljøvariabel
-    });
-
-    provider.addSpanProcessor(new BatchSpanProcessor(exporter));
-
-    registerInstrumentations({
-      instrumentations: [
-        getWebAutoInstrumentations({
-          '@opentelemetry/instrumentation-fetch': {
-            propagateTraceHeaderCorsUrls: [ /api\.bufdir\.no/g ], // Korrelerer mot backend
-          },
-        }),
-      ],
-      tracerProvider: provider,
-    });
-
-    provider.register();
+    appInsights.loadAppInsights();
+    appInsights.trackPageView();
   }, []);
 
   return null;
 }
 ```
-*Legg til `<OTELClient />` i din `RootLayout` for å starte overvåking av alle brukere.*
 
 **Viktige punkter for Bufdirno:**
-1. **Service Navn**: Vi skiller mellom `.Server` og `.Browser` for å se nøyaktig hvor tregheten oppstår i Application Map.
-2. **Sikkerhet**: Ved browser-monitorering blir Connection String synlig i JS-bundelen. Siden dette kun gir rettighet til å *skrive* telemetri, anses det ofte som en akseptabel risiko i offentlige portaler, men man kan bruke en proxy-gateway hvis man ønsker full kontroll.
-3. **W3C Trace Context**: Dette sikrer at `trace-id` følger med fra browser -> Next.js Server -> Optimizely CMS -> Database.
+1. **Sikkerhet**: Ved browser-monitorering blir Connection String synlig. Dette er normal praksis for RUM.
+2. **W3C Trace Context**: Sikrer korrelasjon mellom browser og backend.
 
 ---
 
@@ -228,17 +153,13 @@ export function OTELClient() {
  - Implementer logging av Custom Events i C# for disse hendelsene.
  - Sett opp varsel basert på KQL-spørring mot `customEvents`.
 
-Eksempel på logging med OpenTelemetry:
+Eksempel på logging med Application Insights:
 ```csharp
-// Bruk ActivitySource for OpenTelemetry
-private static readonly ActivitySource _activitySource = new ActivitySource("Bufdir.Portal.CMS");
+private TelemetryClient _telemetryClient;
 
 public void ProcessAction(string actionName)
 {
-    using var activity = _activitySource.StartActivity("BusinessActionCompleted");
-    activity?.SetTag("Action", actionName);
-    activity?.SetTag("UserType", "Internal");
-    // ... logikk ...
+    _telemetryClient.TrackEvent("BusinessActionCompleted", new Dictionary<string, string> { { "Action", actionName } });
 }
 ```
 

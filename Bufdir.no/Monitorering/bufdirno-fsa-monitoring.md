@@ -13,6 +13,14 @@
 
 Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering spesifikt for **bufdirno-fsa**, som består av en React SPA frontend og en .NET backend (**FSA.Backend.Web**), samt en Strapi CMS for innhold.
 
+### Hybrid Monitoreringsstrategi
+For dette prosjektet har vi valgt en **hybrid monitoreringsmodell** som kombinerer det beste fra to verdener:
+1.  **Frontend (React): Azure Application Insights SDK**
+    *   **Hvorfor:** Spesialtilpasset for Real User Monitoring (RUM). Håndterer klientside-spesifikke behov som brukersesjoner, sidevisninger og JavaScript-exceptions mer sømløst enn standard OpenTelemetry i nettleseren.
+2.  **Backend (.NET & Node.js): OpenTelemetry**
+    *   **Hvorfor:** Industristandard for moderne backend-instrumentering. Gir bedre ytelse, er leverandørnøytral og er Microsofts primære anbefaling for .NET 8/9 og moderne Node.js-arkitekturer.
+3.  **Korrelasjon:** Begge systemer bruker **W3C Trace Context** som standard, noe som sikrer at distribuert sporing (traces) fungerer sømløst fra brukerens klikk i nettleseren, gjennom API-ene og ned til databasen.
+
 ## Innholdsfortegnelse
 
 - [Fase 1: Grunnleggende oppsett](#fase-1-grunnleggende-oppsett)
@@ -38,116 +46,81 @@ Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering sp
 ## Fase 2: Applikasjonsinstrumentering
 
 ### Oppgave 2.1: Instrumenter .NET Backend (FSA.Backend.Web)
- - Installer OpenTelemetry NuGet-pakker i `FSA.Backend.Web`-modulen.
- - Konfigurer OpenTelemetry i `Program.cs` for å fange opp SQL Server-kall og HTTP-trafikk.
+ - Installer **OpenTelemetry** SDK i `FSA.Backend.Web`-modulen.
+ - Konfigurer OpenTelemetry i `ConfigureCoreServices.cs` for å fange opp SQL Server-kall og HTTP-trafikk ved bruk av Azure Monitor exporter.
  - Legg til connection string fra Key Vault.
 
 #### Implementasjonsveiledning for OpenTelemetry (.NET)
 Legg til følgende pakker i `FSA.Backend.Web`:
-`OpenTelemetry.Extensions.Hosting`, `OpenTelemetry.Instrumentation.AspNetCore`, `OpenTelemetry.Instrumentation.SqlClient`, og `Azure.Monitor.OpenTelemetry.AspNetCore`.
+`Azure.Monitor.OpenTelemetry.AspNetCore`.
 
-**Eksempel på konfigurasjon i `Program.cs`:**
+**Eksempel på konfigurasjon i `ConfigureCoreServices.cs`:**
 ```csharp
-using OpenTelemetry.Metrics;
+using Azure.Monitor.OpenTelemetry.AspNetCore;
 using OpenTelemetry.Resources;
-using OpenTelemetry.Trace;
 
-var serviceName = "Bufdir.FSA.Backend";
-
-builder.Services.AddOpenTelemetry()
-    .WithTracing(tracing =>
+// I AddCoreServices:
+services.AddOpenTelemetry()
+    .ConfigureResource(resource => resource.AddService("Bufdir.FSA.Backend"))
+    .UseAzureMonitor(options =>
     {
-        tracing
-            .AddSource(serviceName)
-            .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(serviceName))
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation()
-            .AddSqlClientInstrumentation(options =>
-            {
-                options.SetDbStatementForStoredProcedures = true;
-                options.SetDbStatementForText = true;
-                options.RecordException = true;
-            })
-            .AddAzureMonitorTraceExporter(o => o.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
-    })
-    .WithMetrics(metrics =>
-    {
-        metrics
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation()
-            .AddRuntimeInstrumentation();
+        options.ConnectionString = configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
     });
 ```
 
-### Oppgave 2.2: Instrumenter React Frontend (OpenTelemetry)
- - Installer OpenTelemetry npm-pakker for web:
+### Oppgave 2.2: Instrumenter React Frontend (Application Insights SDK)
+ - Installer Application Insights SDK:
   ```bash
-  npm install @opentelemetry/api @opentelemetry/sdk-trace-web \
-    @opentelemetry/instrumentation-xml-http-request \
-    @opentelemetry/instrumentation-fetch \
-    @opentelemetry/resources \
-    @opentelemetry/semantic-conventions \
-    @opentelemetry/exporter-trace-otlp-http
+  npm install @microsoft/applicationinsights-web
   ```
- - Opprett en initialiseringsfil for OpenTelemetry i React-appen.
- - Sørg for at `Distributed Tracing` headere (W3C) sendes med API-kall til backenden.
+ - Opprett en initialiseringsfil for Application Insights i React-appen.
 
-#### Implementasjonsveiledning for React med OpenTelemetry (Browser)
-
-For å sikre full sporbarhet fra React-frontend helt til databasen, bruker vi OpenTelemetry Web SDK direkte i browseren.
-
-**Eksempel på `src/otel-frontend.ts`:**
+#### Implementasjonsveiledning for React med Application Insights
 
 ```typescript
-import { WebTracerProvider } from '@opentelemetry/sdk-trace-web';
-import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-base';
-import { registerInstrumentations } from '@opentelemetry/instrumentation';
-import { getWebAutoInstrumentations } from '@opentelemetry/auto-instrumentations-web';
-import { Resource } from '@opentelemetry/resources';
-import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions';
-import { AzureMonitorTraceExporter } from '@azure/monitor-opentelemetry-exporter';
+import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 
-const provider = new WebTracerProvider({
-  resource: new Resource({
-    [SemanticResourceAttributes.SERVICE_NAME]: 'Bufdir.FSA.Frontend.Browser',
-  }),
+const appInsights = new ApplicationInsights({
+  config: {
+    connectionString: "DIN_CONNECTION_STRING_HER",
+    enableAutoRouteTracking: true,
+    distributedTracingMode: 2, // W3C standard
+  }
 });
-
-// Exporter sender telemetri direkte fra browser til Azure Application Insights
-const exporter = new AzureMonitorTraceExporter({
-  connectionString: "DIN_CONNECTION_STRING_HER",
-});
-
-provider.addSpanProcessor(new BatchSpanProcessor(exporter));
-
-registerInstrumentations({
-  instrumentations: [
-    getWebAutoInstrumentations({
-      '@opentelemetry/instrumentation-fetch': {
-        // Viktig: Dette sprer Trace Context til backenden (W3C standard)
-        propagateTraceHeaderCorsUrls: [ /fsa-api\.bufdir\.no/g ], 
-      },
-      '@opentelemetry/instrumentation-xml-http-request': {
-        propagateTraceHeaderCorsUrls: [ /fsa-api\.bufdir\.no/g ],
-      },
-    }),
-  ],
-  tracerProvider: provider,
-});
-
-provider.register();
+appInsights.loadAppInsights();
+appInsights.trackPageView();
 ```
 
-**Viktige fordeler med browser-monitorering:**
-1. **Real User Monitoring (RUM):** Man ser nøyaktig hva brukeren opplever, inkludert treghet i nettverk og rendering i browseren.
-2. **Distributed Tracing:** Når en bruker klikker på "Send søknad", kan vi følge den eksakte forespørselen gjennom React -> .NET API -> Database.
-3. **Feilhåndtering:** JavaScript-feil fanges opp automatisk og korreleres med brukerens sesjon.
+**Viktige fordeler:**
+1. **Enkelt oppsett:** Ingen behov for OTLP Collector proxy.
+2. **Real User Monitoring (RUM):** Man ser nøyaktig hva brukeren opplever direkte i Azure.
+3. **Distributed Tracing:** Korrelerer forespørsler fra frontend til backend via W3C standard.
 
-> **Sikkerhetsmerknad:** Connection String blir eksponert i klientkoden. Dette er normal praksis for RUM-verktøy, da strengen kun tillater innsending av data (ingestion), ikke lesing av data. For maksimal sikkerhet kan man sette opp en proxy som mottar OTLP-trafikk og sender den videre til Azure.
+### Oppgave 2.3: Instrumenter Strapi CMS (OpenTelemetry)
+ - Konfigurer **OpenTelemetry** Node.js SDK for Strapi med Azure Monitor exporter.
+ - Sett `service.name` til `Bufdir.FSA.Strapi`.
 
-### Oppgave 2.3: Instrumenter Strapi CMS (Container App)
- - Konfigurer OpenTelemetry Node.js SDK for Strapi.
- - Sett `OTEL_SERVICE_NAME=Bufdir.FSA.Strapi`.
+#### Implementasjonsveiledning for Strapi med OpenTelemetry
+
+**1. Installer pakker:**
+```bash
+npm install @azure/monitor-opentelemetry @opentelemetry/api
+```
+
+**2. Opprett `otel.js`:**
+```javascript
+const { useAzureMonitor } = require("@azure/monitor-opentelemetry");
+
+useAzureMonitor({
+  azureMonitorExporterOptions: {
+    connectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING
+  },
+  resourceAttributes: {
+    "service.name": "Bufdir.FSA.Strapi",
+    "project": "fsa"
+  }
+});
+```
 
 ---
 
@@ -183,18 +156,16 @@ provider.register();
 
 #### Eksempel på Logging av Forretningsfeil i React
 ```typescript
-// Bruk en custom tracer for å logge hendelser eller unntak
-import { trace } from '@opentelemetry/api';
-
-const tracer = trace.getTracer('fsa-frontend-logic');
+import { appInsights } from './monitoring/appInsights';
 
 const handleSubmit = (data) => {
     if (!isValidBusinessData(data)) {
-        tracer.startActiveSpan('Business Logic Error', (span) => {
-            span.setAttribute('errorCode', 'FSA-102');
-            span.setAttribute('severity', 'Critical');
-            span.recordException(new Error('Invalid Business Data'));
-            span.end();
+        appInsights.trackException({ 
+            exception: new Error('Invalid Business Data'),
+            properties: { 
+                errorCode: 'FSA-102',
+                severity: 'Critical'
+            }
         });
         // Håndter feil i UI
     }

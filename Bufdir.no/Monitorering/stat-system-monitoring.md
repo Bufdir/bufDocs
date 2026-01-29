@@ -13,6 +13,14 @@
 
 Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering for **Statistikksystemet**, som består av **stat-content-strapi5** (Strapi 5 CMS) og **stat-backend** (BufdirStatisticsDataAPI).
 
+### Hybrid Monitoreringsstrategi
+Statistikksystemet følger Bufdirs standard for hybrid monitorering:
+1.  **Backend (.NET & Strapi): OpenTelemetry**
+    *   **Hvorfor:** Gir best ytelse for tunge dataoperasjoner og sikrer en fremtidsrettet, leverandørnøytral instrumentering.
+2.  **Frontend (hvis aktuelt): Azure Application Insights SDK**
+    *   **Hvorfor:** Brukes for å fange opp rik klient-telemetri (RUM) der det er brukerinteraksjon i nettleseren.
+3.  **Integrasjon:** Bruk av **W3C Trace Context** sikrer at sporinger korreleres på tvers av CMS og API.
+
 ## Innholdsfortegnelse
 
 - [Fase 1: Grunnleggende oppsett](#fase-1-grunnleggende-oppsett)
@@ -37,76 +45,50 @@ Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering fo
 
 ## Fase 2: Applikasjonsinstrumentering
 
-### Oppgave 2.1: Instrumenter Strapi 5 (Node.js) med OpenTelemetry
- - Installer nødvendige OpenTelemetry-pakker i `stat-content-strapi5`:
+### Oppgave 2.1: Instrumenter Strapi 5 (Node.js) med Application Insights
+ - Installer `applicationinsights` pakken i `stat-content-strapi5`:
   ```bash
-  npm install @opentelemetry/api @opentelemetry/sdk-node \
-    @opentelemetry/auto-instrumentations-node \
-    @azure/monitor-opentelemetry-exporter
+  npm install applicationinsights
   ```
- - Opprett en initialiseringsfil for OpenTelemetry (f.eks. `src/otel.ts`).
+ - Opprett en initialiseringsfil for Application Insights (f.eks. `src/otel.ts` eller `src/appinsights.ts`).
  - Sørg for at instrumenteringen starter før Strapi-applikasjonen.
 
 #### Implementasjonsveiledning for OpenTelemetry i Strapi
-**Eksempel på `src/otel.ts`:**
-```typescript
-import { NodeSDK } from '@opentelemetry/sdk-node';
-import { AzureMonitorTraceExporter } from '@azure/monitor-opentelemetry-exporter';
-import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node';
-import { Resource } from '@opentelemetry/resources';
-import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions';
-
-const sdk = new NodeSDK({
-  resource: new Resource({
-    [SemanticResourceAttributes.SERVICE_NAME]: 'Bufdir.Stat.Content.Strapi',
-  }),
-  traceExporter: new AzureMonitorTraceExporter({
-    connectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING,
-  }),
-  instrumentations: [
-    getNodeAutoInstrumentations({
-      '@opentelemetry/instrumentation-fs': { enabled: false },
-    }),
-  ],
-});
-
-sdk.start();
+**1. Installer pakker:**
+```bash
+npm install @azure/monitor-opentelemetry @opentelemetry/api
 ```
 
-### Oppgave 2.2: Moderniser stat-backend med OpenTelemetry
-Prosjektet bruker i dag `AddApplicationInsightsTelemetry()`. Dette bør moderniseres til OpenTelemetry.
+**2. Opprett `src/otel.ts`:**
+```typescript
+import { useAzureMonitor } from "@azure/monitor-opentelemetry";
 
- - Installer OpenTelemetry NuGet-pakker i `BufdirStatisticsDataAPI`:
-    - `OpenTelemetry.Extensions.Hosting`, `OpenTelemetry.Instrumentation.AspNetCore`, `OpenTelemetry.Instrumentation.Http`, `OpenTelemetry.Instrumentation.SqlClient`, `Azure.Monitor.OpenTelemetry.AspNetCore`.
+useAzureMonitor({
+  azureMonitorExporterOptions: {
+    connectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING
+  },
+  resourceAttributes: {
+    "service.name": "Bufdir.Stat.Content.Strapi",
+    "project": "statistics"
+  }
+});
+```
+
+### Oppgave 2.2: Instrumenter stat-backend (OpenTelemetry)
+ - Installer `Azure.Monitor.OpenTelemetry.AspNetCore` NuGet-pakken i `BufdirStatisticsDataAPI`.
  - Konfigurer OpenTelemetry i `Startup.cs` eller `Program.cs`.
 
 #### Implementasjonsveiledning for OpenTelemetry (.NET)
 ```csharp
-var serviceName = "Bufdir.Statistics.API";
-
-services.AddOpenTelemetry()
-    .WithTracing(tracing =>
-    {
-        tracing
-            .AddSource(serviceName)
-            .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(serviceName))
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation()
-            .AddSqlClientInstrumentation(options =>
-            {
-                options.SetDbStatementForStoredProcedures = true;
-                options.SetDbStatementForText = true;
-                options.RecordException = true;
-            })
-            .AddAzureMonitorTraceExporter(o => o.ConnectionString = Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
-    })
-    .WithMetrics(metrics =>
-    {
-        metrics
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation()
-            .AddRuntimeInstrumentation();
-    });
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddOpenTelemetry()
+        .ConfigureResource(resource => resource.AddService("Bufdir.Stat.Backend"))
+        .UseAzureMonitor(options =>
+        {
+            options.ConnectionString = Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
+        });
+}
 ```
 
 ---
@@ -197,89 +179,76 @@ Dette kapittelet beskriver spesifikke metrikker og spor som er relevante for fin
         - `ExcelGeneration`: Sporing av ressurskrevende Excel-eksport i statistikksystemet.
         - `DnsLookupDuration`: Sporing av tid brukt på DNS-oppslag mot eksterne kilder.
 
-#### Implementasjonsveiledning for spesifikke spor (Traces)
+#### Implementasjonsveiledning for spesifikke spor (Traces/Dependencies)
 
-For å spore komplekse operasjoner som går på tvers av tjenester eller tar lang tid, bruker vi OpenTelemetry-sporing.
+For å spore komplekse operasjoner som går på tvers av tjenester eller tar lang tid, bruker vi Application Insights sporing.
 
 **1. DataAggregation (C# / .NET API)**
 Dette sporet brukes for å overvåke tunge beregninger i `stat-backend`.
 
 ```csharp
-using System.Diagnostics;
+using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.DataContracts;
 
 public class StatisticsService
 {
-    private static readonly ActivitySource _activitySource = new ActivitySource("Bufdir.Statistics.API");
+    private readonly TelemetryClient _telemetryClient;
+
+    public StatisticsService(TelemetryClient telemetryClient)
+    {
+        _telemetryClient = telemetryClient;
+    }
 
     public async Task<AggregateResult> AggregateData(AggregateRequest request)
     {
-        using var activity = _activitySource.StartActivity("DataAggregation");
-        activity?.SetTag("stat.query_type", request.Type);
-        activity?.SetTag("stat.dataset_id", request.DatasetId);
+        using (var operation = _telemetryClient.StartOperation<DependencyTelemetry>("DataAggregation"))
+        {
+            operation.Telemetry.Type = "Calculation";
+            operation.Telemetry.Properties["stat.query_type"] = request.Type;
+            operation.Telemetry.Properties["stat.dataset_id"] = request.DatasetId;
 
-        try
-        {
-            activity?.AddEvent(new ActivityEvent("CalculationStarted"));
-            // Utfør aggregering...
-            var result = await PerformHeavyCalculation(request);
-            
-            activity?.SetTag("stat.result_count", result.Count);
-            activity?.SetStatus(ActivityStatusCode.Ok);
-            return result;
-        }
-        catch (Exception ex)
-        {
-            activity?.SetStatus(ActivityStatusCode.Error, ex.Message);
-            activity?.RecordException(ex);
-            throw;
+            try
+            {
+                // Utfør aggregering...
+                var result = await PerformHeavyCalculation(request);
+                
+                operation.Telemetry.Properties["stat.result_count"] = result.Count.ToString();
+                operation.Telemetry.Success = true;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                operation.Telemetry.Success = false;
+                _telemetryClient.TrackException(ex);
+                throw;
+            }
         }
     }
 }
 ```
 
 **2. CmsSyncFlow (Node.js & C#)**
-For å spore dataflyten fra Strapi til .NET API-et, må vi sende med Trace Context.
+For å spore dataflyten fra Strapi til .NET API-et, må vi sende med korreleringsheadere. Application Insights SDK gjør dette automatisk for de fleste HTTP-klienter.
 
 **I Strapi (Node.js - når synkronisering trigges):**
 ```typescript
-import { trace, SpanStatusCode, propagation, Context } from '@opentelemetry/api';
-
-const tracer = trace.getTracer('stat-content-strapi');
+import * as appInsights from 'applicationinsights';
 
 async function syncToBackend(data: any) {
-  await tracer.startActiveSpan('CmsSyncFlow', async (span) => {
-    try {
-      span.setAttribute('cms.content_id', data.id);
-      
-      // Pakk ut trace context for å sende den videre i HTTP-headeren
-      const headers = {};
-      propagation.inject(trace.getActiveSpan()?.spanContext() ? trace.setSpan(trace.getActiveSpan()!) : undefined, headers);
-
-      await axios.post(process.env.BACKEND_URL + '/sync', data, { headers });
-      
-      span.setStatus({ code: SpanStatusCode.OK });
-    } catch (error) {
-      span.setStatus({ code: SpanStatusCode.ERROR, message: error.message });
-      span.recordException(error);
-      throw error;
-    } finally {
-      span.end();
-    }
-  });
+  // Application Insights vil automatisk korrelere dette utgående kallet
+  // dersom det gjøres med standard biblioteker som axios eller http.
+  await axios.post(process.env.BACKEND_URL + '/sync', data);
 }
 ```
 
 **I .NET API (Mottak av synkronisering):**
-OpenTelemetry vil automatisk plukke opp `traceparent`-headeren fra Strapi og koble seg på det eksisterende sporet dersom `AddAspNetCoreInstrumentation()` er konfigurert.
+Application Insights vil automatisk plukke opp korreleringsheadere og koble seg på det eksisterende sporet.
 
 ```csharp
 [HttpPost("sync")]
 public async Task<IActionResult> ReceiveSync([FromBody] SyncData data)
 {
-    // Activity.Current vil her automatisk være en del av "CmsSyncFlow" fra Strapi
-    Activity.Current?.AddEvent(new ActivityEvent("DataReceivedInBackend"));
-    Activity.Current?.SetTag("backend.process_id", Guid.NewGuid());
-    
+    // Kallet er automatisk korrelert
     await _syncService.Process(data);
     return Ok();
 }

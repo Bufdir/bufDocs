@@ -13,6 +13,12 @@
 
 Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering for **fosterhjem-api** (Container App).
 
+### Hybrid Monitoreringsstrategi
+For dette prosjektet har vi valgt en **hybrid monitoreringsmodell**:
+1.  **Backend (.NET): OpenTelemetry**
+    *   **Hvorfor:** Industristandard for moderne backend-instrumentering. Gir bedre ytelse og er Microsofts primære anbefaling for .NET.
+2.  **Korrelasjon:** Bruker **W3C Trace Context** som standard, noe som sikrer at distribuert sporing fungerer sømløst på tvers av tjenester.
+
 ## Innholdsfortegnelse
 - [Fase 1: Applikasjonsinstrumentering](#fase-1-applikasjonsinstrumentering)
 - [Fase 2: Infrastrukturmonitorering](#fase-2-infrastrukturmonitorering)
@@ -30,44 +36,24 @@ Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering fo
  - Verifiser at `APPLICATIONINSIGHTS_CONNECTION_STRING` i Azure peker til den felles ressursen.
 
 ### Oppgave 1.2: .NET API-instrumentering (OpenTelemetry)
- - Implementer OpenTelemetry i modulen.
- - Sikre at `Distributed Tracing` fungerer mellom portalen og dette API-et ved å bruke W3C Trace Context.
- - Sett `OTEL_SERVICE_NAME=Bufdir.Fosterhjem.API`.
+ - Installer **OpenTelemetry** SDK i `fosterhjem-api`.
+ - Konfigurer OpenTelemetry for å fange opp SQL Server-kall og HTTP-trafikk ved bruk av Azure Monitor exporter.
+ - Sett Cloud Role Name (Service Name) til `Bufdir.Fosterhjem.API`.
 
 #### Implementasjonsveiledning for OpenTelemetry (.NET)
-Legg til følgende pakker:
-`OpenTelemetry.Extensions.Hosting`, `OpenTelemetry.Instrumentation.AspNetCore`, `OpenTelemetry.Instrumentation.SqlClient`, og `Azure.Monitor.OpenTelemetry.AspNetCore`.
+Legg til følgende pakke: `Azure.Monitor.OpenTelemetry.AspNetCore`.
 
 **Eksempel på konfigurasjon i `Program.cs`:**
 ```csharp
-using OpenTelemetry.Metrics;
+using Azure.Monitor.OpenTelemetry.AspNetCore;
 using OpenTelemetry.Resources;
-using OpenTelemetry.Trace;
 
-var serviceName = "Bufdir.Fosterhjem.API";
-
+// I ConfigureServices / builder:
 builder.Services.AddOpenTelemetry()
-    .WithTracing(tracing =>
+    .ConfigureResource(resource => resource.AddService("Bufdir.Fosterhjem.API"))
+    .UseAzureMonitor(options =>
     {
-        tracing
-            .AddSource(serviceName)
-            .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(serviceName))
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation()
-            .AddSqlClientInstrumentation(options =>
-            {
-                options.SetDbStatementForStoredProcedures = true;
-                options.SetDbStatementForText = true;
-                options.RecordException = true;
-            })
-            .AddAzureMonitorTraceExporter(o => o.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
-    })
-    .WithMetrics(metrics =>
-    {
-        metrics
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation()
-            .AddRuntimeInstrumentation();
+        options.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
     });
 ```
 
@@ -129,46 +115,52 @@ Dette kapittelet beskriver spesifikke metrikker og spor som er relevante for fin
     - **Sporing (Traces):**
         - `ApplicationProcess`: Sporing av søknadshåndtering for fosterhjem.
 
-#### Implementasjonsveiledning for spesifikke spor (Traces)
+#### Implementasjonsveiledning for tilpasset sporing (Custom Events)
 
-For å spore en forretningsprosess som "søknadshåndtering", bruker vi `ActivitySource` i .NET. Dette gjør at vi kan se hele forløpet som en sammenhengende operasjon i Application Insights.
+For å spore en forretningsprosess som "søknadshåndtering", bruker vi `TelemetryClient` i .NET. Dette gjør at vi kan se hele forløpet som en sammenhengende operasjon i Application Insights.
 
 **Eksempel på implementering av `ApplicationProcess`:**
 
 ```csharp
-using System.Diagnostics;
+using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.DataContracts;
 
 public class ApplicationService
 {
-    // Definer ActivitySource (bør være statisk og gjenbrukes)
-    private static readonly ActivitySource _activitySource = new ActivitySource("Bufdir.Fosterhjem.API");
+    private readonly TelemetryClient _telemetryClient;
+
+    public ApplicationService(TelemetryClient telemetryClient)
+    {
+        _telemetryClient = telemetryClient;
+    }
 
     public async Task ProcessApplication(string applicationId)
     {
-        // Start et nytt spor (span)
-        using var activity = _activitySource.StartActivity("ApplicationProcess");
-        
-        // Legg til attributter for å kunne filtrere/søke i Application Insights
-        activity?.SetTag("application.id", applicationId);
-        activity?.SetTag("application.type", "Fosterhjem");
-        
-        try 
+        // Start en ny operasjon
+        using (var operation = _telemetryClient.StartOperation<RequestTelemetry>("ApplicationProcess"))
         {
-            // Steg 1: Validering
-            activity?.AddEvent(new ActivityEvent("ValidationStarted"));
-            await Validate(applicationId);
+            // Legg til egenskaper for å kunne filtrere/søke i Application Insights
+            operation.Telemetry.Properties["application.id"] = applicationId;
+            operation.Telemetry.Properties["application.type"] = "Fosterhjem";
             
-            // Steg 2: Lagring
-            activity?.AddEvent(new ActivityEvent("StorageStarted"));
-            await SaveToDatabase(applicationId);
-            
-            activity?.SetStatus(ActivityStatusCode.Ok);
-        }
-        catch (Exception ex)
-        {
-            activity?.SetStatus(ActivityStatusCode.Error, ex.Message);
-            activity?.RecordException(ex);
-            throw;
+            try 
+            {
+                // Steg 1: Validering
+                _telemetryClient.TrackEvent("ValidationStarted");
+                await Validate(applicationId);
+                
+                // Steg 2: Lagring
+                _telemetryClient.TrackEvent("StorageStarted");
+                await SaveToDatabase(applicationId);
+                
+                operation.Telemetry.Success = true;
+            }
+            catch (Exception ex)
+            {
+                operation.Telemetry.Success = false;
+                _telemetryClient.TrackException(ex);
+                throw;
+            }
         }
     }
 }

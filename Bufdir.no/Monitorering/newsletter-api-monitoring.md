@@ -13,6 +13,12 @@
 
 Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering for **newsletter-api** (Container App).
 
+### Hybrid Monitoreringsstrategi
+For dette prosjektet har vi valgt en **hybrid monitoreringsmodell**:
+1.  **Backend (.NET): OpenTelemetry**
+    *   **Hvorfor:** Industristandard for moderne backend-instrumentering. Gir bedre ytelse og er Microsofts primære anbefaling for .NET.
+2.  **Korrelasjon:** Bruker **W3C Trace Context** som standard, noe som sikrer at distribuert sporing fungerer sømløst på tvers av tjenester.
+
 ## Innholdsfortegnelse
 - [Fase 1: Applikasjonsinstrumentering](#fase-1-applikasjonsinstrumentering)
 - [Fase 2: Infrastrukturmonitorering](#fase-2-infrastrukturmonitorering)
@@ -30,44 +36,24 @@ Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering fo
  - Verifiser at `APPLICATIONINSIGHTS_CONNECTION_STRING` i Azure peker til den felles ressursen.
 
 ### Oppgave 1.2: .NET API-instrumentering (OpenTelemetry)
- - Implementer OpenTelemetry i modulen.
- - Sikre at `Distributed Tracing` fungerer mellom portalen og dette API-et ved å bruke W3C Trace Context.
- - Sett `OTEL_SERVICE_NAME=Bufdir.Newsletter.API`.
+ - Installer **OpenTelemetry** SDK i `newsletter-api`.
+ - Konfigurer OpenTelemetry for å fange opp HTTP-trafikk og Azure Monitor-integrasjon.
+ - Sett Cloud Role Name (Service Name) til `Bufdir.Newsletter.API`.
 
 #### Implementasjonsveiledning for OpenTelemetry (.NET)
-Legg til følgende pakker:
-`OpenTelemetry.Extensions.Hosting`, `OpenTelemetry.Instrumentation.AspNetCore`, `OpenTelemetry.Instrumentation.SqlClient`, og `Azure.Monitor.OpenTelemetry.AspNetCore`.
+Legg til følgende pakke: `Azure.Monitor.OpenTelemetry.AspNetCore`.
 
 **Eksempel på konfigurasjon i `Program.cs`:**
 ```csharp
-using OpenTelemetry.Metrics;
+using Azure.Monitor.OpenTelemetry.AspNetCore;
 using OpenTelemetry.Resources;
-using OpenTelemetry.Trace;
 
-var serviceName = "Bufdir.Newsletter.API";
-
+// I ConfigureServices / builder:
 builder.Services.AddOpenTelemetry()
-    .WithTracing(tracing =>
+    .ConfigureResource(resource => resource.AddService("Bufdir.Newsletter.API"))
+    .UseAzureMonitor(options =>
     {
-        tracing
-            .AddSource(serviceName)
-            .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(serviceName))
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation()
-            .AddSqlClientInstrumentation(options =>
-            {
-                options.SetDbStatementForStoredProcedures = true;
-                options.SetDbStatementForText = true;
-                options.RecordException = true;
-            })
-            .AddAzureMonitorTraceExporter(o => o.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
-    })
-    .WithMetrics(metrics =>
-    {
-        metrics
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation()
-            .AddRuntimeInstrumentation();
+        options.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
     });
 ```
 

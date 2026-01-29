@@ -13,6 +13,14 @@
 
 Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering for **Utrapporteringsbank**, en Next.js-applikasjon som bruker Drizzle ORM og PostgreSQL.
 
+### Hybrid Monitoreringsstrategi
+Utrapporteringsbanken benytter en hybrid monitoreringsmodell:
+1.  **Frontend (Nettleser): Azure Application Insights SDK**
+    *   **Hvorfor:** Spesialtilpasset for Real User Monitoring (RUM). Fanger opp brukersesjoner, sidevisninger og klient-exceptions mer detaljert enn standard OpenTelemetry.
+2.  **Backend (Next.js Server / API): OpenTelemetry**
+    *   **Hvorfor:** Industristandard for server-side instrumentering. Sikrer høy ytelse ved rapportgenerering og dyp innsikt i databasekall.
+3.  **Korrelasjon:** Ved å bruke **W3C Trace Context** sikrer vi at en brukers forespørsel kan følges fra nettleseren og helt gjennom server-side logikken.
+
 ## Innholdsfortegnelse
 
 - [Fase 1: Grunnleggende oppsett](#fase-1-grunnleggende-oppsett)
@@ -42,6 +50,12 @@ Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering fo
   ```bash
   npm install @opentelemetry/api @opentelemetry/sdk-node \
     @opentelemetry/auto-instrumentations-node \
+    @opentelemetry/sdk-trace-web \
+    @opentelemetry/instrumentation-xml-http-request \
+    @opentelemetry/instrumentation-fetch \
+    @opentelemetry/resources \
+    @opentelemetry/semantic-conventions \
+    @opentelemetry/exporter-trace-otlp-http \
     @azure/monitor-opentelemetry-exporter
   ```
  - Aktiver OpenTelemetry i `next.config.ts`:
@@ -55,82 +69,39 @@ Dette dokumentet beskriver oppgavene som kreves for å sette opp monitorering fo
   ```
  - Opprett `src/instrumentation.ts` for å fange opp HTTP-forespørsler og databasekall.
 
-#### Implementasjonsveiledning for Next.js og OpenTelemetry
+#### Implementasjonsveiledning for Application Insights (Node.js & Browser)
 
-For å få full sporing i Utrapporteringsbanken (både på serveren og i nettleseren), bruker vi en todelt strategi.
+For å få full sporing i Utrapporteringsbanken (både på serveren og i nettleseren), bruker vi Application Insights SDK-er.
 
 **1. Server-side (SSR, API-ruter, Databasekall): `src/instrumentation.ts`**
 
 ```typescript
 export async function register() {
   if (process.env.NEXT_RUNTIME === 'nodejs') {
-    const { NodeSDK } = await import('@opentelemetry/sdk-node');
-    const { AzureMonitorTraceExporter } = await import('@azure/monitor-opentelemetry-exporter');
-    const { getNodeAutoInstrumentations } = await import('@opentelemetry/auto-instrumentations-node');
-    const { Resource } = await import('@opentelemetry/resources');
-    const { SemanticResourceAttributes } = await import('@opentelemetry/semantic-conventions');
-
-    const sdk = new NodeSDK({
-      resource: new Resource({
-        [SemanticResourceAttributes.SERVICE_NAME]: 'Bufdir.Utrapporteringsbank.Server',
-      }),
-      traceExporter: new AzureMonitorTraceExporter({
-        connectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING,
-      }),
-      instrumentations: [
-        getNodeAutoInstrumentations({
-          '@opentelemetry/instrumentation-fs': { enabled: false },
-        }),
-      ],
-    });
-
-    sdk.start();
+    const { NodeSDK } = await import('@microsoft/applicationinsights-node-js');
+    // Konfigurer for Node.js
   }
 }
 ```
 
 **2. Klient-side (Browser): `src/components/MonitorInit.tsx`**
 
-Fanger opp brukerinteraksjoner og ytelse i nettleseren.
-
 ```tsx
 'use client';
 
 import { useEffect } from 'react';
-import { WebTracerProvider } from '@opentelemetry/sdk-trace-web';
-import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-base';
-import { registerInstrumentations } from '@opentelemetry/instrumentation';
-import { getWebAutoInstrumentations } from '@opentelemetry/auto-instrumentations-web';
-import { AzureMonitorTraceExporter } from '@azure/monitor-opentelemetry-exporter';
-import { Resource } from '@opentelemetry/resources';
-import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions';
+import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 
 export function MonitorInit() {
   useEffect(() => {
-    const provider = new WebTracerProvider({
-      resource: new Resource({
-        [SemanticResourceAttributes.SERVICE_NAME]: 'Bufdir.Utrapporteringsbank.Browser',
-      }),
+    const appInsights = new ApplicationInsights({
+      config: {
+        connectionString: "DIN_CONNECTION_STRING_HER",
+        enableAutoRouteTracking: true,
+      }
     });
-
-    const exporter = new AzureMonitorTraceExporter({
-      connectionString: "DIN_CONNECTION_STRING_HER",
-    });
-
-    provider.addSpanProcessor(new BatchSpanProcessor(exporter));
-
-    registerInstrumentations({
-      instrumentations: [
-        getWebAutoInstrumentations({
-          '@opentelemetry/instrumentation-fetch': {
-            propagateTraceHeaderCorsUrls: [ /utrapporteringsbank\.bufdir\.no/g ],
-          },
-        }),
-      ],
-      tracerProvider: provider,
-    });
-
-    provider.register();
+    appInsights.loadAppInsights();
+    appInsights.trackPageView();
   }, []);
 
   return null;
@@ -138,17 +109,15 @@ export function MonitorInit() {
 ```
 
 **Viktige punkter:**
-1. **Hvorfor experimental?** 
-   Dette flagget er nødvendig fordi Next.js-teamet fortsatt anser instrumentation-funksjonaliteten som et eksperimentelt API. Det er likevel den anbefalte måten å fange opp server-side telemetri på.
-2. **Todelt overvåking**: Ved å skille mellom `.Server` og `.Browser` kan vi identifisere om treghet i rapportgenerering skyldes selve server-prosessen eller overføring til klienten.
-3. **Korrelasjon**: Browser-sporet kobles sammen med server-sporet og databasekallene (Drizzle) via W3C Trace Context.
+1. **Todelt overvåking**: Ved å skille mellom server og browser kan vi se hvor treghet oppstår.
+2. **Korrelasjon**: Browser-sporet kobles sammen med server-sporet via W3C Trace Context.
 
 ### Oppgave 2.2: Overvåk autentisering (NextAuth.js og Maskinporten)
  - Logg vellykkede og feilede pålogginger via NextAuth.js (uten å logge sensitiv informasjon).
  - Overvåk integrasjon mot Maskinporten for henting av tokens (responstid og feilkoder).
 
 ### Oppgave 2.3: Instrumenter Database-kall (Drizzle)
- - Sørg for at `pg` (node-postgres) instrumenteres automatisk via `getNodeAutoInstrumentations`.
+ - Sørg for at databasekall instrumenteres automatisk.
  - Verifiser at SQL-spørringer dukker opp som "Dependencies" i Application Insights.
 
 ---
@@ -180,21 +149,16 @@ export function MonitorInit() {
 
 #### Logging av hendelser i Next.js (Server Side)
 ```typescript
-import { trace } from '@opentelemetry/api';
-
-const tracer = trace.getTracer('utrapporteringsbank-logic');
+import { TelemetryClient } from '@microsoft/applicationinsights-node-js';
+const client = new TelemetryClient();
 
 export async function generateReport() {
     try {
         // Logikk for generering
-        tracer.startActiveSpan('ReportGeneratedSuccess', (span) => {
-            span.end();
-        });
+        client.trackEvent({ name: 'ReportGeneratedSuccess' });
     } catch (err) {
-        tracer.startActiveSpan('ReportGeneratedFailure', (span) => {
-            span.recordException(err as Error);
-            span.end();
-        });
+        client.trackException({ exception: err as Error });
+        client.trackEvent({ name: 'ReportGeneratedFailure' });
         throw err;
     }
 }

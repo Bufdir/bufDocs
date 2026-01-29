@@ -16,6 +16,18 @@ Dette dokumentet gir en oversikt over monitoreringsstrategien for hele løsninge
 
 ---
 
+## Hybrid Monitoreringsstrategi
+Bufdirno benytter en **hybrid monitoreringsmodell** for å sikre optimal observabilitet på tvers av hele økosystemet. Denne strategien er valgt for å utnytte styrkene til de ulike verktøyene:
+
+1.  **Frontend (Nettleser): Azure Application Insights SDK**
+    *   **Hvorfor:** Spesialtilpasset for **Real User Monitoring (RUM)**. Håndterer klientside-spesifikke behov som brukersesjoner, sidevisninger, klikk-strømmer og JavaScript-exceptions mer sømløst enn standard OpenTelemetry i nettleseren. Det krever ingen kompleks proxy-infrastruktur (som OTLP Collector) for å sende data sikkert til Azure.
+2.  **Backend (.NET & Node.js): OpenTelemetry**
+    *   **Hvorfor:** Industristandard for moderne backend-instrumentering. Det er Microsofts primære anbefaling for .NET 8/9 og moderne Node.js-arkitekturer. OpenTelemetry gir bedre ytelse på serveren, er leverandørnøytral og har et rikt økosystem av instrumentering for databaser, køer og eksterne API-er.
+3.  **Korrelasjon (Distributed Tracing): W3C Trace Context**
+    *   **Hvorfor:** Ved å bruke den åpne standarden **W3C Trace Context** på tvers av både Application Insights SDK (frontend) og OpenTelemetry (backend), oppnår vi sømløs korrelasjon. En forespørsel kan følges fra brukerens første klikk i nettleseren, gjennom alle mikrotjenester, og helt ned til den enkelte SQL-spørring eller eksterne tjenestekall.
+
+---
+
 ## Felles Oppgaver
 
 ### Fase 1: Grunnleggende infrastruktur
@@ -32,10 +44,10 @@ Dette dokumentet gir en oversikt over monitoreringsstrategien for hele løsninge
 ---
 
 ## Korrelasjon og Distributed Tracing
-For å kunne følge en forespørsel fra Next.js frontend, gjennom Optimizely CMS, og videre til mikrotjenester og databaser, er det avgjørende at:
+For å kunne følge en forespørsel fra nettleseren, gjennom ulike frontender og backender, og videre til mikrotjenester og databaser, er det avgjørende at:
 1. **Felles ressurs:** Alle komponenter sender telemetri til samme Application Insights-ressurs.
-2. **W3C Trace Context:** Alle tjenester må støtte og videreformidle standardiserte trace-headere (gjør automatisk av OpenTelemetry).
-3. **Cloud Role Name:** Hver tjeneste må sette et unikt `service.name` (Cloud Role Name) i OpenTelemetry-konfigurasjonen for å skille dem i Application Map. Det anbefales å skille mellom `.Server` og `.Browser` for frontend-applikasjoner.
+2. **W3C Trace Context:** Alle tjenester må støtte og videreformidle standardiserte trace-headere (gjør automatisk av både AI SDK og OpenTelemetry).
+3. **Cloud Role Name:** Hver tjeneste må sette et unikt `service.name` (eller `ai.cloud.role`) for å skille dem i Application Map. Det anbefales å skille mellom `.Server` og `.Browser` for frontend-applikasjoner.
 
 ---
 
@@ -48,7 +60,7 @@ For applikasjoner med en frontend-del (Next.js, React) er det mulig og sterkt an
 ### Sikkerhetshensyn ved Browser-monitorering
 Når man instrumenterer koden som kjører i browseren, vil `ConnectionString` til Application Insights være synlig for sluttbrukeren.
 1.  **Risikovurdering:** Denne strengen gir kun tillatelse til å *sende* data til Azure (Ingestion). Den gir ingen tilgang til å lese logger eller se andres data.
-2.  **Anbefaling:** For Bufdirno anses dette som en akseptabel risiko for offentlige flater. For strengere krav kan man sette opp en **OpenTelemetry Collector** som fungerer som en proxy mellom browseren og Azure.
+2.  **Anbefaling:** For Bufdirno anses dette som en akseptabel risiko for offentlige flater. Ved å bruke Application Insights SDK direkte i browseren unngår man behovet for en OpenTelemetry Collector proxy, noe som forenkler arkitekturen betraktelig.
 
 ---
 
@@ -168,8 +180,8 @@ For å gå fra grunnleggende overvåking ("kjører systemet?") til dyp innsikt (
 *   **Forretningsmetrikker:** Fokus på verdi og flyt (f.eks. fullføringsgrad for søknader, suksessrate for nyhetsbrev).
 
 ### 2. Strategisk verdi
-Ved å bruke OpenTelemetry-standarden på tvers av alle språk (.NET, Node.js, TypeScript) oppnår vi:
-*   **Sammenhengende feilsøking:** Vi kan følge en "trace" fra en treghet i browseren, gjennom API-er, til den nøyaktige SQL-spørringen som forårsaket den.
+Ved å kombinere Application Insights SDK (frontend) og OpenTelemetry (backend) oppnår vi:
+*   **Sammenhengende feilsøking:** Vi kan følge en "trace" fra en treghet i browseren, gjennom API-er, til den nøyaktige SQL-spørringen som forårsaket den, takket være W3C Trace Context.
 *   **Proaktiv optimalisering:** Metrikker som `cache.hit_rate` og `query_complexity` gjør at vi kan optimalisere infrastrukturen før det oppstår flaskehalser.
 *   **Forretningsinnsikt:** Ved å logge `customEvents` for kritiske steg i en søknadsprosess, kan vi identifisere hvor brukere faller fra uten å trenge komplekse analyseverktøy.
 

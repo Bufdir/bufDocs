@@ -1869,31 +1869,18 @@ From `appsettings.production.json`:
 
 For å sikre driftsstabilitet og rask feildeteksjon i Bufdir.no-løsningen anbefales det å implementere en helhetlig monitorerings- og varslingsstrategi.
 
-### 6.1 Anbefalt løsning
+### 6.1 Anbefalt løsning: Hybrid Monitorering
+Bufdir.no benytter en **hybrid monitoreringsmodell** for å sikre optimal observabilitet:
 
-**OpenTelemetry** kombinert med **Azure Application Insights** gir en moderne og fleksibel observability-løsning:
-
-#### Azure Application Insights
-
-Azure Application Insights er Microsofts Application Performance Management (APM)-tjeneste som gir:
-
-- **Automatisk innsamling** av telemetri for Azure-tjenester
-- **Distribuert tracing** på tvers av mikrotjenester
-- **Application Map** for visuell oversikt over systemavhengigheter
-- **Live Metrics** for sanntidsovervåkning
-- **Smart Detection** med AI-basert anomalideteksjon
-- **Varsling** via Azure Monitor Alerts
-- **Integrasjon** med Azure-økosystemet (Container Apps, App Services, Functions)
-
-#### OpenTelemetry
-
-OpenTelemetry er en vendor-nøytral observability-standard som tilbyr:
-
-- **Unified API** for metrics, logs og traces
-- **Åpen standard** - unngår vendor lock-in
-- **Rich instrumentation** for .NET, Node.js, og andre språk
-- **Flexibilitet** - eksporter data til Application Insights eller andre backends
-- **Future-proof** - industristandardisert løsning
+1.  **Frontend (Nettleser): Azure Application Insights SDK**
+    *   Brukes for **Real User Monitoring (RUM)**.
+    *   Fanger opp sidevisninger, brukersesjoner, klientside-Exceptions og ytelse (Core Web Vitals).
+    *   Fordel: Spesialtilpasset for nettlesere, enkel integrasjon uten behov for OpenTelemetry Collector proxy.
+2.  **Backend (.NET & Node.js Server): OpenTelemetry**
+    *   Brukes for server-side instrumentering.
+    *   Fanger opp HTTP-forespørsler, databasekall (SQL/NoSQL) og utgående avhengigheter.
+    *   Fordel: Industristandard, høy ytelse, leverandørnøytral og Microsofts primære anbefaling for moderne backender.
+3.  **Korrelasjon:** Begge verdener kobles sammen ved bruk av **W3C Trace Context**. Dette sikrer at en forespørsel kan følges fra brukerens nettleser, gjennom alle mikrotjenester og helt ned til databasen.
 
 ### 6.2 Implementering
 
@@ -1949,73 +1936,45 @@ graph LR
 #### 6.2.2 Implementeringssteg
 
 **1. Sett opp Application Insights**
+Opprett en felles Application Insights-ressurs i Azure for hele prosjektet.
+
+**2. Installer SDK-er**
 
 ```bash
-# Opprett Application Insights-ressurs
-az monitor app-insights component create \
-  --app bufdir-appinsights \
-  --location norwayeast \
-  --resource-group rg-bufdir-prod \
-  --workspace /subscriptions/.../resourcegroups/.../providers/microsoft.operationalinsights/workspaces/bufdir-logs
+# Frontend (React/Next.js Browser)
+npm install @microsoft/applicationinsights-web
+
+# Backend (Node.js Server)
+npm install @azure/monitor-opentelemetry @opentelemetry/api
+
+# Backend (.NET)
+# Legg til NuGet-pakke: Azure.Monitor.OpenTelemetry.AspNetCore
 ```
 
-**2. Installer OpenTelemetry NuGet-pakker (.NET-moduler)**
-
-```xml
-<PackageReference Include="OpenTelemetry.Exporter.ApplicationInsights" Version="1.0.0" />
-<PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.0.0" />
-<PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0" />
-<PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0" />
-<PackageReference Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.0.0" />
-```
-
-**3. Konfigurer OpenTelemetry (Program.cs / Startup.cs)**
+**3. Konfigurer Backend (.NET)**
 
 ```csharp
-builder.Services.AddOpenTelemetry()
-    .WithTracing(tracerProviderBuilder =>
-    {
-        tracerProviderBuilder
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation()
-            .AddSqlClientInstrumentation()
-            .AddAzureMonitorTraceExporter(options =>
-            {
-                options.ConnectionString = builder.Configuration["ApplicationInsights:ConnectionString"];
-            });
-    })
-    .WithMetrics(meterProviderBuilder =>
-    {
-        meterProviderBuilder
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation()
-            .AddAzureMonitorMetricExporter(options =>
-            {
-                options.ConnectionString = builder.Configuration["ApplicationInsights:ConnectionString"];
-            });
-    });
+services.AddOpenTelemetry()
+    .ConfigureResource(r => r.AddService("MinTjeneste"))
+    .UseAzureMonitor(o => o.ConnectionString = "...");
 ```
 
-**4. Node.js-applikasjoner (Next.js)**
-
-```bash
-npm install @opentelemetry/api @opentelemetry/sdk-node @opentelemetry/auto-instrumentations-node @azure/monitor-opentelemetry-exporter
-```
+**4. Konfigurer Backend (Node.js)**
 
 ```javascript
-// instrumentation.js
-const { NodeSDK } = require('@opentelemetry/sdk-node');
-const { getNodeAutoInstrumentations } = require('@opentelemetry/auto-instrumentations-node');
-const { AzureMonitorTraceExporter } = require('@azure/monitor-opentelemetry-exporter');
+const { useAzureMonitor } = require("@azure/monitor-opentelemetry");
+useAzureMonitor({ connectionString: "..." });
+```
 
-const sdk = new NodeSDK({
-  traceExporter: new AzureMonitorTraceExporter({
-    connectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING
-  }),
-  instrumentations: [getNodeAutoInstrumentations()]
-});
+**5. Konfigurer Frontend (Browser)**
 
-sdk.start();
+```javascript
+import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+const appInsights = new ApplicationInsights({ config: {
+  connectionString: '...',
+  distributedTracingMode: 2 // W3C
+}});
+appInsights.loadAppInsights();
 ```
 
 **5. Konfigurer varsler i Azure Monitor**
