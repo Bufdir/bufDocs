@@ -29,7 +29,7 @@ description.
 
 ### Fixed
 
-- Adjusted heading levels of accordions in Monitor
+- Removed headingLevel attribute from AccordionsGroup component.
 
 ## [5.0.5] - 2026-01-16
 
