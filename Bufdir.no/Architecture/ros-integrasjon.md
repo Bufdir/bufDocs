@@ -7,7 +7,9 @@
     - [1.3 Roller og Handlinger per Komponent](#13-roller-og-handlinger-per-komponent)
 2. [2. Integrasjonsbeskrivelser](#2-integrasjonsbeskrivelser)
     - [2.1 Postnummervalidering](#21-postnummervalidering)
-    - [2.2 Arrangementssynkronisering](#22-arrangementssynkronisering)
+    - [2.2 Arrangementer (Synkronisering og Påmelding)](#22-arrangementer-synkronisering-og-pamelding)
+        - [2.2.1 Synkronisering av arrangementer (Automatisert)](#221-synkronisering-av-arrangementer-automatisert)
+        - [2.2.2 Påmelding til arrangementer (Brukerdrevet)](#222-pamelding-til-arrangementer-brukerdrevet)
     - [2.3 Henvendelseshåndtering](#23-henvendelseshåndtering)
 3. [3. Prosesser i ros](#3-prosesser-i-ros)
 4. [4. Infrastruktur og Felles Konfigurasjon](#4-infrastruktur-og-felles-konfigurasjon)
@@ -20,7 +22,7 @@ Integrasjonen fungerer som et bindeledd mellom den offentlige webportalen (Bufdi
 ### Funksjonalitet
 Integrasjonen er delt inn i tre hovedområder:
 1.  **Postnummervalidering**: `fosterhjemapi` henter og cacher det offisielle registeret fra `ros` for å validere postnummer og mappe dem til riktig kontor.
-2.  **Arrangementssynkronisering**: `ros` pusher automatisk nye/endrede kurs og møter til `bufdirno`. `fosterhjemapi` kobler påmeldinger til disse via `eventGuid`.
+2.  **Arrangementer (Synkronisering og Påmelding)**: `ros` pusher automatisk nye/endrede kurs og møter til `fosterhjemapi`. Brukere kan deretter melde seg på disse via webportalen.
 3.  **Henvendelseshåndtering**: `fosterhjemapi` lagrer henvendelser lokalt, mens `ros` henter (puller) disse asynkront og overfører dem til sitt interne saksbehandlingssystem.
 
 ### 1.1 Arkitektur: Overordnet Flyt
@@ -168,7 +170,38 @@ Representerer geografisk informasjon fra ROS.
 
 ---
 
-### 2.2 Arrangementssynkronisering
+### 2.2 Arrangementer (Synkronisering og Påmelding)
+Denne integrasjonen håndterer både den automatiske synkroniseringen av arrangementer fra `ros` til portalen, og flyten når brukere melder seg på disse.
+
+#### 2.2.1 Synkronisering av arrangementer (Automatisert)
+Dette er en automatisert rutine hvor `ros` fungerer som master for alle kurs og møter. `ros` pusher endringer til `fosterhjemapi` med jevne mellomrom.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    
+    participant R as ros (EventSync)
+    participant API as fosterhjemapi
+    participant DB as SQL Database
+
+    box "Eksternt System"
+        participant R
+    end
+    box "Backend API"
+        participant API
+    end
+    box "Data"
+        participant DB
+    end
+
+    Note over R: Identifiserer nye/endrede arrangementer
+    R->>+API: POST /Event/list
+    API->>+DB: AddOrUpdateFromEventList()
+    DB-->>-API: OK
+    API-->>-R: 200 OK
+```
+
+#### 2.2.2 Påmelding til arrangementer (Brukerdrevet)
 Denne integrasjonen håndterer flyten når brukere melder seg på kurs eller informasjonsmøter som administreres i `ros`.
 
 ### Tekniske Komponenter
@@ -209,7 +242,7 @@ Brukt i `EventDto` for å spesifisere deltakende kontorer.
 | `Name` | `string` | Navn på kontoret. |
 | `Organizer` | `bool` | Markerer om kontoret er hovedarrangør. |
 
-### Algoritme: Arrangementssynkronisering (Frontend)
+### Algoritme: Påmelding til arrangement (Frontend)
 Denne algoritmen i `Next.js (Browser)` avgjør datakontrakt og ruting før API-kall, samt sporing av konverteringer for kurs og møter:
 
 1.  **Innsending**: Brukeren fyller ut skjemaet og klikker på send-knappen.
@@ -267,7 +300,7 @@ sequenceDiagram
     end
 ```
 
-### Algoritme: Arrangementssynkronisering (Backend)
+### Algoritme: Påmelding til arrangement (Backend)
 Når en påmelding mottas i `InboundFormController` (`fosterhjemapi`), mappes `EventGuid` til `ros` sin interne ID, og påmeldingen lagres i databasen. `ros` henter deretter ut påmeldingene asynkront:
 
 1.  **Motta påmelding**: `fosterhjemapi` mottar påmeldingsdata med en `EventGuid`.
