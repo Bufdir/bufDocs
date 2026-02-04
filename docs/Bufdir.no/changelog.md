@@ -13,6 +13,14 @@ description.
 
 ### Fixed
 
+### Added
+
+- OpenTelemetry and Application Insigths telemetry
+
+### Removed
+
+### Changed
+
 - Added css utility class to existing Section component
 
 ## [5.0.6] - 2026-01-27
