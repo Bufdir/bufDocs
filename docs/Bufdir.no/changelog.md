@@ -15,13 +15,21 @@ description.
 
 ### Added
 
-- OpenTelemetry and Application Insigths telemetry
-
 ### Removed
 
 ### Changed
 
+## [5.0.7] - 2026-02-09
+
+### Added
+
+- OpenTelemetry and Application Insigths telemetry
+
+### Changed
+
 - Added css utility class to existing Section component
+- Added scroll to section functionality
+  "statistikk-og-analyse/barnevern/barn-i-fosterhjem/"
 
 ## [5.0.6] - 2026-01-27
 
