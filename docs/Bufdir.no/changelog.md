@@ -19,6 +19,12 @@ description.
 
 ### Changed
 
+## [5.0.8] - 2025-02-10
+
+### Fixed
+
+- Added css utility class to existing Section component
+
 ## [5.0.7] - 2026-02-09
 
 ### Added
