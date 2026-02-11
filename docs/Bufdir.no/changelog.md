@@ -9,19 +9,27 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
-## [Unreleased] - YYYY-MM-DD
+## [Unrelesed] - YYYY-MM-DD
 
 ### Fixed
 
 ### Added
 
-- cps img-src mfstatic.com
-
 ### Removed
 
 ### Changed
 
-## [5.0.8] - 2025-02-10
+## [5.0.9] - 2026-02-11
+
+### Fixed
+
+- disabled monitoring for now
+
+### Added
+
+- cps img-src mfstatic.com
+
+## [5.0.8] - 2026-02-10
 
 ### Fixed
 
