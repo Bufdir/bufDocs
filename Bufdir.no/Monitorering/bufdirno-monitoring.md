@@ -49,8 +49,9 @@ Bufdirno benytter en hybrid tilnærming for monitorering:
 ## Fase 2: Applikasjonsinstrumentering
 
 ### Oppgave 2.1: Instrumenter Optimizely CMS (.NET)
- - Installer Application Insights NuGet-pakke i `bufdirno` CMS-modulen.
- - Konfigurer Application Insights i `ConfigureCoreServices.cs` for å fange opp Optimizely-spesifikke metrikker og SQL Server-kall.
+ - Installer `Azure.Monitor.OpenTelemetry.AspNetCore` NuGet-pakke i `bufdirno` CMS-modulen.
+ - Konfigurer OpenTelemetry i `ConfigureCoreServices.cs` for å fange opp Optimizely-spesifikke metrikker og SQL Server-kall.
+ - **Viktig:** Begrens logging til nivå `Error` for å kontrollere kostnader og redusere støy.
  - Legg til connection string i `appsettings.json`.
 
 #### Implementasjonsveiledning for OpenTelemetry (.NET)
@@ -61,8 +62,17 @@ Eksempel på konfigurasjon i `ConfigureCoreServices.cs`:
 ```csharp
 using Azure.Monitor.OpenTelemetry.AspNetCore;
 using OpenTelemetry.Resources;
+using Microsoft.Extensions.Logging;
 
 // I AddCoreServices:
+
+// 1. Konfigurer filtrering for å kun sende Error til Azure Monitor
+services.AddLogging(logging =>
+{
+    logging.AddFilter<OpenTelemetryLoggerProvider>(null, LogLevel.Error);
+});
+
+// 2. Sett opp OpenTelemetry
 services.AddOpenTelemetry()
     .ConfigureResource(resource => resource.AddService("Bufdir.Portal.CMS"))
     .UseAzureMonitor(options =>
@@ -71,13 +81,29 @@ services.AddOpenTelemetry()
     });
 ```
 
+**3. Konfigurasjon i `appsettings.json`**
+
+I tillegg til filtrering i koden, bør standard loggnivå settes i konfigurasjonen:
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Error",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  }
+}
+```
+
 ### Oppgave 2.2: Instrumenter Next.js Frontend (Server & Browser)
  - Installer Application Insights SDK-er:
   ```bash
   npm install @microsoft/applicationinsights-web @microsoft/applicationinsights-node-js
   ```
- - Opprett `instrumentation.ts` for Server Side (SSR/API).
- - Opprett `OTELClient.tsx` (eller `AIClient.tsx`) for Browser-instrumentering.
+ - Opprett `instrumentation.ts` for Server Side (SSR/API) og sett `OTEL_LOG_LEVEL=error`.
+ - Opprett `AIClient.tsx` for Browser-instrumentering og sett `loggingLevelConsole: 2`.
 
 #### Implementasjonsveiledning for Next.js og Application Insights
 
@@ -85,11 +111,14 @@ For å få full sporing i Next.js (både på serveren og i nettleseren), bruker 
 
 **1. Server-side (SSR, API-ruter, Middleware): `src/instrumentation.ts`**
 
+På serveren styres loggnivået enklest via miljøvariabler i Azure:
+`OTEL_LOG_LEVEL=error`
+
 ```typescript
 export async function register() {
   if (process.env.NEXT_RUNTIME === 'nodejs') {
     const { NodeSDK } = await import('@microsoft/applicationinsights-node-js');
-    // Konfigurer for Node.js
+    // Konfigurasjon skjer automatisk via miljøvariabler eller SDK-init
   }
 }
 ```
@@ -108,6 +137,7 @@ export function AIClient() {
       config: {
         connectionString: "DIN_CONNECTION_STRING_HER",
         enableAutoRouteTracking: true,
+        loggingLevelConsole: 2, // 2: Bare Error sendes til Azure
       }
     });
     appInsights.loadAppInsights();
