@@ -293,7 +293,7 @@ En forespørsel kan følges fra:
 
 **Slik holder du kostnadene nede:**
 
-- **Juster logging level**
+- **Juster logging level** (se [veiledning](./monitoring.md#styring-av-loggmengde-og-lognivå-logging-level))
   - Unngå logging av all SQL-tekst i produksjon
   - Detaljert logging kun ved debugging
 

@@ -105,7 +105,72 @@ De første 31 dagene er inkludert gratis.
 | Varsling & Tester | 80 kr | 250 kr | 250 kr |
 | **Sum per måned** | **350 kr** | **1 550 kr** | **5 110 kr** |
 
-*Merk: Kostnadene er basert på at alle 7 moduler (portal, FSA, API-er, statistikk og utrapporteringsbank) er instrumentert. Kostnadene vil variere sterkt basert på "Logging Level". Hvis man logger all SQL-tekst og har mye trafikk, vil datamengden øke. Ved å sette en "Daily Cap" på 5GB/dag (ca. 150GB/mnd), vil den maksimale kostnaden ligge rundt 5 000 kr i måneden.*
+*Merk: Kostnadene er basert på at alle 7 moduler (portal, FSA, API-er, statistikk og utrapporteringsbank) er instrumentert. Kostnadene vil variere sterkt basert på [Logging Level](#styring-av-loggmengde-og-lognivå-logging-level). Hvis man logger all SQL-tekst og har mye trafikk, vil datamengden øke. Ved å sette en "Daily Cap" på 5GB/dag (ca. 150GB/mnd), vil den maksimale kostnaden ligge rundt 5 000 kr i måneden.*
+
+---
+
+## Styring av Loggmengde og Lognivå (Logging Level)
+
+For å kontrollere kostnadene i Azure Monitor og unngå støy i loggene, er det viktig å styre hvor detaljert informasjonen som sendes skal være. I produksjon er det anbefalt å begrense logging til nivå **Error** eller **Warning**, med unntak av spesifikke forretningsmetrikker.
+
+### 1. .NET Backend (OpenTelemetry)
+For .NET-applikasjoner som bruker `Azure.Monitor.OpenTelemetry.AspNetCore`, styres lognivået primært via `appsettings.json`.
+
+For å begrense til kun Error:
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Error",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  }
+}
+```
+
+Du kan også styre dette direkte i koden. Dette er nyttig hvis du vil sikre at OpenTelemetry-eksportøren alltid har et bestemt nivå uavhengig av hva som står i konfigurasjonsfilen.
+
+#### I `Program.cs` (Moderne .NET):
+```csharp
+builder.Logging.AddFilter<OpenTelemetryLoggerProvider>("", LogLevel.Error);
+```
+
+#### I `ConfigureCoreServices.cs` (Ved bruk av Dependency Injection):
+Hvis prosjektet (som `bufdirno-fsa`) bruker en utvidelsesmetode for tjenester, legges filteret til i `AddLogging`:
+
+```csharp
+services.AddLogging(logging =>
+{
+    logging.AddFilter<OpenTelemetryLoggerProvider>(null, LogLevel.Error);
+});
+```
+
+Ved å spesifisere `OpenTelemetryLoggerProvider` sikrer du at filteret kun gjelder for dataene som sendes til Azure Monitor, mens andre logg-destinasjoner (som konsoll) kan beholde sine egne nivåer.
+
+### 2. Node.js og Next.js (Server-side)
+For tjenester som kjører på Node.js med OpenTelemetry, kan lognivået styres via miljøvariabler i Azure App Service eller Container Apps:
+```bash
+OTEL_LOG_LEVEL=error
+```
+
+### 3. Frontend (Application Insights SDK)
+I nettleseren kan du begrense hva som sendes til Azure ved å konfigurere SDK-en i `AIClient.tsx` eller tilsvarende:
+```javascript
+const appInsights = new ApplicationInsights({
+  config: {
+    connectionString: "...",
+    loggingLevelConsole: 0, // 0: Off, 1: Only Critical, 2: Error
+    disableExceptionTracking: false, // Sikre at feil fortsatt spores
+    // Bruk Telemetry Processors for finmasket filtrering
+  }
+});
+```
+
+### 4. Strategi for filtrering
+*   **Debug/Verbose:** Skal aldri være aktivert i produksjon.
+*   **Information:** Brukes kun for kritiske livssyklus-hendelser.
+*   **Warning/Error:** Standard nivå for produksjon for å fange opp avvik og faktiske feil.
 
 ---
 
