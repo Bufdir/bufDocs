@@ -66,6 +66,21 @@ services.AddOpenTelemetry()
     {
         options.ConnectionString = configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
     });
+
+// Filtrer bort støyende ruter (typiske 404)
+services.ConfigureOpenTelemetryTracerProvider((sp, builder) =>
+    builder.AddAspNetCoreInstrumentation(options =>
+    {
+        options.Filter = (httpContext) =>
+        {
+            var path = httpContext.Request.Path.Value;
+            return path == null ||
+                   (!path.Contains("favicon") &&
+                    !path.StartsWith("/_next/") &&
+                    !path.Contains("/health") &&
+                    !path.EndsWith(".map"));
+        };
+    }));
 ```
 
 ### Oppgave 2.2: Instrumenter React Frontend (Application Insights SDK)
@@ -88,13 +103,25 @@ const appInsights = new ApplicationInsights({
   }
 });
 appInsights.loadAppInsights();
+
+// Dropp 404-feil for å unngå loggstøy
+appInsights.addTelemetryInitializer((telemetry) => {
+  if (telemetry.data && telemetry.data.responseCode === 404) {
+    return false;
+  }
+});
+
 appInsights.trackPageView();
 ```
+
+**Viktig ved CORS-feil:**
+Ved bruk av distributed tracing vil frontenden legge til ekstra headere (`traceparent` osv.). Hvis du får CORS-feil, se veiledningen i [hovedplanen](./monitoring.md#cors-feil-ved-distributed-tracing) for hvordan du tillater disse i backend og Azure Application Gateway.
 
 **Viktige fordeler:**
 1. **Enkelt oppsett:** Ingen behov for OTLP Collector proxy.
 2. **Real User Monitoring (RUM):** Man ser nøyaktig hva brukeren opplever direkte i Azure.
 3. **Distributed Tracing:** Korrelerer forespørsler fra frontend til backend via W3C standard.
+4. **Azure Application Gateway**: Sikre at gatewayen er konfigurert til å tillate sporings-headerne.
 
 ### Oppgave 2.3: Instrumenter Strapi CMS (OpenTelemetry)
  - Konfigurer **OpenTelemetry** Node.js SDK for Strapi med Azure Monitor exporter.

@@ -84,6 +84,23 @@ export async function register() {
 }
 ```
 
+##### Unngå støy fra 404 på serversiden (Node.js / Next.js API)
+Når du bruker OpenTelemetry-instrumentering for HTTP, kan du filtrere bort typiske 404-ruter (favicon, `/_next/`-assets, helsesjekker) slik:
+
+```typescript
+import { HttpInstrumentation } from '@opentelemetry/instrumentation-http';
+
+const httpInstr = new HttpInstrumentation({
+  ignoreIncomingRequestHook: (req) => {
+    const url = req.url || '';
+    return url.includes('favicon') || url.startsWith('/_next/') || url.includes('/health') || url.endsWith('.map');
+  }
+});
+
+// I NodeSDK-konfigurasjonen, legg til instrumentasjonen:
+// new NodeSDK({ instrumentations: [httpInstr, ...andre] })
+```
+
 **2. Klient-side (Browser): `src/components/MonitorInit.tsx`**
 
 ```tsx
@@ -101,6 +118,14 @@ export function MonitorInit() {
       }
     });
     appInsights.loadAppInsights();
+
+    // Dropp 404 i nettleseren for å unngå unødvendig telemetri
+    appInsights.addTelemetryInitializer((telemetry) => {
+      if (telemetry.data && telemetry.data.responseCode === 404) {
+        return false;
+      }
+    });
+
     appInsights.trackPageView();
   }, []);
 
@@ -108,9 +133,13 @@ export function MonitorInit() {
 }
 ```
 
+### Viktig ved CORS-feil:
+Ved bruk av Distributed Tracing legger frontenden til ekstra headere (`traceparent` osv.). Hvis du får CORS-feil i Utrapporteringsbanken (som er en Next.js-app), se den [detaljerte veiledningen for Next.js CORS](./monitoring.md#3-løsning-i-nextjs-nodejs-backend) i hovedplanen.
+
 **Viktige punkter:**
 1. **Todelt overvåking**: Ved å skille mellom server og browser kan vi se hvor treghet oppstår.
 2. **Korrelasjon**: Browser-sporet kobles sammen med server-sporet via W3C Trace Context.
+3. **Azure Application Gateway**: Pass på at gatewayen tillater sporings-headerne (`traceparent` osv.).
 
 ### Oppgave 2.2: Overvåk autentisering (NextAuth.js og Maskinporten)
  - Logg vellykkede og feilede pålogginger via NextAuth.js (uten å logge sensitiv informasjon).

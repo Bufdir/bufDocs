@@ -55,6 +55,20 @@ builder.Services.AddOpenTelemetry()
     {
         options.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
     });
+
+// Filtrer bort støyende ruter (typiske 404)
+builder.Services.ConfigureOpenTelemetryTracerProvider((sp, builder) =>
+    builder.AddAspNetCoreInstrumentation(options =>
+    {
+        options.Filter = (httpContext) =>
+        {
+            var path = httpContext.Request.Path.Value;
+            return path == null ||
+                   (!path.Contains("favicon") &&
+                    !path.Contains("/health") &&
+                    !path.EndsWith(".map"));
+        };
+    }));
 ```
 
 ## Fase 2: Infrastrukturmonitorering

@@ -70,6 +70,15 @@ useAzureMonitor({
   resourceAttributes: {
     "service.name": "Bufdir.Stat.Content.Strapi",
     "project": "statistics"
+  },
+  samplingRatio: 1.0,
+  instrumentationOptions: {
+    http: {
+      filterRequest: (req) => {
+        // Eksempel: Filtrer bort helsesjekker eller favicon for å unngå støy
+        return !req.url.includes('health') && !req.url.includes('favicon');
+      }
+    }
   }
 });
 ```
@@ -88,6 +97,20 @@ public void ConfigureServices(IServiceCollection services)
         {
             options.ConnectionString = Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
         });
+
+    // Filtrer bort støyende ruter (typiske 404)
+    services.ConfigureOpenTelemetryTracerProvider((sp, builder) =>
+        builder.AddAspNetCoreInstrumentation(options =>
+        {
+            options.Filter = (httpContext) =>
+            {
+                var path = httpContext.Request.Path.Value;
+                return path == null ||
+                       (!path.Contains("favicon") &&
+                        !path.Contains("/health") &&
+                        !path.EndsWith(".map"));
+            };
+        }));
 }
 ```
 

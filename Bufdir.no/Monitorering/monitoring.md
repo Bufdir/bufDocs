@@ -9,6 +9,7 @@ Dette dokumentet gir en oversikt over monitoreringsstrategien for hele løsninge
 - [Newsletter-api](./newsletter-api-monitoring.md)
 - [stat-system (Statistikk)](./stat-system-monitoring.md)
 - [Utrapporteringsbank](./utrapporteringsbank-monitoring.md)
+- [Løsning av CORS-feil](#cors-feil-ved-distributed-tracing)
 - [Sertifikater og Secrets](#overvåking-av-sertifikater-og-secrets)
 - [Automatisering av Monitorering](./automatisering-av-monitorering.md)
 - [Automatisert Fornyelse (Auto-rotation)](./auto-rotasjon-veiledning.md)
@@ -171,6 +172,300 @@ const appInsights = new ApplicationInsights({
 *   **Debug/Verbose:** Skal aldri være aktivert i produksjon.
 *   **Information:** Brukes kun for kritiske livssyklus-hendelser.
 *   **Warning/Error:** Standard nivå for produksjon for å fange opp avvik og faktiske feil.
+
+### 5. Hvordan unngå støy fra 404-forespørsler (Not Found)
+404-feil skyldes ofte roboter, feilstavede URL-er eller manglende ikoner (f.eks. `favicon.ico`). Dette kan fylle opp loggene og øke kostnadene i Azure Monitor.
+
+#### I .NET (OpenTelemetry)
+For å filtrere bort 404-forespørsler fra sporing (Traces), kan du konfigurere `AspNetCoreInstrumentation`:
+
+```csharp
+services.AddOpenTelemetry()
+    .WithTracing(tracing => tracing
+        .AddAspNetCoreInstrumentation(options =>
+        {
+            options.Filter = (httpContext) =>
+            {
+                // Eksempel: Ikke logg favicon eller helsesjekker
+                var path = httpContext.Request.Path.Value;
+                if (path != null && (path.Contains("favicon") || path.Contains("health")))
+                {
+                    return false;
+                }
+                return true;
+            };
+        })
+        .UseAzureMonitor(...)
+    );
+```
+
+For å filtrere basert på statuskode (etter at forespørselen er ferdig), er det mest effektivt å bruke en **Custom Processor** eller filtrere i **Application Insights** via en `ITelemetryProcessor`.
+
+#### I Frontend (Application Insights SDK)
+Bruk en `TelemetryInitializer` for å droppe telemetri med 404-statuskode:
+
+```javascript
+appInsights.addTelemetryInitializer((telemetry) => {
+    if (telemetry.data && telemetry.data.responseCode === 404) {
+        return false; // Hindrer at data sendes til Azure
+    }
+});
+```
+
+#### I Node.js (OpenTelemetry)
+Bruk filter-funksjonaliteten i `HttpInstrumentation`:
+
+```javascript
+new HttpInstrumentation({
+  filterRequest: (req) => {
+    // Returner false for å ignorere spesifikke stier
+    return !req.url.includes('health');
+  }
+})
+```
+
+---
+
+## Harmonering av OpenTelemetry og Serilog
+
+Mange prosjekter i Bufdirno bruker **Serilog** for strukturert logging til fil og konsoll. Når vi introduserer OpenTelemetry for å sende data til Azure Monitor, er det viktig å unngå konflikter og "dobbelt-logging".
+
+### 1. Unngå dobbelt-logging (Viktig!)
+Hvis du bruker både `Serilog.Sinks.ApplicationInsights` og `Azure.Monitor.OpenTelemetry.AspNetCore`, vil hver loggmelding bli sendt to ganger til Azure Monitor.
+
+**Anbefalt løsning:**
+1.  **Fjern** `Serilog.Sinks.ApplicationInsights` fra prosjektet.
+2.  Behold Serilog for lokal logging (Console, File).
+3.  La OpenTelemetry håndtere all eksport til Azure Monitor via den innebygde `ILogger`-integrasjonen.
+
+### 2. Slik fungerer de sammen
+Når du bruker `.UseSerilog()`, erstatter Serilog standard `LoggerFactory`. Alle kall til `ILogger.LogInformation()` etc. går da gjennom Serilog.
+
+OpenTelemetry sin `OpenTelemetryLoggerProvider` kobler seg på standard .NET logging-pipeline. Det betyr at når Serilog er konfigurert korrekt, vil OpenTelemetry plukke opp de samme loggmeldingene og sende dem til Azure Monitor, komplett med Serilog sine "properties" (strukturert logging).
+
+### 3. Eksempel på konfigurasjon i `Program.cs`
+
+```csharp
+// 1. Serilog konfigureres som vanlig for lokal logging
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Console()
+    .WriteTo.File("logs/log.txt")
+    .CreateLogger();
+
+builder.Host.UseSerilog();
+
+// 2. OpenTelemetry settes opp for Azure Monitor
+builder.Services.AddOpenTelemetry()
+    .UseAzureMonitor(options =>
+    {
+        options.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
+    });
+
+// 3. Viktig: Sikre at OTEL-filteret er satt hvis du vil begrense AI-logger
+// uavhengig av Serilog sin lokale konfigurasjon
+builder.Logging.AddFilter<OpenTelemetryLoggerProvider>("", LogLevel.Error);
+```
+
+### 4. Fordeler med denne tilnærmingen
+- **Enkelhet:** Du trenger ikke en egen Serilog-sink for Azure Monitor.
+- **Ytelse:** OpenTelemetry-eksportøren er høytytende og leverandørnøytral.
+- **Konsistens:** Samme sporings-ID (Trace ID) brukes både i Serilog-logger og OpenTelemetry-sporing, noe som gjør feilsøking på tvers av tjenester mye enklere.
+
+---
+
+## CORS-feil ved Distributed Tracing
+
+Når man aktiverer Distributed Tracing med Application Insights SDK (frontend) og OpenTelemetry (backend), vil klientsiden automatisk legge til ekstra headere i HTTP-forespørslene for å korrelere spor på tvers av tjenester. Dette kan utløse CORS-feil (Cross-Origin Resource Sharing) hvis backend eller gateway ikke er konfigurert til å tillate disse headerne.
+
+### 1. Hvorfor oppstår feilen?
+Nettlesere sender en "preflight"-forespørsel (OPTIONS) når en request inneholder headere som ikke er på standardlisten. Hvis responsen fra serveren ikke eksplisitt tillater disse headerne, vil nettleseren blokkere den faktiske forespørselen.
+
+De vanligste headerne som legges til er:
+*   `traceparent` (W3C Trace Context standard)
+*   `tracestate` (W3C Trace Context standard)
+*   `request-id` (Application Insights legacy standard)
+*   `x-ms-request-id`
+*   `x-ms-request-root-id`
+
+### 2. Løsning i .NET Backend
+I backenden må CORS-policyen oppdateres til å tillate disse headerne. Den enkleste måten er å tillate alle headere:
+
+```csharp
+services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("https://din-frontend-url.no")
+               .AllowAnyHeader() // Tillater alle headere, inkludert sporing
+               .AllowAnyMethod()
+               .AllowCredentials();
+    });
+});
+```
+
+Hvis du vil være mer restriktiv, må du spesifisere headerne:
+```csharp
+builder.WithHeaders("traceparent", "tracestate", "request-id", "x-ms-request-id", "x-ms-request-root-id", "Content-Type");
+```
+
+### 3. Løsning i Next.js (Node.js) Backend
+
+Hvis du bruker Next.js API Routes eller en annen Node.js-backend, må du også tillate sporings-headerne.
+
+#### Alternativ A: Via `next.config.js` (Enklest)
+Dette er den enkleste metoden for å sette statiske CORS-headere for alle API-ruter:
+
+```javascript
+// next.config.js
+module.exports = {
+  async headers() {
+    return [
+      {
+        source: "/api/:path*",
+        headers: [
+          { key: "Access-Control-Allow-Credentials", value: "true" },
+          { key: "Access-Control-Allow-Origin", value: "https://din-frontend-url.no" },
+          { key: "Access-Control-Allow-Methods", value: "GET,DELETE,PATCH,POST,PUT,OPTIONS" },
+          { key: "Access-Control-Allow-Headers", value: "Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, traceparent, tracestate, request-id, x-ms-request-id, x-ms-request-root-id" },
+        ]
+      }
+    ]
+  }
+}
+```
+
+#### Alternativ B: Via `middleware.ts` (Fleksibelt)
+Hvis du trenger dynamisk sjekk av Origin eller mer avansert logikk, bruk Middleware:
+
+```typescript
+// middleware.ts
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+export function middleware(request: NextRequest) {
+  // Håndter preflight-forespørsler (OPTIONS)
+  if (request.method === 'OPTIONS') {
+    return new NextResponse(null, {
+      status: 204,
+      headers: {
+        'Access-Control-Allow-Origin': 'https://din-frontend-url.no',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, traceparent, tracestate, request-id, x-ms-request-id, x-ms-request-root-id',
+        'Access-Control-Max-Age': '86400',
+      },
+    })
+  }
+
+  const response = NextResponse.next()
+  response.headers.set('Access-Control-Allow-Origin', 'https://din-frontend-url.no')
+  return response
+}
+```
+
+### 4. Løsning i Azure Application Gateway
+
+Siden løsningen benytter Azure Application Gateway, må du sikre at den er konfigurert til å håndtere eller sende videre disse headerne. Hvis du får CORS-feil på grunn av sporings-headere, er det to hovedmåter å løse det på i Gateway-en.
+
+#### Alternativ A: Rewrite Rules (Anbefalt)
+Du kan bruke "Rewrite Rules" i Application Gateway til å automatisk legge til nødvendige CORS-headere for "preflight"-forespørsler (OPTIONS). Dette er spesielt nyttig hvis du ikke vil eller kan endre koden i backenden.
+
+Her er et konkret eksempel på hvordan logikken settes opp. Selv om Azure internt bruker JSON (ARM-maler), er logikken her beskrevet i et strukturert format for oversikt:
+
+**Logikk for Rewrite Rule (Beskrivende eksempel):**
+```xml
+<!-- Dette er en konseptuell fremstilling av en Rewrite Rule for CORS i App Gateway -->
+<RewriteRuleSet name="DistributedTracingCORS">
+    <RewriteRule name="AllowTracingHeaders">
+        <Conditions>
+            <!-- Sjekk om dette er en preflight-forespørsel -->
+            <Condition variable="var_request_method" match="OPTIONS" />
+        </Conditions>
+        <Actions>
+            <!-- Legg til de nødvendige headerne for OpenTelemetry/Application Insights -->
+            <SetResponseHeader name="Access-Control-Allow-Headers" 
+                               value="Content-Type, traceparent, tracestate, request-id, x-ms-request-id, x-ms-request-root-id" />
+            <SetResponseHeader name="Access-Control-Allow-Origin" value="{var_http_origin}" />
+            <SetResponseHeader name="Access-Control-Allow-Methods" value="GET, POST, PUT, DELETE, OPTIONS" />
+            <SetResponseHeader name="Access-Control-Allow-Credentials" value="true" />
+            <SetResponseHeader name="Access-Control-Max-Age" value="86400" />
+        </Actions>
+    </RewriteRule>
+</RewriteRuleSet>
+```
+
+**Konkret JSON-konfigurasjon (ARM Template):**
+Hvis du konfigurerer via "Infrastructure as Code", vil det se slik ut i ARM-malen:
+
+```json
+{
+  "name": "AllowTracingHeaders",
+  "actionSet": {
+    "responseHeaderConfigurations": [
+      {
+        "headerName": "Access-Control-Allow-Headers",
+        "headerValue": "Content-Type, traceparent, tracestate, request-id, x-ms-request-id, x-ms-request-root-id"
+      },
+      {
+        "headerName": "Access-Control-Allow-Origin",
+        "headerValue": "{var_http_origin}"
+      }
+    ]
+  },
+  "conditions": [
+    {
+      "variable": "var_request_method",
+      "pattern": "OPTIONS",
+      "ignoreCase": true
+    }
+  ]
+}
+```
+
+#### Alternativ B: Konfigurasjon i applikasjonskode
+Hvis du ikke ønsker å håndtere CORS i Application Gateway, må du sikre at applikasjonskoden din (f.eks. i .NET eller Next.js) er konfigurert til å tillate sporings-headere. Se de spesifikke avsnittene over for:
+- [Løsning i .NET Backend](#2-løsning-i-net-backend)
+- [Løsning i Next.js Backend](#3-løsning-i-nextjs-nodejs-backend)
+
+**Viktig:** Hvis du bruker WAF (Web Application Firewall) på Gateway-en, må du sjekke at "Anomaly Scoring" ikke blokkerer forespørslene fordi de inneholder ukjente headere. Du må kanskje legge inn en "Exclusion rule" for de spesifikke sporings-headerne (`traceparent`, `tracestate`, `request-id`).
+
+### 5. Løsning i Frontend (Application Insights SDK)
+
+Hvis du absolutt ikke kan endre backend- eller gateway-konfigurasjonen umiddelbart, kan du midlertidig deaktivere korrelasjonsheaderne i frontend. **Vær oppmerksom på at du da mister Distributed Tracing (sammenhengen mellom frontend- og backend-logger).**
+
+I `appInsights.ts` / `AIClient.tsx`:
+```javascript
+const appInsights = new ApplicationInsights({
+  config: {
+    connectionString: "...",
+    disableCorsCorrelation: true, // Deaktiverer de ekstra headerne for CORS-kall
+    enableCorsCorrelation: false
+  }
+});
+```
+
+### 6. CORS-feil mot 3.-partstjenester (f.eks. Mediaflow)
+
+Når du sender forespørsler til eksterne tjenester som du ikke kontrollerer selv (som Mediaflow, Vimeo, Google Maps), kan du ikke endre deres CORS-policy. Hvis disse tjenestene blokkerer forespørsler på grunn av sporings-headere, må du ekskludere disse domene fra automatisk sporing.
+
+**Løsning:**
+Bruk `excludeRequestFromAutoTrackingPatterns` i konfigurasjonen til Application Insights SDK. Dette hindrer at SDK-en legger til `traceparent` og andre headere på forespørsler til de spesifiserte domene.
+
+```javascript
+const appInsights = new ApplicationInsights({
+  config: {
+    connectionString: "...",
+    // Ekskluder spesifikke domener fra å få lagt til sporings-headere
+    excludeRequestFromAutoTrackingPatterns: [
+        /mediaflow\.com/, 
+        /mediaflowpro\.com/,
+        /vimeo\.com/
+    ],
+  }
+});
+```
+Dette løser CORS-problemet uten å deaktivere sporing for dine egne backender.
+*Merk: Dette anbefales ikke som en permanent løsning, da det reduserer observabiliteten.*
 
 ---
 

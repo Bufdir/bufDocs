@@ -307,6 +307,20 @@ En forespørsel kan følges fra:
 
 ---
 
+## Viktig: CORS og Application Gateway
+
+**Unngå blokkerte forespørsler**
+
+- **Nye headere:** OTEL/AI legger til sporing-headere:
+  - `traceparent`, `tracestate`, `request-id`
+- **CORS-preflight:** Browseren vil spørre om disse er lov
+- **Løsning:** 
+  - Oppdater CORS-policy i backend
+  - Konfigurer Azure Application Gateway til å tillate disse headerne
+  - Se [detaljert veiledning](./monitoring.md#cors-feil-ved-distributed-tracing)
+
+---
+
 ## Strategisk Verdi
 
 **Fra "kjører systemet?" til "fungerer forretningen optimalt?"**

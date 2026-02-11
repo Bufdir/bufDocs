@@ -79,6 +79,21 @@ services.AddOpenTelemetry()
     {
         options.ConnectionString = configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
     });
+
+// 3. (Valgfritt) Filtrer bort støyende ruter (typiske 404)
+services.ConfigureOpenTelemetryTracerProvider((sp, builder) =>
+    builder.AddAspNetCoreInstrumentation(options =>
+    {
+        options.Filter = (httpContext) =>
+        {
+            var path = httpContext.Request.Path.Value;
+            return path == null ||
+                   (!path.Contains("favicon") &&
+                    !path.StartsWith("/_next/") &&
+                    !path.Contains("/health") &&
+                    !path.EndsWith(".map"));
+        };
+    }));
 ```
 
 **3. Konfigurasjon i `appsettings.json`**
@@ -141,6 +156,14 @@ export function AIClient() {
       }
     });
     appInsights.loadAppInsights();
+
+    // Dropp 404-feil for å unngå loggstøy
+    appInsights.addTelemetryInitializer((telemetry) => {
+      if (telemetry.data && telemetry.data.responseCode === 404) {
+        return false;
+      }
+    });
+
     appInsights.trackPageView();
   }, []);
 
@@ -148,9 +171,13 @@ export function AIClient() {
 }
 ```
 
+**Viktig ved CORS-feil:**
+Hvis du får CORS-feil etter å ha aktivert sporing, se avsnittet [CORS-feil ved Distributed Tracing](./monitoring.md#cors-feil-ved-distributed-tracing) i hovedplanen. For Next.js-spesifikk konfigurasjon, se [Løsning i Next.js Backend](./monitoring.md#3-løsning-i-nextjs-nodejs-backend).
+
 **Viktige punkter for Bufdirno:**
 1. **Sikkerhet**: Ved browser-monitorering blir Connection String synlig. Dette er normal praksis for RUM.
 2. **W3C Trace Context**: Sikrer korrelasjon mellom browser og backend.
+3. **Azure Application Gateway**: Pass på at gatewayen tillater de ekstra sporings-headerne hvis den håndterer CORS.
 
 ---
 
