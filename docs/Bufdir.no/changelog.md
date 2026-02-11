@@ -15,6 +15,8 @@ description.
 
 ### Added
 
+- cps img-src mfstatic.com
+
 ### Removed
 
 ### Changed
