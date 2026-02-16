@@ -1,0 +1,6510 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../bufdir/">
+      
+      
+        <link rel="next" href="../pull_request_template/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Changelog - BufDocs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#changelog" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="BufDocs" class="md-header__button md-logo" aria-label="BufDocs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BufDocs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Changelog
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Welcome to BufDocs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../test/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Test
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Bufdir.no
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../DSM/BM/" class="md-tabs__link">
+          
+  
+  
+  DSM
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Statistikk/Statistikk/" class="md-tabs__link">
+          
+  
+  
+  Statistikk
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../noeharskjedd/noeharskjedd/" class="md-tabs__link">
+          
+  
+  
+  Noeharskjedd
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BufDocs" class="md-nav__button md-logo" aria-label="BufDocs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    BufDocs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome to BufDocs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bufdir.no
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bufdir.no
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BufdirWeb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bufdir/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bufdir.no
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#unrelesed-yyyy-mm-dd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [Unrelesed] - YYYY-MM-DD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[Unrelesed] - YYYY-MM-DD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#509-2026-02-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [5.0.9] - 2026-02-11
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[5.0.9] - 2026-02-11">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#508-2026-02-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [5.0.8] - 2026-02-10
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[5.0.8] - 2026-02-10">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#507-2026-02-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [5.0.7] - 2026-02-09
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[5.0.7] - 2026-02-09">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#506-2026-01-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [5.0.6] - 2026-01-27
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[5.0.6] - 2026-01-27">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#505-2026-01-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [5.0.5] - 2026-01-16
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[5.0.5] - 2026-01-16">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#504-2025-12-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [5.0.4] - 2025-12-12
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[5.0.4] - 2025-12-12">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#503-2025-12-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [5.0.3] - 2025-12-10
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[5.0.3] - 2025-12-10">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#502-2025-11-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [5.0.2] - 2025-11-18
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[5.0.2] - 2025-11-18">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#501-2025-11-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [5.0.1] - 2025-11-03
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[5.0.1] - 2025-11-03">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#500-2025-10-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [5.0.0] - 2025-10-27
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[5.0.0] - 2025-10-27">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#406-2025-10-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [4.0.6] - 2025-10-09
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[4.0.6] - 2025-10-09">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#405-2025-10-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [4.0.5] - 2025-10-02
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[4.0.5] - 2025-10-02">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#404-2025-09-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [4.0.4] - 2025-09-29
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[4.0.4] - 2025-09-29">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#403-2025-09-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [4.0.3] - 2025-09-17
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[4.0.3] - 2025-09-17">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#402-2025-09-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [4.0.2] - 2025-09-16
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[4.0.2] - 2025-09-16">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#401-2025-09-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [4.0.1] - 2025-09-09
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[4.0.1] - 2025-09-09">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#400-2025-08-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [4.0.0] - 2025-08-25
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[4.0.0] - 2025-08-25">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3167-2025-06-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.16.7] - 2025-06-25
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.16.7] - 2025-06-25">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3166-2025-06-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.16.6] - 2025-06-18
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.16.6] - 2025-06-18">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3165-2025-06-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.16.5] - 2025-06-02
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.16.5] - 2025-06-02">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3164-2025-05-09" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.16.4] - 2025-05-09
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.16.4] - 2025-05-09">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3163-2025-05-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.16.3] - 2025-05-22
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.16.3] - 2025-05-22">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3162-2025-05-05" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.16.2] - 2025-05-05
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.16.2] - 2025-05-05">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3161-2025-04-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.16.1] - 2025-04-29
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.16.1] - 2025-04-29">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3160-2025-04-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.16.0] - 2025-04-29
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.16.0] - 2025-04-29">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3150-2025-04-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.15.0] - 2025-04-22
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.15.0] - 2025-04-22">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3140-2025-03-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.14.0] - 2025-03-18
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.14.0] - 2025-03-18">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3140-2025-03-18_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.14.0] - 2025-03-18
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.14.0] - 2025-03-18">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3130-2025-03-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.13.0] - 2025-03-18
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.13.0] - 2025-03-18">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3130-2025-03-18_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.13.0] - 2025-03-18
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.13.0] - 2025-03-18">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#312-2025-03-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.12] - 2025-03-07
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.12] - 2025-03-07">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3110-2025-03-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.11.0] - 2025-03-04
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.11.0] - 2025-03-04">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3100-2025-02-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.10.0] - 2025-02-25
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.10.0] - 2025-02-25">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#390-2025-02-05" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.9.0] - 2025-02-05
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.9.0] - 2025-02-05">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#380-2025-02-03" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.8.0] - 2025-02-03
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.8.0] - 2025-02-03">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#370-2025-01-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.7.0] - 2025-01-16
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.7.0] - 2025-01-16">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#360-2024-12-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.6.0] - 2024-12-20
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.6.0] - 2024-12-20">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#351-2024-11-28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.5.1] - 2024-11-28
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.5.1] - 2024-11-28">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#350-2024-11-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.5.0] - 2024-11-20
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.5.0] - 2024-11-20">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#340-2024-11-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.4.0] - 2024-11-04
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.4.0] - 2024-11-04">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#331-2024-10-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.3.1] - 2024-10-21
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.3.1] - 2024-10-21">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#330-2024-10-18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.3.0] - 2024-10-18
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.3.0] - 2024-10-18">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#320-2024-10-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.2.0] - 2024-10-10
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.2.0] - 2024-10-10">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removed_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#310-2024-09-02" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.1.0] - 2024-09-02
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.1.0] - 2024-09-02">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#301-2024-08-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.0.1] - 2024-08-21
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.0.1] - 2024-08-21">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#added_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#300-2024-08-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [3.0.0] - 2024-08-20
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[3.0.0] - 2024-08-20">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fixed_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pull_request_template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pull request template
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Docs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/RSC-status-feb-2024/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RSC status på komponenter i Bufdir-next
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/Reindex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reindex dokumentasjon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/best-practices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Best Practices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/feedback-dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dagens situasjon:
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/frontend-localization-next/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Frontend localization next
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/frontend-testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Frontend Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/razor-to-next/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Converting from Razor to Next.js
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/release/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releasing and deploy this project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_9" id="__nav_3_5_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data migration
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data migration
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/data-migration/readme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Azure CLI Setup and Login Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Src
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Src
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_1" id="__nav_3_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NextJs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    NextJs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../src/NextJs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_1_2" id="__nav_3_6_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Src
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_6_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Src
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_1_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_1_2_1" id="__nav_3_6_1_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generic types ts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_3_6_1_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_1_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Generic types ts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../src/NextJs/src/generic-types-ts/Readme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    We are using three kinds type definition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_2" id="__nav_3_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Site
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Site
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_2_1" id="__nav_3_6_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Frontend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_6_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Frontend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_2_1_1" id="__nav_3_6_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Src
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_3_6_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Src
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_2_1_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_2_1_1_1" id="__nav_3_6_2_1_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generic types ts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="6" aria-labelledby="__nav_3_6_2_1_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_2_1_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Generic types ts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../src/Site/Frontend/src/generic-types-ts/Readme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    We are using three kinds type definition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_2_2" id="__nav_3_6_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Feedback dashboard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_6_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Feedback dashboard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../src/Site/feedback-dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    React + TypeScript + Vite
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_2_3" id="__nav_3_6_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Frontend code
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_6_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Frontend code
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_2_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_2_3_1" id="__nav_3_6_2_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Feedback dashboard
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_3_6_2_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_2_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Feedback dashboard
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../src/Site/frontend-code/feedback-dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    React + TypeScript + Vite
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_2_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_2_3_2" id="__nav_3_6_2_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wordimporter
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_3_6_2_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_2_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Wordimporter
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../src/Site/frontend-code/wordimporter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    React + TypeScript + Vite
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_2_3_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_2_3_2_2" id="__nav_3_6_2_3_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Public
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="6" aria-labelledby="__nav_3_6_2_3_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_2_3_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Public
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_2_3_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_2_3_2_2_1" id="__nav_3_6_2_3_2_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tinymce
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="7" aria-labelledby="__nav_3_6_2_3_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_2_3_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tinymce
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../src/Site/frontend-code/wordimporter/public/tinymce/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TinyMCE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../src/Site/frontend-code/wordimporter/public/tinymce/CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../src/Site/frontend-code/wordimporter/public/tinymce/license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software License Agreement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bufdir.no/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database:
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bufdir.no/Fosterhjem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fosterhjem docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fosterhjem.API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fosterhjem.API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bufdir.no/Fosterhjem.API/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database:
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bufdir.no/Fosterhjem.API/Fosterhjem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fosterhjem docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DSM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DSM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DSM/BM/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DSM Api
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DSM/BM/BM/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Begjær Mekling (BM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DSM/BM/dsm-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DSM Api
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FSA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FSA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DSM/FSA/FSA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foreldresammarbeids avtalen (FSA)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Statistikk
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Statistikk
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Statistikk/Statistikk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Statistikk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Noeharskjedd
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Noeharskjedd
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../noeharskjedd/noeharskjedd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../noeharskjedd/readme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h1>
+<p>All notable changes to this project will be documented in this file.</p>
+<p>The format is based on <a href="http://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>
+and this project adheres to
+<a href="http://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
+<p>See ./docs/release.md for release description. See README.md for release
+description.</p>
+<h2 id="unrelesed-yyyy-mm-dd">[Unrelesed] - YYYY-MM-DD<a class="headerlink" href="#unrelesed-yyyy-mm-dd" title="Permanent link">&para;</a></h2>
+<h3 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fix spacing issues in MediaFlowVideo component.</li>
+<li>Added a short delay before scrolling to anchor when navigating to guideline
+  page.</li>
+</ul>
+<h3 id="added">Added<a class="headerlink" href="#added" title="Permanent link">&para;</a></h3>
+<h3 id="removed">Removed<a class="headerlink" href="#removed" title="Permanent link">&para;</a></h3>
+<h3 id="changed">Changed<a class="headerlink" href="#changed" title="Permanent link">&para;</a></h3>
+<h2 id="509-2026-02-11">[5.0.9] - 2026-02-11<a class="headerlink" href="#509-2026-02-11" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_1">Fixed<a class="headerlink" href="#fixed_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>disabled monitoring for now</li>
+</ul>
+<h3 id="added_1">Added<a class="headerlink" href="#added_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>cps img-src mfstatic.com</li>
+</ul>
+<h2 id="508-2026-02-10">[5.0.8] - 2026-02-10<a class="headerlink" href="#508-2026-02-10" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_2">Fixed<a class="headerlink" href="#fixed_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added css utility class to existing Section component</li>
+</ul>
+<h2 id="507-2026-02-09">[5.0.7] - 2026-02-09<a class="headerlink" href="#507-2026-02-09" title="Permanent link">&para;</a></h2>
+<h3 id="added_2">Added<a class="headerlink" href="#added_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>OpenTelemetry and Application Insigths telemetry</li>
+</ul>
+<h3 id="changed_1">Changed<a class="headerlink" href="#changed_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added css utility class to existing Section component</li>
+<li>Added scroll to section functionality
+  "statistikk-og-analyse/barnevern/barn-i-fosterhjem/"</li>
+</ul>
+<h2 id="506-2026-01-27">[5.0.6] - 2026-01-27<a class="headerlink" href="#506-2026-01-27" title="Permanent link">&para;</a></h2>
+<h3 id="added_3">Added<a class="headerlink" href="#added_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Table of contents component with smooth scrolling</li>
+<li>Skyra findability feature (FEATURE_TOGGLE_SKYRA_FINDABILITY)</li>
+<li>Feature toggle functionality. See readme.md</li>
+</ul>
+<h3 id="changed_2">Changed<a class="headerlink" href="#changed_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Updated buflib package to version 7.4.0</li>
+</ul>
+<h3 id="fixed_3">Fixed<a class="headerlink" href="#fixed_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Removed headingLevel attribute from AccordionsGroup component.</li>
+</ul>
+<h2 id="505-2026-01-16">[5.0.5] - 2026-01-16<a class="headerlink" href="#505-2026-01-16" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_4">Fixed<a class="headerlink" href="#fixed_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Font size overriden in FamilyServicesEventListPage</li>
+</ul>
+<h3 id="added_4">Added<a class="headerlink" href="#added_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Mobile nested accordions spacing override</li>
+</ul>
+<h3 id="removed_1">Removed<a class="headerlink" href="#removed_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Removed [VideoBlock] Set default heading levels job</li>
+<li>Removed legacy search code</li>
+</ul>
+<h3 id="changed_3">Changed<a class="headerlink" href="#changed_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Rewrite language usage plugin</li>
+</ul>
+<h2 id="504-2025-12-12">[5.0.4] - 2025-12-12<a class="headerlink" href="#504-2025-12-12" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_5">Fixed<a class="headerlink" href="#fixed_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Removed the 'no search results' warning when search string is empty</li>
+</ul>
+<h3 id="added_5">Added<a class="headerlink" href="#added_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Improved Geta NotFoundHandler handling, add support for regex rules</li>
+<li>Added property for overwriting signup button text in event page type</li>
+</ul>
+<h3 id="changed_4">Changed<a class="headerlink" href="#changed_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Display year in event dates</li>
+</ul>
+<h2 id="503-2025-12-10">[5.0.3] - 2025-12-10<a class="headerlink" href="#503-2025-12-10" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_6">Fixed<a class="headerlink" href="#fixed_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Breadcrumbs missing search</li>
+</ul>
+<h3 id="added_6">Added<a class="headerlink" href="#added_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Video block - added title header element level and rich text over video</li>
+<li>Scheduled job for setting default header level in video blocks without header
+  level set Filter options for /fosterhjem/informasjonsmoter/</li>
+</ul>
+<h3 id="changed_5">Changed<a class="headerlink" href="#changed_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>New search</li>
+</ul>
+<h2 id="502-2025-11-18">[5.0.2] - 2025-11-18<a class="headerlink" href="#502-2025-11-18" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_7">Fixed<a class="headerlink" href="#fixed_7" title="Permanent link">&para;</a></h3>
+<p>page reload/refresh flicker bugfix for header search bar and to top button</p>
+<h2 id="501-2025-11-03">[5.0.1] - 2025-11-03<a class="headerlink" href="#501-2025-11-03" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_8">Fixed<a class="headerlink" href="#fixed_8" title="Permanent link">&para;</a></h3>
+<p><a class="magiclink magiclink-github magiclink-repository" href="https://github.com/svgr/webpack" title="GitHub Repository: svgr/webpack">svgr/webpack</a> svg loader in next.config.js NumberInTen gender chart layout fixed</p>
+<h2 id="500-2025-10-27">[5.0.0] - 2025-10-27<a class="headerlink" href="#500-2025-10-27" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_9">Fixed<a class="headerlink" href="#fixed_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Wrong font in Bufdir / components from statistics folder</li>
+<li>Regular weight for paragraphs in bd-box</li>
+</ul>
+<h3 id="added_7">Added<a class="headerlink" href="#added_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Moved components from stat-frontend to Bufdir. path:
+  "/NextJs/src/components/statistics"</li>
+<li>Added functions for styling in statistics charts</li>
+<li>Subsidy templates</li>
+<li>NonSelected logic to Survey questions</li>
+<li>SKYRA Survey script</li>
+</ul>
+<h3 id="changed_6">Changed<a class="headerlink" href="#changed_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Update title handling in ParentSupportedMeasuresApiController and
+  SubsidyApiController to prioritize TeaserHeading</li>
+<li>Enhance sorting logic in ParentSupportedMeasuresApiController and
+  SubsidyApiController to take ChildSortOrder into account</li>
+<li>Surveys use now RadioCards and InputGroup components</li>
+</ul>
+<h2 id="406-2025-10-09">[4.0.6] - 2025-10-09<a class="headerlink" href="#406-2025-10-09" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_10">Fixed<a class="headerlink" href="#fixed_10" title="Permanent link">&para;</a></h3>
+<ul>
+<li>css spacing in tilskudd</li>
+</ul>
+<h2 id="405-2025-10-02">[4.0.5] - 2025-10-02<a class="headerlink" href="#405-2025-10-02" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_11">Fixed<a class="headerlink" href="#fixed_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li>phone number links in href</li>
+<li>fact box spacing in /fosterhjem/informasjonsmoter/</li>
+</ul>
+<h2 id="404-2025-09-29">[4.0.4] - 2025-09-29<a class="headerlink" href="#404-2025-09-29" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_12">Fixed<a class="headerlink" href="#fixed_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Renewed Optimizely license</li>
+</ul>
+<h2 id="403-2025-09-17">[4.0.3] - 2025-09-17<a class="headerlink" href="#403-2025-09-17" title="Permanent link">&para;</a></h2>
+<h3 id="added_8">Added<a class="headerlink" href="#added_8" title="Permanent link">&para;</a></h3>
+<p>-React Loading Skeletons</p>
+<ul>
+<li>React Loading Skeletons</li>
+<li>Blocks description in NO for Factbox and Infobox</li>
+</ul>
+<h3 id="removed_2">Removed<a class="headerlink" href="#removed_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>PostNummer search from ForsterCareEventList</li>
+</ul>
+<h3 id="changed_7">Changed<a class="headerlink" href="#changed_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Extended <PostalSearcHandler> to search without form</li>
+</ul>
+<h2 id="402-2025-09-16">[4.0.2] - 2025-09-16<a class="headerlink" href="#402-2025-09-16" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_13">Fixed<a class="headerlink" href="#fixed_13" title="Permanent link">&para;</a></h3>
+<ul>
+<li>'Ongoing course' label instead of datetime in FamilyServices courses</li>
+</ul>
+<h3 id="added_9">Added<a class="headerlink" href="#added_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li>ResponsiveTebles in Guidelines</li>
+<li>Faktabox and InfoBox thumbs and description</li>
+<li>New search system that is compatible with new elasticsearch versions (Epinova
+  plugin is limited to Elastic v7.x.x)</li>
+<li>New event handler to trigger external <code>cmsextractor</code> for indexing page content
+  to elastic when pages are created, updated, deleted or moved.</li>
+<li>Endpoints for <code>cmsextractor</code> to extract page content to index</li>
+<li>Search service and client that support new elasticsearch versions</li>
+<li>Conditional build with pipeline parameter <code>useNewSearch</code> to switch between the
+  old and new search implementation</li>
+</ul>
+<h3 id="changed_8">Changed<a class="headerlink" href="#changed_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Bumped Buflib to v.7.2.3</li>
+</ul>
+<h3 id="removed_3">Removed<a class="headerlink" href="#removed_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>If useNewSearch=true the Bufdir.ElasticSearch Epinova plugin is removed and
+  replaced by the new search</li>
+</ul>
+<h2 id="401-2025-09-09">[4.0.1] - 2025-09-09<a class="headerlink" href="#401-2025-09-09" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_14">Fixed<a class="headerlink" href="#fixed_14" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Print stylesheet</li>
+<li>Fosterhjem contact form in modal</li>
+<li>Optimizely image thumbnails</li>
+<li>Uncompatible findLastIndex</li>
+</ul>
+<h2 id="400-2025-08-25">[4.0.0] - 2025-08-25<a class="headerlink" href="#400-2025-08-25" title="Permanent link">&para;</a></h2>
+<h3 id="changed_9">Changed<a class="headerlink" href="#changed_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Bumped Buflib to v.7.1.1</li>
+</ul>
+<h3 id="fixed_15">Fixed<a class="headerlink" href="#fixed_15" title="Permanent link">&para;</a></h3>
+<ul>
+<li>ContenTeasers linkText from heading field</li>
+<li>Add <a href="http://www.google.com">www.google.com</a> to CSP connect-src directive</li>
+<li>Fix contact form GDPR consent checkbox</li>
+<li>Fix header language issue</li>
+</ul>
+<h3 id="added_10">Added<a class="headerlink" href="#added_10" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fact box block</li>
+</ul>
+<h3 id="removed_4">Removed<a class="headerlink" href="#removed_4" title="Permanent link">&para;</a></h3>
+<h3 id="changed_10">Changed<a class="headerlink" href="#changed_10" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Updated NuGet packages (including Optimizely)</li>
+</ul>
+<h2 id="3167-2025-06-25">[3.16.7] - 2025-06-25<a class="headerlink" href="#3167-2025-06-25" title="Permanent link">&para;</a></h2>
+<h3 id="changed_11">Changed<a class="headerlink" href="#changed_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li>buflib, bufdir_stat, next, react and more pkg updates</li>
+<li>refactored code that was breaking changes.</li>
+<li>refactored imports in scss files</li>
+<li>bugfixs, refactor few components for better performance and code quality</li>
+</ul>
+<h2 id="3166-2025-06-18">[3.16.6] - 2025-06-18<a class="headerlink" href="#3166-2025-06-18" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_16">Fixed<a class="headerlink" href="#fixed_16" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fix info page rendering when main body has a block</li>
+<li>Fix search button on mobile</li>
+</ul>
+<h3 id="added_11">Added<a class="headerlink" href="#added_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Implement default template for info meetings</li>
+<li>Implement below event list area in Office page (familievern)</li>
+</ul>
+<h3 id="changed_12">Changed<a class="headerlink" href="#changed_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Bump bufdir_stat to v.8.1.2 - Respect ".." in multidimension xls docs</li>
+<li>Bump bufdir_stat to v.8.1.1 - globalUnitsName save fix</li>
+<li>Remove common content from info meeting page</li>
+</ul>
+<h2 id="3165-2025-06-02">[3.16.5] - 2025-06-02<a class="headerlink" href="#3165-2025-06-02" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_17">Fixed<a class="headerlink" href="#fixed_17" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Add null check in ReplaceProp method</li>
+<li>AccordionList header dynamic class based on headingLevels</li>
+<li>Bump bufdir_stat to v.8.1.0 - Respect ".." and show only decimals gt 0</li>
+<li>Pride logo animation fix</li>
+</ul>
+<h3 id="removed_5">Removed<a class="headerlink" href="#removed_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Second event signup button in information meeting and course pages under
+  familievern and fosterhjem</li>
+</ul>
+<h3 id="changed_13">Changed<a class="headerlink" href="#changed_13" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Event signup button type and styling in information meeting and course pages
+  under familievern and fosterhjem</li>
+</ul>
+<h2 id="3164-2025-05-09">[3.16.4] - 2025-05-09<a class="headerlink" href="#3164-2025-05-09" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_18">Fixed<a class="headerlink" href="#fixed_18" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Redirect urls with docId parameter to url with docId as segment</li>
+</ul>
+<h3 id="changed_14">Changed<a class="headerlink" href="#changed_14" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Updated CSP with new mediaflow entries</li>
+</ul>
+<h2 id="3163-2025-05-22">[3.16.3] - 2025-05-22<a class="headerlink" href="#3163-2025-05-22" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_19">Fixed<a class="headerlink" href="#fixed_19" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Revert removal of /api/framework/GetBufdirFramework endpoint</li>
+<li>Added Next <Link> back in Megamenu missing changes</li>
+</ul>
+<h3 id="changed_15">Changed<a class="headerlink" href="#changed_15" title="Permanent link">&para;</a></h3>
+<ul>
+<li>refactor code: Footer, CookieSettings</li>
+<li>added cookie settings hook</li>
+<li>created context for cookie settings</li>
+<li>Improve overview over unused blocks and media</li>
+<li>Event signup button type and styling in information meeting and course pages
+  under familievern and fosterhjem</li>
+</ul>
+<h2 id="3162-2025-05-05">[3.16.2] - 2025-05-05<a class="headerlink" href="#3162-2025-05-05" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_20">Fixed<a class="headerlink" href="#fixed_20" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added Next <Link> back in Megamenu</li>
+</ul>
+<h2 id="3161-2025-04-29">[3.16.1] - 2025-04-29<a class="headerlink" href="#3161-2025-04-29" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_21">Fixed<a class="headerlink" href="#fixed_21" title="Permanent link">&para;</a></h3>
+<ul>
+<li>MegaMenu not closing when clicking a link</li>
+</ul>
+<h2 id="3160-2025-04-29">[3.16.0] - 2025-04-29<a class="headerlink" href="#3160-2025-04-29" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_22">Fixed<a class="headerlink" href="#fixed_22" title="Permanent link">&para;</a></h3>
+<ul>
+<li>NewsList list header from heading instead of name</li>
+<li>Header levels in some accordions</li>
+</ul>
+<h3 id="changed_16">Changed<a class="headerlink" href="#changed_16" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Bump Buflib to v.6.4.6 - Accordion bugs fixed</li>
+<li>Bump bufdir_stat to v.8.0.8 - Stat Accordions adjustments</li>
+<li>Removed unused APIs</li>
+<li>Protect public APIs with bearer token, Optimizely authorization or reCaptcha</li>
+<li>Report pages uses path based URLs instead of query parameters</li>
+<li>Implement canonical tags</li>
+</ul>
+<h2 id="3150-2025-04-22">[3.15.0] - 2025-04-22<a class="headerlink" href="#3150-2025-04-22" title="Permanent link">&para;</a></h2>
+<h3 id="added_12">Added<a class="headerlink" href="#added_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li>disableCookieModalAutoOpenUrls</li>
+</ul>
+<h3 id="changed_17">Changed<a class="headerlink" href="#changed_17" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Cookies UU - Adapt to small screens</li>
+<li>Cookies UU - Focus on top</li>
+<li>Cookies UU - Don't show on exceptionsPage - disableCookieModalAutoOpenUrls</li>
+<li>Refactored EventDuration into a reusable component</li>
+<li>Family services event duration display</li>
+<li>Bump buflib to v.6.4.2 - New Accordions</li>
+<li>Bump bufdir_stat to v.8.0.4 - New Accordions</li>
+<li>sending eventLevels to the new BlAccordion</li>
+<li>Display "Finner ikke artikkel" as title when document isn't found on
+  DocumentDetailsPage</li>
+<li>Use standard code TinyMCE plugin for WebAdmins</li>
+</ul>
+<h3 id="fixed_23">Fixed<a class="headerlink" href="#fixed_23" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fix displaying report when there is one header in abstract</li>
+<li>Fix aria-hidden attribute in breadcrumbs</li>
+</ul>
+<h2 id="3140-2025-03-18">[3.14.0] - 2025-03-18<a class="headerlink" href="#3140-2025-03-18" title="Permanent link">&para;</a></h2>
+<h3 id="changed_18">Changed<a class="headerlink" href="#changed_18" title="Permanent link">&para;</a></h3>
+<ul>
+<li>NextJs upgrade to 14.2.25 to include a security patch</li>
+<li>Visning av dato og klokkeslett på familie kursene</li>
+</ul>
+<h3 id="changed_19">Changed<a class="headerlink" href="#changed_19" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Refactored EventDuration into a reusable component</li>
+<li>Cookie modal allways on top and visible in mobile</li>
+<li>Cookie modal links and buttons focusable first</li>
+<li>Added [disableCookieModalAutoOpenUrls] field in Optimizely Footer section</li>
+</ul>
+<h2 id="3140-2025-03-18_1">[3.14.0] - 2025-03-18<a class="headerlink" href="#3140-2025-03-18_1" title="Permanent link">&para;</a></h2>
+<h3 id="changed_20">Changed<a class="headerlink" href="#changed_20" title="Permanent link">&para;</a></h3>
+<ul>
+<li>NextJs upgrade to 14.2.25 to include a security patch</li>
+<li>Date and time display in family services courses</li>
+</ul>
+<h2 id="3130-2025-03-18">[3.13.0] - 2025-03-18<a class="headerlink" href="#3130-2025-03-18" title="Permanent link">&para;</a></h2>
+<h3 id="added_13">Added<a class="headerlink" href="#added_13" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Generere dokumentstruktur fra worddokument med liste av kapitler</li>
+</ul>
+<h2 id="3130-2025-03-18_1">[3.13.0] - 2025-03-18<a class="headerlink" href="#3130-2025-03-18_1" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_24">Fixed<a class="headerlink" href="#fixed_24" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Image carousel responsive image mapping</li>
+<li>Empty markup when <ul> lists are empty</li>
+</ul>
+<h3 id="added_14">Added<a class="headerlink" href="#added_14" title="Permanent link">&para;</a></h3>
+<ul>
+<li>new style breadcrumb</li>
+</ul>
+<h3 id="removed_6">Removed<a class="headerlink" href="#removed_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Old menu code</li>
+</ul>
+<h2 id="312-2025-03-07">[3.12] - 2025-03-07<a class="headerlink" href="#312-2025-03-07" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_25">Fixed<a class="headerlink" href="#fixed_25" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Localization on close megamenu</li>
+<li>matomoscript src from .env</li>
+<li>correct head title on 404</li>
+<li>heading spacing in guidelines</li>
+</ul>
+<h2 id="3110-2025-03-04">[3.11.0] - 2025-03-04<a class="headerlink" href="#3110-2025-03-04" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_26">Fixed<a class="headerlink" href="#fixed_26" title="Permanent link">&para;</a></h3>
+<ul>
+<li>"Utgiver" filter on rapporter</li>
+<li>Width on header for servicestart-pages</li>
+<li>Back-button on document page in rapporter</li>
+</ul>
+<h3 id="added_15">Added<a class="headerlink" href="#added_15" title="Permanent link">&para;</a></h3>
+<ul>
+<li>added region icons for welcome blocks</li>
+<li>metadata for breadcrumb added to CDA</li>
+</ul>
+<h2 id="3100-2025-02-25">[3.10.0] - 2025-02-25<a class="headerlink" href="#3100-2025-02-25" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_27">Fixed<a class="headerlink" href="#fixed_27" title="Permanent link">&para;</a></h3>
+<ul>
+<li>change priority for ingress in link list block so that locally set ingress
+  triumphs linked ingress</li>
+<li>disable preview content from appearing on stats pages</li>
+<li>increased z-index so that "Go to content / menu works"</li>
+</ul>
+<h3 id="added_16">Added<a class="headerlink" href="#added_16" title="Permanent link">&para;</a></h3>
+<ul>
+<li>implemented filtering on onlinelibrary</li>
+<li>implemented termlist/search/record fetch in next-js backend</li>
+</ul>
+<h3 id="removed_7">Removed<a class="headerlink" href="#removed_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>removed reindex code from cms-backend</li>
+</ul>
+<h3 id="changed_21">Changed<a class="headerlink" href="#changed_21" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>removed external link icon from menu links</p>
+</li>
+<li>
+<p>added more options to the remove format button</p>
+</li>
+<li>
+<p>upgrade Buflib 6.1.1</p>
+</li>
+</ul>
+<h2 id="390-2025-02-05">[3.9.0] - 2025-02-05<a class="headerlink" href="#390-2025-02-05" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_28">Fixed<a class="headerlink" href="#fixed_28" title="Permanent link">&para;</a></h3>
+<ul>
+<li>upgrade bufdir stat to 8.0.0 for switching to strapi 5</li>
+</ul>
+<h2 id="380-2025-02-03">[3.8.0] - 2025-02-03<a class="headerlink" href="#380-2025-02-03" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_29">Fixed<a class="headerlink" href="#fixed_29" title="Permanent link">&para;</a></h3>
+<ul>
+<li>upgrade bufdir stat to 7.1.0 which fixes switching graphs not working for
+  downloading, and icons not displaying on graph buttons</li>
+<li>removed empty h2 tags from video blocks</li>
+<li>Fix hypenation issue on title in the Footer component via buflib 6.0.0 upgrade</li>
+<li>Remove empty list (EventListComponent)</li>
+</ul>
+<h3 id="added_17">Added<a class="headerlink" href="#added_17" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Add robots meta tag to all pages with a default value and overwrites from
+  Optimizely</li>
+<li>Add matomo tracking when opening signup form</li>
+</ul>
+<h3 id="changed_22">Changed<a class="headerlink" href="#changed_22" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Updated version of unused blocks and media</li>
+<li>Upgraded buflib to 6.0.0</li>
+</ul>
+<h2 id="370-2025-01-16">[3.7.0] - 2025-01-16<a class="headerlink" href="#370-2025-01-16" title="Permanent link">&para;</a></h2>
+<p>Note: 3.6.0 is not released at the time of writing, but starting new unreleased
+section so that the log lines don't mix upon finishing the started release.</p>
+<h3 id="fixed_30">Fixed<a class="headerlink" href="#fixed_30" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fixed issue with robots.txt not returning anything</li>
+<li>fixed issue with shadow not showing no sticky top on menu v2</li>
+<li>Fixed issue with metadata description not being presented which was provided
+  by optimizely</li>
+<li>Updated buflib to v6 beta (highlights: new button styles, new media query
+  breakpoints)</li>
+<li>Document details page: display text as abstract when supported by reIndex</li>
+<li>Add a 300ms delay before showing loading state on button for contact forms,
+  feedback, newsletters and postal searches</li>
+<li>Fixed styling for CTA buttons</li>
+<li>Fixed styling for all buttons that do not use the BlButton component</li>
+</ul>
+<h3 id="changed_23">Changed<a class="headerlink" href="#changed_23" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Started using the Portal component in the EventSignup, PostalSearchModal and
+  CookieSettings components</li>
+</ul>
+<h2 id="360-2024-12-20">[3.6.0] - 2024-12-20<a class="headerlink" href="#360-2024-12-20" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_31">Fixed<a class="headerlink" href="#fixed_31" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fixed bug where side menu showed in front of menu</li>
+<li>Fixed search in page on mobile, which did not show any more when triggered</li>
+<li>fixed issue with stats pages not displaying 404 when pages not found</li>
+</ul>
+<h3 id="added_18">Added<a class="headerlink" href="#added_18" title="Permanent link">&para;</a></h3>
+<ul>
+<li>New global menu configuration</li>
+<li>New global menu GUI</li>
+<li>Feature toggle for new global menu</li>
+</ul>
+<h2 id="351-2024-11-28">[3.5.1] - 2024-11-28<a class="headerlink" href="#351-2024-11-28" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_32">Fixed<a class="headerlink" href="#fixed_32" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Feedback dashboard: fix filter-bug when editing feedback</li>
+<li>Guideline pages: Fixed bug where hits were still marked after closing search
+  on mobile and desktop</li>
+<li>Guideline pages: Fixed bug where accordion icon was visible in front of the
+  search in page on mobile</li>
+<li>Frontend tests: Added tests for the Xhtmlstring component (render method of
+  content areas and rich text areas)</li>
+</ul>
+<h3 id="changed_24">Changed<a class="headerlink" href="#changed_24" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Feedback dashboard: preserve filter-state</li>
+<li>Feedback dashboard: width on filter-inputs increased</li>
+<li>Feedback dashboard: new column - Oppdatert</li>
+<li>Feedback dashboard: moved expander button from own column to inside comment
+  column</li>
+<li>Feedback dashboard: break-word and white space to show more of the feedback</li>
+<li>Guideline pages: Updated the design on table of contents on mobile</li>
+</ul>
+<h2 id="350-2024-11-20">[3.5.0] - 2024-11-20<a class="headerlink" href="#350-2024-11-20" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_33">Fixed<a class="headerlink" href="#fixed_33" title="Permanent link">&para;</a></h3>
+<ul>
+<li>fixed header/footer (layout) to work correct on no/en pages</li>
+<li>refactored feedback-props</li>
+<li>feedback dashboard</li>
+<li>feedback endpoints moved from function apps into feedbackapicontroller</li>
+<li>fixed header/footer (layout) to work correct on no/en pages</li>
+<li>refactored feedback-props</li>
+<li>new design on search in page on mobile</li>
+<li>feedback dashboard</li>
+<li>feedback endpoints moved from function apps into feedbackapicontroller</li>
+</ul>
+<h3 id="added_19">Added<a class="headerlink" href="#added_19" title="Permanent link">&para;</a></h3>
+<ul>
+<li>added big links option for linklist block</li>
+<li>added tests for PostalSearchHandler</li>
+<li>added tests for PostalSearchModal</li>
+</ul>
+<h3 id="removed_8">Removed<a class="headerlink" href="#removed_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>removed customized handling of 404,500 from Optimizely</li>
+<li>removed customized handling of 404,500 from Optimizely</li>
+</ul>
+<h3 id="changed_25">Changed<a class="headerlink" href="#changed_25" title="Permanent link">&para;</a></h3>
+<h3 id="added_20">Added<a class="headerlink" href="#added_20" title="Permanent link">&para;</a></h3>
+<ul>
+<li>changed new layout into the survey result page</li>
+<li>added input result message to detailed table of contents in guideline pages</li>
+</ul>
+<h2 id="340-2024-11-04">[3.4.0] - 2024-11-04<a class="headerlink" href="#340-2024-11-04" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_34">Fixed<a class="headerlink" href="#fixed_34" title="Permanent link">&para;</a></h3>
+<ul>
+<li>guideline search: show number of hits, even when search term has below 3 chars</li>
+<li>guideline search: do not show separate hits for separate words in the same
+  search term</li>
+<li>Guideline: moved page info from side menu to below guideline heading</li>
+<li>fix search from menu issues with menu not closing and query terms not updating</li>
+<li>updated buflib to v5.1.3 (fix for carousel caption in full screen, 1px pointer
+  link hover issue and accordion list toggle-all z-index issue)</li>
+<li>remove underline from pointer links ("enkeltstående lenke") and cta links
+  ("call to action") in rich text</li>
+</ul>
+<h3 id="added_21">Added<a class="headerlink" href="#added_21" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>added matomo tracking of global search and online library search</p>
+</li>
+<li>
+<p>added support for ingress in linklistblock and add job to migrate to new
+  property</p>
+</li>
+<li>
+<p>Guideline pages: added detailed table of content with search/filter</p>
+</li>
+</ul>
+<h3 id="removed_9">Removed<a class="headerlink" href="#removed_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li>removed old views for pages which were used when optimizely was responsible
+  for rendering pages</li>
+</ul>
+<h2 id="331-2024-10-21">[3.3.1] - 2024-10-21<a class="headerlink" href="#331-2024-10-21" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_35">Fixed<a class="headerlink" href="#fixed_35" title="Permanent link">&para;</a></h3>
+<ul>
+<li>fix a bug in online library due to url change and possibly due to enabling
+  trailing slashes</li>
+</ul>
+<h2 id="330-2024-10-18">[3.3.0] - 2024-10-18<a class="headerlink" href="#330-2024-10-18" title="Permanent link">&para;</a></h2>
+<h3 id="added_22">Added<a class="headerlink" href="#added_22" title="Permanent link">&para;</a></h3>
+<ul>
+<li>guideline pages: added search hits per section</li>
+<li>added CSP Rules to allow Hotjar fonts and images</li>
+<li>added Feedback (Fant du det du lette etter?) to all statistics pages</li>
+</ul>
+<h3 id="changed_26">Changed<a class="headerlink" href="#changed_26" title="Permanent link">&para;</a></h3>
+<ul>
+<li>changed trailing slash to be default because links from optimizely has it</li>
+</ul>
+<h2 id="320-2024-10-10">[3.2.0] - 2024-10-10<a class="headerlink" href="#320-2024-10-10" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_36">Fixed<a class="headerlink" href="#fixed_36" title="Permanent link">&para;</a></h3>
+<ul>
+<li>fix simple address not redirecting to actual url</li>
+<li>fix pdf pages not displaying on transport page</li>
+<li>increase max upload file size to 140 MB</li>
+<li>guideline pages: drop side menu heading from focus order</li>
+<li>guideline pages: fix focus styling for side menu links</li>
+</ul>
+<h3 id="added_23">Added<a class="headerlink" href="#added_23" title="Permanent link">&para;</a></h3>
+<ul>
+<li>added Link styles in tinymce editor</li>
+<li>guideline pages: added search to side menu</li>
+<li>added subtext field to WelcomeBlock</li>
+</ul>
+<h3 id="removed_10">Removed<a class="headerlink" href="#removed_10" title="Permanent link">&para;</a></h3>
+<ul>
+<li>removed media button from tinymce editor</li>
+<li>removed all code concerning youtube</li>
+</ul>
+<h3 id="changed_27">Changed<a class="headerlink" href="#changed_27" title="Permanent link">&para;</a></h3>
+<ul>
+<li>running each page of bufdir_stat in dedicated Nextjs routes</li>
+<li>guideline pages: updated styling on side menu, using "menu links"</li>
+<li>TranportLink/WelcomeBlock: updated styling according to new design</li>
+<li>moved aria-live for child service results to h2</li>
+<li>updated buflib to v5 (new links and teasers)</li>
+<li>updated bufdir_stat to version 6 (better NextJs support and support for buflib
+  v5)</li>
+</ul>
+<h2 id="310-2024-09-02">[3.1.0] - 2024-09-02<a class="headerlink" href="#310-2024-09-02" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_37">Fixed<a class="headerlink" href="#fixed_37" title="Permanent link">&para;</a></h3>
+<ul>
+<li>remove space under block if is rich-text followed by another rich-text block</li>
+<li>fixed html rendering without content (missing/lacking null checks)</li>
+<li>hide unused fields in guideline chapter page</li>
+<li>add icons and favico files - add link to manifest file</li>
+<li>fixed wss csp issue for hotjar</li>
+<li>Bug 42751: Veiledere: interne lenker er brutt</li>
+<li>fixed html rendering without content (missing/lacking null checks)</li>
+<li>add missing application insights key</li>
+<li>fixed bug where carousel was rendered even when images were missing</li>
+<li>add hotjar domain to csp</li>
+<li>upgrade node version of frontendcontainer to handle memory leak</li>
+<li>update license for qa and production</li>
+</ul>
+<h3 id="added_24">Added<a class="headerlink" href="#added_24" title="Permanent link">&para;</a></h3>
+<ul>
+<li>upgrades to veileder mal to handle rettsdata content</li>
+<li>add new fields to guideline section</li>
+</ul>
+<h2 id="301-2024-08-21">[3.0.1] - 2024-08-21<a class="headerlink" href="#301-2024-08-21" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_38">Fixed<a class="headerlink" href="#fixed_38" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Exception on imageblock when key is missing on dictionary</li>
+<li>Guidelinepager failing on external links</li>
+<li>Mediaflow - CSP error</li>
+</ul>
+<h3 id="added_25">Added<a class="headerlink" href="#added_25" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Additional logging on CDA errors</li>
+</ul>
+<h2 id="300-2024-08-20">[3.0.0] - 2024-08-20<a class="headerlink" href="#300-2024-08-20" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_39">Fixed<a class="headerlink" href="#fixed_39" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<h1 id="42644-fix-barnevern-filter">42644 - fix barnevern-filter<a class="headerlink" href="#42644-fix-barnevern-filter" title="Permanent link">&para;</a></h1>
+</li>
+<li>
+<h1 id="42186-add-print-button-to-focus-order">42186 - add print button to focus order<a class="headerlink" href="#42186-add-print-button-to-focus-order" title="Permanent link">&para;</a></h1>
+</li>
+<li>Wrong number of search items shown in online library</li>
+<li>Changed survey result wording for take test again</li>
+</ul>
+<h3 id="added_26">Added<a class="headerlink" href="#added_26" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added title of current environment in the top bar in edit mode</li>
+<li>Added siteimprove script</li>
+</ul>
+<h3 id="removed_11">Removed<a class="headerlink" href="#removed_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Removed Bing Ads and Google Floodlight scripts</li>
+<li>Remove flag useSecondary from the Link List block (needs to be cleaned from db
+  manually via cms gui)</li>
+</ul>
+<h3 id="changed_28">Changed<a class="headerlink" href="#changed_28" title="Permanent link">&para;</a></h3>
+<ul>
+<li>relase.md updated to new procedure</li>
+<li>Rewrote the frontend framework from ReactJs.NET to Next.js</li>
+<li>Making headers in yellow tile areas smaller.</li>
+<li>Slightly changed the design of the guideline page to be able to have alot
+  cleaner code.</li>
+</ul>
+<h2 id="2310-2024-02-05">[2.31.0] - 2024-02-05<a class="headerlink" href="#2310-2024-02-05" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_40">Fixed<a class="headerlink" href="#fixed_40" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Prevent error box from blinking in document details for online library</li>
+</ul>
+<h2 id="2300-2024-02-01">[2.30.0] - 2024-02-01<a class="headerlink" href="#2300-2024-02-01" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_41">Fixed<a class="headerlink" href="#fixed_41" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Wrong number of search items shown in online library</li>
+<li>guidelinechaptercontent error</li>
+<li>Fix Application Insights config bug</li>
+<li>Wrong error message displayed when document is not found in online library</li>
+</ul>
+<h3 id="added_27">Added<a class="headerlink" href="#added_27" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Show only tagged/whitelisted documents from online library</li>
+<li>go to main content and main menu links</li>
+<li>logic for conditional rendering of small teaser</li>
+<li>forced teaserlist to be small</li>
+<li>Spacing to Guidline page</li>
+</ul>
+<h3 id="removed_12">Removed<a class="headerlink" href="#removed_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Remove Archive Page template/controller</li>
+</ul>
+<h3 id="changed_29">Changed<a class="headerlink" href="#changed_29" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Disabled PermanentLinkKeeper Init code from Bufdir.SEO</p>
+</li>
+<li>
+<p>Updated buflib to 3.1.6</p>
+</li>
+</ul>
+<h2 id="2290-2023-01-15">[2.29.0] - 2023-01-15<a class="headerlink" href="#2290-2023-01-15" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_42">Fixed<a class="headerlink" href="#fixed_42" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Wrong number of documents sometimes shown when using online library
+  pagination.</li>
+</ul>
+<h3 id="added_28">Added<a class="headerlink" href="#added_28" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Online Library step 3 (document page, pagination)</li>
+<li>Redesigned Search page and zero hits</li>
+<li>Added tracking of search terms</li>
+<li>Added tracking to nettbibliotek search and clicks</li>
+<li>margin bottom to accordion list</li>
+</ul>
+<h3 id="changed_30">Changed<a class="headerlink" href="#changed_30" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Updated Buflib to 3.1.5</li>
+</ul>
+<h2 id="2280-2023-12-20">[2.28.0] - 2023-12-20<a class="headerlink" href="#2280-2023-12-20" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_43">Fixed<a class="headerlink" href="#fixed_43" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Navigation issue caused by using relative routes instead of absolute routes in
+  nettbibliotek</li>
+<li>Fixed UU issues on foreldrestiltest</li>
+<li>Wrong number of documents sometimes shown when using online library
+  pagination.</li>
+</ul>
+<h3 id="added_29">Added<a class="headerlink" href="#added_29" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Online Library step 3 (document page, pagination)</li>
+<li>Redesigned Search page and zero hits</li>
+<li>Added google site verification file</li>
+<li>Added tracking of search terms</li>
+<li>Added tracking to nettbibliotek search and clicks</li>
+</ul>
+<h3 id="changed_31">Changed<a class="headerlink" href="#changed_31" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Updated bufdir_stat to version 3.0.5</li>
+</ul>
+<h2 id="2270-2023-12-06">[2.27.0] - 2023-12-06<a class="headerlink" href="#2270-2023-12-06" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_44">Fixed<a class="headerlink" href="#fixed_44" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Change how V8 engine is created to avoid cache issues</li>
+</ul>
+<h2 id="2260-2023-11-30">[2.26.0] - 2023-11-30<a class="headerlink" href="#2260-2023-11-30" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_45">Fixed<a class="headerlink" href="#fixed_45" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fixed issue with tabs in component props</li>
+</ul>
+<h3 id="changed_32">Changed<a class="headerlink" href="#changed_32" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Replaced IMemoryCache with IObjectInstanceCache</p>
+</li>
+<li>
+<p>Updated buflib</p>
+</li>
+</ul>
+<h2 id="2250-2023-11-23">[2.25.0] - 2023-11-23<a class="headerlink" href="#2250-2023-11-23" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_46">Fixed<a class="headerlink" href="#fixed_46" title="Permanent link">&para;</a></h3>
+<ul>
+<li>made notfound handler available for all editors</li>
+</ul>
+<h3 id="added_30">Added<a class="headerlink" href="#added_30" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Online Library with pseudo pagination (Step 2)</li>
+</ul>
+<h2 id="2240-2023-11-03">[2.24.0] - 2023-11-03<a class="headerlink" href="#2240-2023-11-03" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_47">Fixed<a class="headerlink" href="#fixed_47" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fixed bug with linklist block not supporting horizontal mode and hide arrows</li>
+<li>Upgraded to optimizely 12.23</li>
+<li>Updated License file for test</li>
+</ul>
+<h3 id="added_31">Added<a class="headerlink" href="#added_31" title="Permanent link">&para;</a></h3>
+<ul>
+<li>added functionality to preview blocks</li>
+<li>Added (dedicated) pagetype for contacting foster care offices</li>
+</ul>
+<h3 id="changed_33">Changed<a class="headerlink" href="#changed_33" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Start using new fosterhjem api in test environment</li>
+</ul>
+<h2 id="2230-2023-10-13">[2.23.0] - 2023-10-13<a class="headerlink" href="#2230-2023-10-13" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_48">Fixed<a class="headerlink" href="#fixed_48" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Reconfigured Serilog to log to new seq-instance</li>
+<li>Changed how title is displayed for program block program items</li>
+<li>updated bufdir_stat to v3.0.2</li>
+<li>fixed issue where megamenu do not follow header on desktop</li>
+<li>fixed issue where user could scroll behind megamenu on mobile</li>
+<li>fixed event-sync-bug, pages now created with "no" culture as default</li>
+<li>contentLanguage added to get correct language on frontend-translations</li>
+<li>fixed bug with duplicate ids being generated in guideline pages</li>
+<li>fixed bug with best bets tab not showing in elasticsearch</li>
+<li>fixed sorting and title on continous meetings on officepage</li>
+<li>Reduce number of teaser views, and point all to the teaser react component
+  instead of having custom html for each</li>
+<li>Fixed bug where linklist title isn't in bold after adding support for teaser
+  text</li>
+<li>Fixed bug causing inability to scroll on megamenu on tablets</li>
+</ul>
+<h3 id="added_32">Added<a class="headerlink" href="#added_32" title="Permanent link">&para;</a></h3>
+<ul>
+<li>updated buflib to 3.0.2</li>
+<li>Added mapped role for elastic search addon editors</li>
+<li>Added block type for making seminar schedules</li>
+<li>updated bufdir_stat to 3.0.3</li>
+</ul>
+<h3 id="removed_13">Removed<a class="headerlink" href="#removed_13" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Removed unstyled list styles</li>
+<li>added support for displaying teasers in linklistblock</li>
+<li>Removed phone numbers from FostercareOfficePage and FamilyServicesOfficePage</li>
+<li>Deleted VideoTeaserListBlock from the code</li>
+</ul>
+<h3 id="changed_34">Changed<a class="headerlink" href="#changed_34" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Changed how tinymce applies bold to nested items</li>
+<li>Changed from h4 to p tag in eventsignup</li>
+<li>Changed Cookie settings to approve/reject all cookies.</li>
+</ul>
+<h2 id="2220-2023-09-25">[2.22.0] - 2023-09-25<a class="headerlink" href="#2220-2023-09-25" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_49">Fixed<a class="headerlink" href="#fixed_49" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added ingress for Foreldrestøttede Tiltak</li>
+<li>Fixed bug where elasticsearch prevented deletion of blocks</li>
+<li>Fixed bug where unpublished pages showed in search results</li>
+<li>fixed bug where preview text returned was wrong in search results</li>
+<li>Fixed bug where image description and attribution on a local office article
+  started showing in listings due to Imageblock refactoring</li>
+<li>Fixed bug where image description on a local office article started showing in
+  listings due to Imageblock refactoring</li>
+<li>Sidemenu overflowing feedback</li>
+<li>ContentTeaser: Don't produce space (empty div) if no header is provided</li>
+</ul>
+<h3 id="added_33">Added<a class="headerlink" href="#added_33" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Infobox for listing out field errors in ContactForm if more than one field is
+  invalid, else focus on the invalid field</li>
+<li>Added language button for tinymce</li>
+<li>Added support for mediaflow on seminar page and on video block</li>
+<li>Updated buflib and bufdir_stat packages to v3 and fix breaking changes</li>
+<li>Field errors list above form in ContactForm</li>
+<li>Added Bing Ads pixel script</li>
+<li>Added Google Floodlight pixel script</li>
+<li>Hotjar script is running only when all cookies are accepted</li>
+<li>Added Bing Ads pixel script (running when all cookies accepted)</li>
+<li>Added Google Floodlight pixel script (running when all cookies accepted)</li>
+<li>Added plugin for read-only viewing source code in tinymce</li>
+<li>Added context plugin for removing content language set using span tags in
+  tinymce.</li>
+<li>Added context plugin for removing content language set using span tags in
+  tinymce.</li>
+<li>Added global padding for bd-article__intro</li>
+</ul>
+<h3 id="changed_35">Changed<a class="headerlink" href="#changed_35" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Changed to aria-describedby on ServiceSearch</li>
+<li>Update License files because the previous ones are about to expire</li>
+<li>moved hr inside <li> element instead of as a child of <ul> in MenuItems</li>
+<li>Header menu is now fixed</li>
+<li>Set position relative on footer wrapper</li>
+<li>Disable cookies on Application Insights</li>
+<li>Changed from bl-p-y-7 to bl-p-b-7 on NewsArticle wrapper</li>
+</ul>
+<h2 id="2210-2023-08-30">[2.21.0] - 2023-08-30<a class="headerlink" href="#2210-2023-08-30" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_50">Fixed<a class="headerlink" href="#fixed_50" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fixed bug with eventsignup checkbox</li>
+<li>Added ingress for Foreldrestøttede Tiltak</li>
+<li>Fixed bug where elasticsearch prevented deletion of blocks</li>
+<li>Added span on accordion list for screen reader to read out loud on
+  AccordionList</li>
+<li>Fix bug that stopped backend validation from showing in context of the field
+  that failed</li>
+<li>Updated bufdir_stat package to get new accessability fixes</li>
+<li>Wrapped teaser titles in h2 tags</li>
+<li>Maximum-scale from 1 to 5</li>
+<li>Updated Buflib to 2.7.2</li>
+</ul>
+<h3 id="added_34">Added<a class="headerlink" href="#added_34" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added language button for tinymce</li>
+<li>Added tools unused blocks / images</li>
+<li>Css for making long words break with hyphens</li>
+<li>Added code to automiatcally set language code on links in footer if the links
+  seems to be to another language</li>
+<li>Added showing time for events, in listings for Fostercare, which are on the
+  same day.</li>
+</ul>
+<h3 id="changed_36">Changed<a class="headerlink" href="#changed_36" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Switched out formValidation for react-hook-form with zod</li>
+</ul>
+<h2 id="2200-2023-08-11">[2.20.0] - 2023-08-11<a class="headerlink" href="#2200-2023-08-11" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_51">Fixed<a class="headerlink" href="#fixed_51" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Update EPiServer.CMS to v12.22.3</li>
+<li>Update buflib to v2.6.5 (accessability and styling fixes)</li>
+<li>Using Node v16 instead of v14 in azure pipeline</li>
+<li>Now running typescript check in npm build command</li>
+<li>Fixed structure for feedback analytics in Matomo</li>
+<li>Fixed test id attribute name for dropdowns</li>
+<li>PostalSearchModal: fixed bug where the modal would not open again after it had
+  been closed</li>
+<li>Removed pages which google cannot see from language stats module</li>
+<li>LinkList: set focus on the first of the new links when "show more" is clicked</li>
+<li>ChildServicesInstitutionList: set focus on the first of the new links when
+  "show more" is clicked</li>
+<li>InfoBox: remove header tag from title</li>
+<li>Feedback: set focus on the text input that appears when user clicks the
+  negative response button</li>
+<li>Fixed tab navigation for "Go to main menu" link</li>
+<li>Fixed tab focus for "go to top" button</li>
+<li>ServiceSearch: accessibility improvements</li>
+<li>Filters: accessibility improvements</li>
+<li>ChildServicesInstitutionList: Added aria-live="polite" result section</li>
+<li>PostalSearchHandler: Added aria-live="polite" result sections</li>
+<li>Removed h2 from search result title</li>
+<li>Changed div tags to h3 tags due to accessibility</li>
+<li>Changed div tags to aside for feedback due to accessibility</li>
+<li>Removed h tags from Accordion header elements</li>
+<li>Expiry date for cookie consent</li>
+<li>Not setting EpiStateMarker cookie anymore</li>
+</ul>
+<h3 id="added_35">Added<a class="headerlink" href="#added_35" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added SR/SEO Heading for front page</li>
+<li>Added heading to search page</li>
+<li>Added Hotjar script (explicitly)</li>
+<li>Added Matomo tracking event for foster care contact form submission</li>
+</ul>
+<h3 id="removed_14">Removed<a class="headerlink" href="#removed_14" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Deleted all code concerning Google Analytics and Google Tag Manager</li>
+</ul>
+<h3 id="changed_37">Changed<a class="headerlink" href="#changed_37" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Switched out Jest with Vitest for testing frontend components</li>
+</ul>
+<h2 id="2192-2023-06-28">[2.19.2] - 2023-06-28<a class="headerlink" href="#2192-2023-06-28" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_52">Fixed<a class="headerlink" href="#fixed_52" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Removed H3-tag from consultation block since it messed with the heading
+  hierarchy which is bad for a11y</li>
+<li>FilterDropdowns: show title even if no results, and do not show warning when
+  result type is "generic"</li>
+<li>Newsletter signup - fixed styling for feedback on success and error</li>
+<li>Parental supported measures: Made filter and result titles editable in the cms</li>
+<li>Focus lock on menu</li>
+<li>update buflib to v2.5.0</li>
+</ul>
+<h3 id="added_36">Added<a class="headerlink" href="#added_36" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added Matomo tracking for signup, survey and feedback</li>
+<li>Added test-id attributes for testers on filterdropdown/multiselect</li>
+</ul>
+<h3 id="changed_38">Changed<a class="headerlink" href="#changed_38" title="Permanent link">&para;</a></h3>
+<ul>
+<li>CSS word break and hyphens on list item</li>
+<li>aria-labels and nav elements in header</li>
+<li>replaced Modal with TileModal in EventSignup, PostalSearchModal, and added id
+  to modal in CookieSettings</li>
+</ul>
+<h3 id="removed_15">Removed<a class="headerlink" href="#removed_15" title="Permanent link">&para;</a></h3>
+<h2 id="2191-2023-06-22">[2.19.1] - 2023-06-22<a class="headerlink" href="#2191-2023-06-22" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_53">Fixed<a class="headerlink" href="#fixed_53" title="Permanent link">&para;</a></h3>
+<ul>
+<li>FilterDropowns: show title even if no results, and do not show warning when
+  result type is "generic"</li>
+<li>Newsletter signup - fixed styling for feedback on success and error</li>
+<li>Parental supported measures: Made filter and result titles editable in the cms</li>
+<li>update buflib to v2.5.0</li>
+</ul>
+<h2 id="2190-2023-06-19">[2.19.0] - 2023-06-19<a class="headerlink" href="#2190-2023-06-19" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_54">Fixed<a class="headerlink" href="#fixed_54" title="Permanent link">&para;</a></h3>
+<ul>
+<li>FilterDropdowns: Displaying how many options are selected in multi selects</li>
+<li>Footer: Refactored CookieSettings to use buflibs TileModal and put Footer and
+  CookieSettings together in react</li>
+<li>Updated bufdir_stat to v2.0.11</li>
+</ul>
+<h3 id="added_37">Added<a class="headerlink" href="#added_37" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added result title to new filter page</li>
+<li>Added flag to show pride logo with animation in start page site settings</li>
+<li>Added admin plugin for seeing stats about nynorsk usage</li>
+<li>Added Geta Not found handler</li>
+<li>Added property for tracking intent for call to action block</li>
+<li>Added selenium test id to filter dropdowns</li>
+</ul>
+<h2 id="2181-2023-06-13">[2.18.1] - 2023-06-13<a class="headerlink" href="#2181-2023-06-13" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Update bufdir_stat from v2.0.4 to v2.0.10</li>
+</ul>
+<h2 id="2180-2023-06-07">[2.18.0] - 2023-06-07<a class="headerlink" href="#2180-2023-06-07" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_55">Fixed<a class="headerlink" href="#fixed_55" title="Permanent link">&para;</a></h3>
+<ul>
+<li>ServiceSearch: if only filters, make them take one third width each</li>
+<li>Removed role=tab from Table of contents component</li>
+<li>Fixed bug where it was possible to submit newsletter signup without valid
+  e-mail</li>
+<li>Updated to buflib v.2.2.0 (transparent accordion background, no vertical
+  centering in teasers)</li>
+<li>Removed all grid column centering (bl-grid--center)</li>
+<li>Changed font size of event signup location</li>
+<li>Fixed bug where alternate text was returned instead of attribution</li>
+<li>Fixed font size for event signup modal</li>
+<li>ServiceSearch: fixed the issue where all inputs appeared short</li>
+<li>Ordered accordion list: updated css class to get the correct style back</li>
+<li>Made reusable phone formatter (frontend) and used it for phone number in
+  PostalSearchModal and ChildServiceInstitutionCard</li>
+<li>Fixed instability in FilterDropdowns for better reusability</li>
+<li>Turn SSR back on for header, newsletter, sticky side menu (normerende) and
+  transport link</li>
+<li>Added support for multiselect in PostalSearchHandler/FilterDropdowns</li>
+</ul>
+<h3 id="added_38">Added<a class="headerlink" href="#added_38" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added property to all page types for marking content as Nynorsk (which sets
+  the language code in html tag)</li>
+<li>Added code for matomo tag manager and property to set the instance ID</li>
+<li>Added draft page templates for "Foreldrestøttede tiltak"</li>
+</ul>
+<h3 id="changed_39">Changed<a class="headerlink" href="#changed_39" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Upgraded optimizely to 12.18</li>
+</ul>
+<h2 id="2170-2023-05-04">[2.17.0] - 2023-05-04<a class="headerlink" href="#2170-2023-05-04" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_56">Fixed<a class="headerlink" href="#fixed_56" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Updated buflib and bufdir_stat packages to v2 and fix breaking changes</li>
+<li>Added block ID on sensible tags for link-list, accordion and accordion
+  collection so that top links might anchor link to them</li>
+<li>Child service institutions - open external institution links in new tab</li>
+<li>Child service institutions - style fixes</li>
+<li>Using bl-accordion-list__toggle styling from buflib instead of custom for
+  bufdir.no</li>
+<li>Ingress size 4 (not 3) for Article, NewsArticle, Process, InstitutionOverview,
+  FosterCareEventList, SeminarList, and OfficeList</li>
+<li>Update buflib (Carousel full screen position fixes and color fixes for warning
+  validations)</li>
+<li>Site locked at bottom scroll position if cookie settings pops up</li>
+</ul>
+<h3 id="added_39">Added<a class="headerlink" href="#added_39" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added custom breadcrumbs for bufdir_stat in header</li>
+<li>Added support for retrieving alt text, description, attribution from
+  underlying image file if it is not provided in the image block</li>
+</ul>
+<h2 id="2162-2023-04-20">[2.16.2] - 2023-04-20<a class="headerlink" href="#2162-2023-04-20" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_57">Fixed<a class="headerlink" href="#fixed_57" title="Permanent link">&para;</a></h3>
+<ul>
+<li>bufdir_stat: Added slash to base-url prop</li>
+</ul>
+<h2 id="2161-2023-04-20">[2.16.1] - 2023-04-20<a class="headerlink" href="#2161-2023-04-20" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_58">Fixed<a class="headerlink" href="#fixed_58" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Updated bufdir_stat to v2</li>
+</ul>
+<h2 id="2160-2023-04-18">[2.16.0] - 2023-04-18<a class="headerlink" href="#2160-2023-04-18" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_59">Fixed<a class="headerlink" href="#fixed_59" title="Permanent link">&para;</a></h3>
+<ul>
+<li>fixed issue with single image in carousel</li>
+<li>Fixed accordion print overlay issue</li>
+<li>Updated buflib to v2 alpha and fixed breaking changes</li>
+<li>Modal UU fixes (tabbing, body disable scroll when open, focus on open)</li>
+<li>Removed internal text link appearing when printing pages logged in as an</li>
+<li>removed internal text link appearing when printing pages logged in as an
+  editor</li>
+</ul>
+<h3 id="added_40">Added<a class="headerlink" href="#added_40" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added support for marking courses as full in family services</li>
+</ul>
+<h3 id="removed_16">Removed<a class="headerlink" href="#removed_16" title="Permanent link">&para;</a></h3>
+<h3 id="changed_40">Changed<a class="headerlink" href="#changed_40" title="Permanent link">&para;</a></h3>
+<h2 id="2150-yyyy-mm-dd">[2.15.0] - YYYY-MM-DD<a class="headerlink" href="#2150-yyyy-mm-dd" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_60">Fixed<a class="headerlink" href="#fixed_60" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fixed icon spacing</li>
+<li>Fixed missing colons on child service institutions</li>
+<li>Fixed possible bug when in edit mode with xhtml string fields</li>
+<li>fixed bug where alt text wasn't showing in page teaser</li>
+<li>Fixed bug where adding seminar page failed if call to action link text wasn't
+  provided</li>
+<li>Fixed bug where footer was partly in english</li>
+<li>Hotfixed sort order not considering norwegian sorting on child service
+  institutions</li>
+</ul>
+<h3 id="added_41">Added<a class="headerlink" href="#added_41" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added field for family service events which do not have end date</li>
+<li>Added support for always displaying sign up button for courses which are
+  continous</li>
+<li>Added frontend-support for second required name field in ContactForm,
+  EventSignup and PostalSearchModal</li>
+<li>Hide cookie consent box in edit mode</li>
+<li>Added max length to CTA button text</li>
+<li>Added support for specifying individual course signup e-mail recipient on
+  family services</li>
+<li>
+<p>added support for two attendeed on family service course</p>
+</li>
+<li>
+<p>Added field for family service events which do not have end date</p>
+</li>
+<li>Added support for always displaying sign up button for courses which are
+  continous</li>
+<li>Hide cookie consent box in edit mode</li>
+<li>Added max length to CTA button text</li>
+<li>Added support for specifying individual course signup e-mail recipient on
+  family services</li>
+<li>added support for two attendeed on family service course</li>
+<li>Added page type for parent child centers</li>
+</ul>
+<h3 id="removed_17">Removed<a class="headerlink" href="#removed_17" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added support for always displaying sign up button for courses which are
+  continuous</li>
+</ul>
+<h3 id="changed_41">Changed<a class="headerlink" href="#changed_41" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Made field for start time of seminars required</li>
+<li>Changed the way family service events are filtered</li>
+<li>Changed the way simple addresses are handled - now redirecting to real address</li>
+<li>Changed upload size limit to 40 megabyte</li>
+<li>Changed the way family service events are filtered</li>
+</ul>
+<h2 id="2140-2023-02-21">[2.14.0] - 2023-02-21<a class="headerlink" href="#2140-2023-02-21" title="Permanent link">&para;</a></h2>
+<h2 id="2140-2023-03-10">[2.14.0] - 2023-03-10<a class="headerlink" href="#2140-2023-03-10" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_61">Fixed<a class="headerlink" href="#fixed_61" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Hotfixed a bug for xhtml string fields</li>
+<li>Fixed frontend test warning about missing window.scrollTo function</li>
+<li>Upgraded storybook to v7.0.0-beta.40</li>
+<li>Switched out Webpack for Vite when building Storybook</li>
+<li>Switched out esbuild for Vite when building bundles</li>
+<li>Upgraded optimizely to 12.15</li>
+<li>Fixed check for empty array. If array was empty "0" was rendered</li>
+<li>Fix logo not linking to correct startpage for current language</li>
+<li>Fix ordering of institutions</li>
+</ul>
+<h3 id="added_42">Added<a class="headerlink" href="#added_42" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added alt text and description fields for imagefile</li>
+<li>Added functionaly for automatically adding language specific alt texts On
+  images in xhtmlstring</li>
+</ul>
+<h3 id="added_43">Added<a class="headerlink" href="#added_43" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added alt text and description fields for imagefile</li>
+<li>(Removed again in hotfix) Added functionaly for automatically adding language
+  specific alt texts On images in xhtmlstring</li>
+</ul>
+<h3 id="changed_42">Changed<a class="headerlink" href="#changed_42" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Changed the way robots/crawlers are blocked, now for all envs except
+  production</li>
+<li>Changed the way carousel images retrieve alt text, attribution and description</li>
+</ul>
+<h2 id="2130-2023-02-02">[2.13.0] - 2023-02-02<a class="headerlink" href="#2130-2023-02-02" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_62">Fixed<a class="headerlink" href="#fixed_62" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added checks for undefined on "toLowercase" function in case value was null</li>
+<li>Possible to enter "other information" for the short description of an
+  institution.</li>
+<li>Header for the short discription of institution should not be visible if no
+  info added.</li>
+<li>Phone and E-mail in Institutions are clickable</li>
+<li>Article lists should not show image description.</li>
+<li>Remove empty structured data script tag because google crawler complains</li>
+<li>
+<p>Fixed that all last accordions in a list get a spacing bottom class.</p>
+</li>
+<li>
+<p>Better handling of cases in header and footer when content has not been added
+  to various properties</p>
+</li>
+<li>Re-enabled feedback export for authenticated users and added menu item to
+  optimizely admin panel. Implemented "permissions to functions" for granular
+  access management.</li>
+</ul>
+<h3 id="added_44">Added<a class="headerlink" href="#added_44" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added newsletter block</li>
+<li>Support for validating recaptcha tokens before passing requests to internal
+  resources.</li>
+</ul>
+<h3 id="removed_18">Removed<a class="headerlink" href="#removed_18" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Misc old cruft</li>
+</ul>
+<h3 id="changed_43">Changed<a class="headerlink" href="#changed_43" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Change how the back to start page link is created in bread crumb</li>
+<li>made several properties on the start page unique per language to support
+  localization</li>
+<li>Updated reCaptcha keys</li>
+<li>Updated bufdir configuration to Options pattern</li>
+<li>Rewrote foster care events and zip codes to use internal resources so the
+  configuration could be further streamlined.</li>
+</ul>
+<h2 id="2120-2023-01-13">[2.12.0] - 2023-01-13<a class="headerlink" href="#2120-2023-01-13" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_63">Fixed<a class="headerlink" href="#fixed_63" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Phone and E-mail in Institutions are clickable</li>
+<li>Month names aren't capitalized in event dates</li>
+<li>Scrolling user up to contact submit success message after submit</li>
+<li>Institutions now shows contact info even if only address info is set</li>
+<li>Removed punctuation after day in foster care event listing.</li>
+<li>Updated bufdir_stat package from 1.1.9 to v1.1.11.</li>
+<li>Updated Statistics.ApiUrl to <a href="https://statistikk.bufdir.no">https://statistikk.bufdir.no</a> in the production
+  app settings.</li>
+</ul>
+<h3 id="removed_19">Removed<a class="headerlink" href="#removed_19" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>Infrastructure/InternalResources</code> was replaced with nuget package and
+  necessary adjustments made.</li>
+</ul>
+<h3 id="changed_44">Changed<a class="headerlink" href="#changed_44" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Family services course registrations now contains more information.</li>
+<li>Hero block has a different logic for determining when it should be visible</li>
+</ul>
+<h3 id="added_45">Added<a class="headerlink" href="#added_45" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Service start page has mainintro field</p>
+</li>
+<li>
+<p>Added teaser info to seminar, foster care office and family services office
+  pages</p>
+</li>
+<li>Added teaser info, main intro, main body, bottom content and adjusted styling
+  on seminar list page</li>
+<li>Added main intro to foster care office and event list page</li>
+</ul>
+<h2 id="2110-2022-12-07">[2.11.0] - 2022-12-07<a class="headerlink" href="#2110-2022-12-07" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_64">Fixed<a class="headerlink" href="#fixed_64" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Updated bufdir_stat package from 1.1.7 to v1.1.9.</li>
+</ul>
+<h3 id="added_46">Added<a class="headerlink" href="#added_46" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Statistics page type for Statistics root page</li>
+<li>Model for Statistics subpages</li>
+<li>Partial routing to Statistics subpages</li>
+<li>temporary endpoint for editors to see how blocks are used</li>
+<li>Teaser image - when provided is used as an open graph image</li>
+</ul>
+<h3 id="removed_20">Removed<a class="headerlink" href="#removed_20" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Removed existing controller routing to statistics pages</li>
+</ul>
+<h2 id="2101-2022-11-24">[2.10.1] - 2022-11-24<a class="headerlink" href="#2101-2022-11-24" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_65">Fixed<a class="headerlink" href="#fixed_65" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Bug causing bufdir logo to appear on private institution</li>
+</ul>
+<h2 id="2100-2022-11-04">[2.10.0] - 2022-11-04<a class="headerlink" href="#2100-2022-11-04" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_66">Fixed<a class="headerlink" href="#fixed_66" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added a <a href="/docs/release.md">markdown file</a> with notes for releasing and
+  deploying this project.</li>
+<li>Updated bufdir_stat package from 1.1.6 to v1.1.7.</li>
+<li>Added qa and prod api urls for bufdir_stat in the appsettings.</li>
+<li>Updated the license for test.</li>
+<li>Events would not show in listing before they were finished.</li>
+<li>[Hotfix] 404 handling improved in application insights</li>
+</ul>
+<h3 id="added_47">Added<a class="headerlink" href="#added_47" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Add logic to hide several page types from external search engines, yet keep
+  them visible for internal search engine.</li>
+</ul>
+<h2 id="292-2022-10-20">[2.9.2] - 2022-10-20<a class="headerlink" href="#292-2022-10-20" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_67">Fixed<a class="headerlink" href="#fixed_67" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Seminars are shown until seminar end time on listing page</li>
+<li>Seminar end time is shown properly on seminar page</li>
+</ul>
+<h2 id="291-2022-09-26">[2.9.1] - 2022-09-26<a class="headerlink" href="#291-2022-09-26" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_68">Fixed<a class="headerlink" href="#fixed_68" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Routing logo and breadcrumb start to relative root, instead of <www.bufdir.no></li>
+</ul>
+<h2 id="290-2022-09-23">[2.9.0] - 2022-09-23<a class="headerlink" href="#290-2022-09-23" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_69">Fixed<a class="headerlink" href="#fixed_69" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Accidental container classes within container classes will not produce extra
+  space on the sides (buflib).</li>
+</ul>
+<h3 id="added_48">Added<a class="headerlink" href="#added_48" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Image counter for Carousel component (buflib).</li>
+</ul>
+<h2 id="280-2022-09-">[2.8.0] - 2022-09-?<a class="headerlink" href="#280-2022-09-" title="Permanent link">&para;</a></h2>
+<p>Missing changelog documentation...</p>
+<h2 id="270-2022-08-22">[2.7.0] - 2022-08-22<a class="headerlink" href="#270-2022-08-22" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_70">Fixed<a class="headerlink" href="#fixed_70" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Foster care: changes on meetings and courses lists</li>
+<li>Api/frontend communication: fixed validation messages from backend</li>
+</ul>
+<h3 id="added_49">Added<a class="headerlink" href="#added_49" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Buflib carousel for use in Razor</li>
+<li>Institution page</li>
+<li>Contact forms: More options for editors</li>
+</ul>
+<h2 id="262-2022-08-15">[2.6.2] - 2022-08-15<a class="headerlink" href="#262-2022-08-15" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_71">Fixed<a class="headerlink" href="#fixed_71" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fixed response handling in Postal Search Route frontend component</li>
+</ul>
+<h2 id="261-2022-08-10">[2.6.1] - 2022-08-10<a class="headerlink" href="#261-2022-08-10" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_72">Fixed<a class="headerlink" href="#fixed_72" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fixed limit on (FosterCare)EventListBlock</li>
+</ul>
+<h2 id="260-2022-08-10">[2.6.0] - 2022-08-10<a class="headerlink" href="#260-2022-08-10" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_73">Fixed<a class="headerlink" href="#fixed_73" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Updated most frontend packages [^1] (not react or packages that needs react
+  v18 to update).</li>
+<li>Style fix for SurveryResultPageIndex: added the required buflib prefix for the
+  wysiwyg css class in survery result body content.</li>
+<li>Fixed links on search results for guideline pages. They now point to the root
+  chapter instead of an anchor-link to the specific guideline as requested.</li>
+</ul>
+<p>[^1]</p>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>From</th>
+<th>To</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bufdir_stat</td>
+<td>1.1.5</td>
+<td>1.1.6</td>
+</tr>
+<tr>
+<td>bulma</td>
+<td>0.9.3</td>
+<td>0.9.4</td>
+</tr>
+<tr>
+<td><a class="magiclink magiclink-github magiclink-repository" href="https://github.com/babel/core" title="GitHub Repository: babel/core">babel/core</a></td>
+<td>7.17.7</td>
+<td>7.18.9</td>
+</tr>
+<tr>
+<td><a class="magiclink magiclink-github magiclink-repository" href="https://github.com/babel/preset-react" title="GitHub Repository: babel/preset-react">babel/preset-react</a></td>
+<td>7.16.7</td>
+<td>7.18.6</td>
+</tr>
+<tr>
+<td><a class="magiclink magiclink-github magiclink-repository" href="https://github.com/types/jest" title="GitHub Repository: types/jest">types/jest</a></td>
+<td>27.4.1</td>
+<td>28.1.6</td>
+</tr>
+<tr>
+<td>concurrently</td>
+<td>7.0.0</td>
+<td>7.3.0</td>
+</tr>
+<tr>
+<td>core-js</td>
+<td>3.21.1</td>
+<td>3.24.1</td>
+</tr>
+<tr>
+<td>dotenv</td>
+<td>16.0.0</td>
+<td>16.0.1</td>
+</tr>
+<tr>
+<td>esbuild</td>
+<td>0.14.27</td>
+<td>0.14.51</td>
+</tr>
+<tr>
+<td>esbuild-sass-plugin</td>
+<td>2.2.5</td>
+<td>2.3.1</td>
+</tr>
+<tr>
+<td>eslint</td>
+<td>8.11.0</td>
+<td>8.21.0</td>
+</tr>
+<tr>
+<td>eslint-plugin-mdx</td>
+<td>1.16.0</td>
+<td>2.0.2</td>
+</tr>
+<tr>
+<td>eslint-plugin-storybook</td>
+<td>0.5.12</td>
+<td>0.6.1</td>
+</tr>
+<tr>
+<td>jest</td>
+<td>28.1.0</td>
+<td>28.1.3</td>
+</tr>
+<tr>
+<td>jest-environment-jsdom</td>
+<td>28.1.0</td>
+<td>28.1.3</td>
+</tr>
+<tr>
+<td>msw</td>
+<td>0.39.2</td>
+<td>0.44.2</td>
+</tr>
+<tr>
+<td>prettier</td>
+<td>2.6.0</td>
+<td>2.7.1</td>
+</tr>
+<tr>
+<td>sass</td>
+<td>1.49.9</td>
+<td>1.54.0</td>
+</tr>
+<tr>
+<td>sass-loader</td>
+<td>12.6.0</td>
+<td>13.0.2</td>
+</tr>
+<tr>
+<td>ts-jest</td>
+<td>28.0.2</td>
+<td>28.0.7</td>
+</tr>
+<tr>
+<td>typescript</td>
+<td>4.6.2</td>
+<td>4.7.4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="added_50">Added<a class="headerlink" href="#added_50" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added InternalResources segment to appsettings.json QA and Prod</li>
+<li>Configged up feedbackAPI for both qa and prod</li>
+<li>Added episerver.labs.gridview package for demo/testing purposes</li>
+<li>Made it possible for editor to overwrite the default text on the survery
+  result page read more button</li>
+</ul>
+<h3 id="changed_45">Changed<a class="headerlink" href="#changed_45" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Changed approach to generating preview text for search results. Instead of
+  hard-coding the search order for each page type, we derive the order from the
+  [Display]-attribute on earch field to approximate the first occurrence of the
+  search term for the end user.</li>
+</ul>
+<h2 id="250-2022-06-27">[2.5.0] - 2022-06-27<a class="headerlink" href="#250-2022-06-27" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_74">Fixed<a class="headerlink" href="#fixed_74" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Possibility for adding multiple FactBox blocks on the front page.</li>
+<li>Style fixes.</li>
+<li>Bug fix for lists with filter url parameters.</li>
+</ul>
+<h3 id="added_51">Added<a class="headerlink" href="#added_51" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Variants of Factbox block.</li>
+<li>Automatic archive functionality.</li>
+<li>Frontend tests</li>
+</ul>
+<h3 id="changed_46">Changed<a class="headerlink" href="#changed_46" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Removed "place" from digital meetings in the gui.</li>
+</ul>
+<h2 id="241-2022-06-07">[2.4.1] - 2022-06-07<a class="headerlink" href="#241-2022-06-07" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_75">Fixed<a class="headerlink" href="#fixed_75" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Dotnet 6.0 upgrade on main solution</li>
+</ul>
+<h3 id="added_52">Added<a class="headerlink" href="#added_52" title="Permanent link">&para;</a></h3>
+<ul>
+<li>new page template for news list</li>
+<li>new page template for news articles</li>
+<li>logic for auto-archiving and tagging old/expired news articles</li>
+</ul>
+<h2 id="240-2022-05-31">[2.4.0] - 2022-05-31<a class="headerlink" href="#240-2022-05-31" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_76">Fixed<a class="headerlink" href="#fixed_76" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Visual bugfixes</li>
+<li>Better naming for page templates</li>
+</ul>
+<h3 id="added_53">Added<a class="headerlink" href="#added_53" title="Permanent link">&para;</a></h3>
+<ul>
+<li>New page templates: Kurs og konferanser</li>
+<li>Component test for ContactForm component</li>
+<li>Set up page template with react component for Statistics pages</li>
+</ul>
+<h3 id="removed_21">Removed<a class="headerlink" href="#removed_21" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Removed some old blocks from migration of normative</li>
+</ul>
+<h2 id="231-2022-05-20">[2.3.1] - 2022-05-20<a class="headerlink" href="#231-2022-05-20" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_77">Fixed<a class="headerlink" href="#fixed_77" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Cleaned up json serialization settings to a single place to ensure consistent
+  camel case serialization behavior.</li>
+</ul>
+<h2 id="210-2022-03-28">[2.1.0] - 2022-03-28<a class="headerlink" href="#210-2022-03-28" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_78">Fixed<a class="headerlink" href="#fixed_78" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Role access in episerver</li>
+<li>Missing tabs in episerver</li>
+<li>Frontend spacing issues</li>
+<li>Transformations</li>
+<li>Search fixes</li>
+</ul>
+<h3 id="added_54">Added<a class="headerlink" href="#added_54" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Feedback component and cms options for displaying it on pages (frontend
+  commented out for this release, since api backend is not 100%)</li>
+<li>Call to Action block</li>
+</ul>
+<h2 id="200-2022-03-21">[2.0.0] - 2022-03-21<a class="headerlink" href="#200-2022-03-21" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_79">Fixed<a class="headerlink" href="#fixed_79" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Style fixes</li>
+<li>Spacing fixes</li>
+<li>Loads and loads of code smell fixes</li>
+<li>UU fixes</li>
+<li>Refactor CSS for smaller payload</li>
+</ul>
+<h3 id="added_55">Added<a class="headerlink" href="#added_55" title="Permanent link">&para;</a></h3>
+<ul>
+<li>New Front End build for production</li>
+<li>Migrated normative content (Normerende)</li>
+<li>Teaser list 3 columns</li>
+<li>Added tests for solution</li>
+</ul>
+<h3 id="removed_22">Removed<a class="headerlink" href="#removed_22" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Removed old styleguide</li>
+</ul>
+<h3 id="changed_47">Changed<a class="headerlink" href="#changed_47" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Upgraded backend to dotnet 5.0</li>
+<li>Upgraded CMS to new version</li>
+<li>Lots of changes to Elastic Search implementation</li>
+<li>Moved away from Epinova module, now custom implementation.</li>
+</ul>
+<h2 id="131-2022-02-dd">[1.3.1] - 2022-02-DD<a class="headerlink" href="#131-2022-02-dd" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_80">Fixed<a class="headerlink" href="#fixed_80" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added hook to tinymce to remove rogue div tags</li>
+</ul>
+<h2 id="130-2022-02-dd">[1.3.0] - 2022-02-DD<a class="headerlink" href="#130-2022-02-dd" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_81">Fixed<a class="headerlink" href="#fixed_81" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Hero block was too wide when no image was added</li>
+<li>Removed source field from fact box block</li>
+<li>New episerver role "Publisist"</li>
+</ul>
+<h2 id="121-2022-01-27">[1.2.1] - 2022-01-27<a class="headerlink" href="#121-2022-01-27" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_82">Fixed<a class="headerlink" href="#fixed_82" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Icons in solution now shows again</li>
+<li>Copy paste in blocks</li>
+</ul>
+<h3 id="added_56">Added<a class="headerlink" href="#added_56" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Migrations of "Normerende" area</li>
+</ul>
+<h2 id="114-2022-01-15-hotfix">[1.1.4] - 2022-01-15 - Hotfix<a class="headerlink" href="#114-2022-01-15-hotfix" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_83">Fixed<a class="headerlink" href="#fixed_83" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Listing title on "Kurs" pages</li>
+</ul>
+<h3 id="added_57">Added<a class="headerlink" href="#added_57" title="Permanent link">&para;</a></h3>
+<ul>
+<li>New role group, "Publisist"</li>
+</ul>
+<h2 id="113-2022-01-11">[1.1.3] - 2022-01-11<a class="headerlink" href="#113-2022-01-11" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_84">Fixed<a class="headerlink" href="#fixed_84" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Tests</li>
+<li>manifest.json</li>
+<li>config settings elastic QA</li>
+</ul>
+<h3 id="added_58">Added<a class="headerlink" href="#added_58" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Teaser block</li>
+<li>Content Teaser</li>
+<li>Word-break: initial on tables</li>
+</ul>
+<h3 id="removed_23">Removed<a class="headerlink" href="#removed_23" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Errorvault</li>
+<li>Developertools</li>
+</ul>
+<h3 id="changed_48">Changed<a class="headerlink" href="#changed_48" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Accordion</li>
+<li>Console warnings, duplicate keys</li>
+<li>Tests</li>
+<li>Logic for isvisible</li>
+</ul>
+<h2 id="112-2021-12-15">[1.1.2] - 2021-12-15<a class="headerlink" href="#112-2021-12-15" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fosterhjem stuff made generally reusable</li>
+<li>Responsive images fixes</li>
+<li>Fosterhjem URL on meetings</li>
+<li>Refactoring ajax calls</li>
+<li>Recaptcha v3</li>
+<li>favicons and SEO</li>
+<li>More deployment pipeline fixes</li>
+<li>Search fixed, elastic running.</li>
+</ul>
+<h2 id="111-2021-12-07">[1.1.1] - 2021-12-07<a class="headerlink" href="#111-2021-12-07" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_85">Fixed<a class="headerlink" href="#fixed_85" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fixed tracking of contact forms not working.</li>
+</ul>
+<h2 id="110-2021-12-01">[1.1.0] -2021-12-01<a class="headerlink" href="#110-2021-12-01" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Major pipeline changes</li>
+<li>Config changes to KV secrets</li>
+<li>ES6 building frontend</li>
+<li>Npm cache</li>
+<li>Structure reformatting in frontend</li>
+<li>Oslo integration</li>
+<li>"Fant du det du lette etter" started</li>
+<li>Foreldrestiltest page</li>
+<li>RTE features turned on.</li>
+</ul>
+<h2 id="103-2021-11-19">[1.0.3] - 2021-11-19<a class="headerlink" href="#103-2021-11-19" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Technical YELL</li>
+<li>Bugfixes</li>
+<li>Fosterhjem release bugs</li>
+<li>Authentication to API</li>
+<li>GTM changes</li>
+<li>Package management</li>
+<li>Front End unit tests</li>
+<li>Backend unit tests</li>
+<li>Cards block</li>
+<li>Fosterhjem.API changes</li>
+</ul>
+<h2 id="102-2021-11-01">[1.0.2] - 2021-11-01<a class="headerlink" href="#102-2021-11-01" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Sprint 39 changes</li>
+<li>gui fixes based on design feedback on live fosterhjem</li>
+<li>technical dept</li>
+<li>xhtml string to accordiancontentblock</li>
+<li>Table overflow fix</li>
+<li>Change event location to "Digitalt" or "Fysisk(<location>)" depending on event
+  type</li>
+<li>Support for embeded video in main body</li>
+</ul>
+<h2 id="101-2021-10-25">[1.0.1] - 2021-10-25<a class="headerlink" href="#101-2021-10-25" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Hot fixes kurs page</li>
+</ul>
+<h3 id="added_59">Added<a class="headerlink" href="#added_59" title="Permanent link">&para;</a></h3>
+<h2 id="100-2021-10-21">[1.0.0] - 2021-10-21<a class="headerlink" href="#100-2021-10-21" title="Permanent link">&para;</a></h2>
+<h3 id="added_60">Added<a class="headerlink" href="#added_60" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fostercare section (fosterhjem)</li>
+<li>Product section (normerende produkter)</li>
+</ul>
+<h2 id="unreleased-yyyy-mm-dd">[Unreleased] - YYYY-MM-DD<a class="headerlink" href="#unreleased-yyyy-mm-dd" title="Permanent link">&para;</a></h2>
+<h3 id="fixed_86">Fixed<a class="headerlink" href="#fixed_86" title="Permanent link">&para;</a></h3>
+<h3 id="added_61">Added<a class="headerlink" href="#added_61" title="Permanent link">&para;</a></h3>
+<h3 id="removed_24">Removed<a class="headerlink" href="#removed_24" title="Permanent link">&para;</a></h3>
+<h3 id="changed_49">Changed<a class="headerlink" href="#changed_49" title="Permanent link">&para;</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
