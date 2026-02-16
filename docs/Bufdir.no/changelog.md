@@ -13,6 +13,9 @@ description.
 
 ### Fixed
 
+- Added a short delay before scrolling to anchor when navigating to guideline
+  page.
+
 ### Added
 
 ### Removed
