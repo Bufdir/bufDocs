@@ -16,6 +16,7 @@ description.
 - Fix spacing issues in MediaFlowVideo component.
 - Added a short delay before scrolling to anchor when navigating to guideline
   page.
+- Fix App Insights integration in BE
 
 ### Added
 
