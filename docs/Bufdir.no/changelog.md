@@ -13,16 +13,29 @@ description.
 
 ### Fixed
 
-- Fix spacing issues in MediaFlowVideo component.
-- Added a short delay before scrolling to anchor when navigating to guideline
-  page.
-- Fix App Insights integration in BE
-
 ### Added
 
 ### Removed
 
 ### Changed
+
+## [5.0.10] - 2026-03-03
+
+### Fixed
+
+- Added a short delay before scrolling to anchor when navigating to guideline
+  page.
+- video block vertical spacing
+- fixed docker image copy test failed in release pipeline (dev)
+- Fix spacing issues in MediaFlowVideo component.
+- Added a short delay before scrolling to anchor when navigating to guideline
+  page.
+- Fix App Insights integration in BE
+- fixed skyra findability feature toggle not working in production
+
+### Added
+
+- open telemetry monitoring
 
 ## [5.0.9] - 2026-02-11
 
