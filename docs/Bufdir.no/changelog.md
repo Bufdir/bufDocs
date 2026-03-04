@@ -9,6 +9,19 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
+
+## [5.0.12] - yyyy-mm-dd
+
+### Fixed
+
+- Filter out expired content from search results
+
+### Added
+
+### Removed
+
+### Changed
+
 ## [5.0.11] - 2026-03-04
 
 ### Fixed
