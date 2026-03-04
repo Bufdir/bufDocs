@@ -13,6 +13,9 @@ description.
 
 ### Fixed
 
+- Fixed issue with duplicate key props passed into components via
+  ComponentWrapper
+
 ### Added
 
 ### Removed
