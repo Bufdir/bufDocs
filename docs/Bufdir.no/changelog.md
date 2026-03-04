@@ -9,12 +9,13 @@ and this project adheres to
 See ./docs/release.md for release description. See README.md for release
 description.
 
-## [Unrelesed] - YYYY-MM-DD
+## [5.0.11] - 2026-03-04
 
 ### Fixed
 
 - Fixed issue with duplicate key props passed into components via
   ComponentWrapper
+- open/close accordion bugfix
 
 ### Added
 
