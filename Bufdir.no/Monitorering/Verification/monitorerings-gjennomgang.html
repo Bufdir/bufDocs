@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Monitorerings- og Infrastruktur-gjennomgang for Bufdir.no og FSA</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+
+<style>
+    body {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+    }
+    h1, h2, h3 { color: #005aab; }
+    pre {
+        background: #f4f4f4;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+    }
+    code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; }
+    ul, ol { margin-bottom: 20px; }
+    li { margin-bottom: 8px; }
+    a { color: #007bff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    #TOC { display: none; } /* Skjul TOC hvis den er der */
+</style>
+
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Monitorerings- og Infrastruktur-gjennomgang for
+Bufdir.no og FSA</h1>
+<p class="date">Generert: 2026-03-06</p>
+</header>
+<h1
+id="oppsummering-monitorering-og-infrastruktur-fsa-og-bufdirno">Oppsummering:
+Monitorering og Infrastruktur (FSA og Bufdirno)</h1>
+<p>Dette dokumentet gir en overordnet oversikt over de viktigste funnene
+og anbefalte tiltakene for å sikre stabil drift og god overvåking av
+Bufdir.no og FSA etter overgangen til ny monitoreringsstrategi.</p>
+<hr />
+<h3 id="hovedutfordringer">Hovedutfordringer</h3>
+<ol type="1">
+<li><strong>Vurdert Sannsynlig Årsak til Produksjonsstopp
+(FSA):</strong> Manglende CORS-konfigurasjon i backenden blokkerte
+frontend-kall som inkluderte den nye <code>traceparent</code>-headeren
+(W3C standard for distribuert sporing).</li>
+<li><strong>Mangelfull overvåking i FSA Backend:</strong> Dagens oppsett
+i FSA sender kun sporingsdata (Traces), men mangler feillogger (Logs) og
+ytelsesdata (Metrics) i OpenTelemetry.</li>
+<li><strong>Infrastruktur-utfordringer (Application Gateway):</strong>
+Backend er ikke konfigurert til å stole på
+<code>Forwarded Headers</code> fra Application Gateway, noe som fører
+til feilrapportering av IP-adresser og potensielle HTTPS-problemer.</li>
+</ol>
+<hr />
+<h3 id="strategiske-anbefalinger">Strategiske Anbefalinger</h3>
+<ul>
+<li><strong>Standardiser på <code>UseAzureMonitor()</code>:</strong>
+Bytt fra manuelt OpenTelemetry-oppsett til Microsofts anbefalte pakke.
+Dette sikrer stabil korrelasjon mellom logger, traces og metrics, og er
+enklere å vedlikeholde.</li>
+<li><strong>Behold Serilog, men moderniser eksporten:</strong> Fortsett
+å bruke Serilog for strukturert logging i koden, men fjern den utdaterte
+<code>ApplicationInsightsSink</code>. La OpenTelemetry håndtere all
+eksport til Azure.</li>
+<li><strong>Reduser sikkerhetsstøy:</strong> Filtrer ut helsesjekker
+(Health Probes) fra Application Gateway i loggene for å redusere
+kostnader og gjøre det enklere å finne reelle feil.</li>
+</ul>
+<hr />
+<h3 id="aksjonsplan">Aksjonsplan</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Prioritet</th>
+<th style="text-align: left;">Område</th>
+<th style="text-align: left;">Beskrivelse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Kritisk</strong></td>
+<td style="text-align: left;">FSA Backend</td>
+<td style="text-align: left;">Aktiver CORS for <code>traceparent</code>
+og <code>UseForwardedHeaders</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Kritisk</strong></td>
+<td style="text-align: left;">Begge</td>
+<td style="text-align: left;">Oppgrader til
+<code>UseAzureMonitor()</code> for fullstendig innsikt.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Høy</strong></td>
+<td style="text-align: left;">Bufdirno Site</td>
+<td style="text-align: left;">Fjern Serilog AI Sink for å unngå doble
+logger/kostnader.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Middels</strong></td>
+<td style="text-align: left;">Frontend/Strapi</td>
+<td style="text-align: left;">Fjern ConnectionString fra konsollogger og
+reduser støy i prod.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="dokumentoversikt">Dokumentoversikt</h3>
+<ul>
+<li><p><a href="#vurdert-sannsynlig-årsak-til-produksjonsstopp-fsa">Kritiske Funn og Tiltak</a>
+- Detaljert gjennomgang av risikoer.</p></li>
+<li><p><a href="#implementasjonsguide-fix-av-monitorering-og-infrastruktur">Implementasjonsguide</a> -
+Steg-for-steg kodedringer.</p></li>
+<li><p><a href="#fallgruver-ved-bruk-av-azure-application-gateway-og-monitorering">Fallgruver ved Application
+Gateway</a> - Dypdykk i infrastruktur.</p></li>
+<li><p><a href="#serilog-og-opentelemetry-i-bufdir.no">Serilog og
+OpenTelemetry</a> - Hvordan kombinere disse korrekt.</p></li>
+<li><p><a href="#verifisering-av-jsts-monitorering">JS/TS Verifisering</a>
+- Spesifikke funn i frontend-kode.</p></li>
+<li><p><a href="#gap-analyse-implementasjon-vs.-strategi">Gap-analyse</a> -
+Strategi vs. faktisk implementering.</p></li>
+</ul>
+<h1 id="vurdert-sannsynlig-årsak-til-produksjonsstopp-fsa">Vurdert
+Sannsynlig Årsak til Produksjonsstopp (FSA)</h1>
+<p>Etter en grundig gjennomgang av koden i <code>bufdirno-fsa</code>
+(både frontend og backend), er det identifisert én hovedårsak som mest
+sannsynlig har ført til produksjonsstopp, samt flere andre kritiske
+mangler som bør utbedres umiddelbart.</p>
+<hr />
+<h3
+id="hovedårsak-cors-blokkering-av-applikasjonen-sannsynlig-kilde-til-funksjonsstopp">🚨
+1. Hovedårsak: CORS-blokkering av applikasjonen (Sannsynlig kilde til
+funksjonsstopp)</h3>
+<p>Dette er den eneste endringen som alene kan stoppe all funksjonalitet
+for brukerne (“produksjonsstopp”).</p>
+<ul>
+<li><p><strong>Hva skjedde?</strong> I
+<code>bufdirno-fsa/FSA.Frontend.React/src/monitoring/appInsights.ts</code>
+er overvåking konfigurert med:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>enableCorsCorrelation<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>distributedTracingMode<span class="op">:</span> DistributedTracingModes<span class="op">.</span><span class="at">W3C</span><span class="op">,</span></span></code></pre></div>
+<p>Dette betyr at frontenden legger til en HTTP-header som heter
+<code>traceparent</code> på alle kall til backenden for å kunne spore en
+forespørsel på tvers av systemene.</p></li>
+<li><p><strong>Hvorfor stoppet det?</strong> I backenden
+(<code>bufdirno-fsa/FSA.Backend.Web/Configuration/ConfigureCoreServices.cs</code>)
+finnes det <strong>ingen</strong> <code>AddCors</code>-konfigurasjon som
+tillater denne spesifikke headeren. Selv om <code>app.UseCors()</code>
+kalles i <code>ConfigureWebApp.cs</code>, vil nettleseren
+(Chrome/Edge/Safari) blokkere alle API-kall fordi backenden ikke
+eksplisitt sier “ja, jeg godtar
+<code>traceparent</code>-headeren”.</p></li>
+<li><p><strong>Konsekvens:</strong> Alle knapper som sender data, eller
+sider som henter data fra backenden, slutter å fungere. Brukeren ser
+bare feilmeldinger eller at ingenting skjer.</p></li>
+</ul>
+<hr />
+<h3 id="kritisk-mangel-blind-backend-fsa">⚠️ 2. Kritisk mangel: “Blind”
+backend (FSA)</h3>
+<p>Selv om backenden sender <em>Traces</em> (sporingsdata), mangler den
+helt <em>Metrics</em> (ytelsesdata) og <em>Logs</em>
+(feilmeldinger/logger) i OpenTelemetry-oppsettet.</p>
+<ul>
+<li><strong>Hvorfor er dette kritisk?</strong> I
+<code>ConfigureCoreServices.cs</code> er det kun
+<code>.WithTracing()</code> som er satt opp manuelt. Hvis det oppstår en
+server feil (500-feil) eller ytelsesproblemer, vil du ikke se
+loggmeldingene eller ressursbruken i Azure Monitor/Application Insights
+under den nye strategien. Du mister dermed evnen til å feilsøke
+effektivt i produksjon.</li>
+</ul>
+<hr />
+<h3 id="kritisk-risiko-ustabilmanuell-konfigurasjon">⚠️ 3. Kritisk
+risiko: Ustabil/Manuell konfigurasjon</h3>
+<p>Både <code>bufdirno</code> (Site) og <code>bufdirno-fsa</code> bruker
+nå en manuell og utdatert måte å konfigurere OpenTelemetry på (ved bruk
+av <code>AddAzureMonitorTraceExporter</code> i stedet for
+<code>UseAzureMonitor()</code>).</p>
+<ul>
+<li><strong>Risiko:</strong> Dette øker sjansen for feilkonfigurering,
+manglende korrelasjon mellom logger og traces, og gjør det vanskeligere
+å vedlikeholde. Den anbefalte metoden fra Microsoft
+(<code>UseAzureMonitor()</code>) håndterer alt dette automatisk og
+sikrer at både Traces, Metrics og Logs blir sendt korrekt.</li>
+</ul>
+<hr />
+<h3 id="application-gateway-fallgruver-forwarded-headers">⚠️ 4.
+Application Gateway Fallgruver (Forwarded Headers)</h3>
+<p>Backend er ikke konfigurert til å stole på
+<code>X-Forwarded-For</code> eller <code>X-Forwarded-Proto</code> fra
+Azure Application Gateway.</p>
+<ul>
+<li><p><strong>Konsekvens:</strong> Feil klient-IP i logger (viser IP-en
+til Application Gateway i stedet for brukeren), og potensielle problemer
+med OIDC/HTTPS-redirects.</p></li>
+<li><p><strong>Se også:</strong> <a
+href="#fallgruver-ved-bruk-av-azure-application-gateway-og-monitorering">Fallgruver ved bruk av Azure
+Application Gateway og Monitorering</a></p></li>
+</ul>
+<hr />
+<h3 id="konkrete-kodeendringer-per-prosjekt">5. Konkrete Kodeendringer
+per Prosjekt</h3>
+<p>For fullstendige kodesnutter og filreferanser, se <a
+href="#implementasjonsguide-fix-av-monitorering-og-infrastruktur">Implementasjonsguide: Fix av Monitorering
+og Infrastruktur</a>.</p>
+<h4 id="fsa-backend">FSA Backend</h4>
+<ul>
+<li><p>Legg til <code>AddCors</code> med støtte for
+<code>traceparent</code>.</p></li>
+<li><p>Aktiver <code>UseForwardedHeaders()</code>.</p></li>
+<li><p>Oppgrader til <code>UseAzureMonitor()</code>.</p></li>
+</ul>
+<h4 id="bufdirno-site">Bufdirno Site</h4>
+<ul>
+<li><p>Fjern Serilog Application Insights Sink (unngå dobbel
+logging).</p></li>
+<li><p>Oppgrader til <code>UseAzureMonitor()</code>.</p></li>
+<li><p>Konfigurer <code>ForwardedHeadersOptions</code>.</p></li>
+</ul>
+<hr />
+<h3 id="kombinere-serilog-og-opentelemetry">6. Kombinere Serilog og
+OpenTelemetry</h3>
+<p>Vi ønsker å beholde Serilog som logging-motor for strukturert logging
+og lokal logging (Console/File), men la OpenTelemetry håndtere eksporten
+til Azure Monitor.</p>
+<ul>
+<li><p><strong>Tiltak:</strong> Fjern
+<code>Serilog.Sinks.ApplicationInsights</code> fra
+<code>appsettings.json</code> og <code>Program.cs</code>.</p></li>
+<li><p><strong>Resultat:</strong> Serilog sender logger til standard
+ILogger-pipeline, som OpenTelemetry plukker opp og sender til Azure
+Monitor. Ingen dobbel logging, men full funksjonalitet.</p></li>
+<li><p><strong>Se også:</strong> <a
+href="#serilog-og-opentelemetry-i-bufdir.no">Serilog og OpenTelemetry i
+Bufdir.no</a></p></li>
+</ul>
+<h1
+id="implementasjonsguide-fix-av-monitorering-og-infrastruktur">Implementasjonsguide:
+Fix av Monitorering og Infrastruktur</h1>
+<p>Her er de konkrete endringene som må gjøres i koden (eller Azure
+Portal) for å løse de kritiske problemene i FSA og Bufdirno (Site).</p>
+<hr />
+<h3 id="fsa-backend-bufdirno-fsa">1. FSA Backend (bufdirno-fsa)</h3>
+<h4
+id="fil-bufdirno-fsafsa.backend.webconfigurationconfigurecoreservices.cs">Fil:
+<code>bufdirno-fsa/FSA.Backend.Web/Configuration/ConfigureCoreServices.cs</code></h4>
+<p><strong>Hva skal gjøres:</strong></p>
+<ol type="1">
+<li><p>Fiks <strong>CORS-blokkering</strong> ved å tillate
+<code>traceparent</code>.</p></li>
+<li><p>Oppgrader til <strong><code>UseAzureMonitor()</code></strong> for
+å få full overvåking (Traces, Metrics, Logs).</p></li>
+<li><p>Konfigurer <strong>Forwarded Headers</strong> for Application
+Gateway.</p></li>
+</ol>
+<p><strong>Kodeendring:</strong> Erstatt den manuelle
+<code>AddOpenTelemetry()</code>-blokken (linje 163–188) med
+følgende:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode csharp"><code class="sourceCode cs"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 1. Konfigurer Forwarded Headers for App Gateway (Viktig for IP og HTTPS)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>services<span class="op">.</span><span class="fu">Configure</span><span class="op">&lt;</span>ForwardedHeadersOptions<span class="op">&gt;(</span>options <span class="op">=&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    options<span class="op">.</span><span class="fu">ForwardedHeaders</span> <span class="op">=</span> ForwardedHeaders<span class="op">.</span><span class="fu">XForwardedFor</span> <span class="op">|</span> ForwardedHeaders<span class="op">.</span><span class="fu">XForwardedProto</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    options<span class="op">.</span><span class="fu">KnownNetworks</span><span class="op">.</span><span class="fu">Clear</span><span class="op">();</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    options<span class="op">.</span><span class="fu">KnownProxies</span><span class="op">.</span><span class="fu">Clear</span><span class="op">();</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">});</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">// 2. Fiks CORS (Viktig for traceparent/produksjonsstopp)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>services<span class="op">.</span><span class="fu">AddCors</span><span class="op">(</span>options <span class="op">=&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    options<span class="op">.</span><span class="fu">AddDefaultPolicy</span><span class="op">(</span>builder <span class="op">=&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        builder<span class="op">.</span><span class="fu">AllowAnyOrigin</span><span class="op">()</span> <span class="co">// Spesifiser domener i produksjon</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>               <span class="op">.</span><span class="fu">AllowAnyMethod</span><span class="op">()</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>               <span class="op">.</span><span class="fu">AllowAnyHeader</span><span class="op">()</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>               <span class="op">.</span><span class="fu">WithExposedHeaders</span><span class="op">(</span><span class="st">&quot;traceparent&quot;</span><span class="op">,</span> <span class="st">&quot;tracestate&quot;</span><span class="op">);</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">});</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="op">});</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">// 3. Oppgrader OpenTelemetry til anbefalt metode</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>services<span class="op">.</span><span class="fu">AddOpenTelemetry</span><span class="op">().</span><span class="fu">UseAzureMonitor</span><span class="op">();</span> </span></code></pre></div>
+<hr />
+<h4
+id="fil-bufdirno-fsafsa.backend.webconfigurationconfigurewebapp.cs">Fil:
+<code>bufdirno-fsa/FSA.Backend.Web/Configuration/ConfigureWebApp.cs</code></h4>
+<p><strong>Hva skal gjøres:</strong> Aktiver <strong>Forwarded
+Headers</strong>-middleware øverst i pipelinen for å sikre korrekt
+klient-IP og HTTPS-støtte bak Application Gateway.</p>
+<p><strong>Kodeendring:</strong> Legg til følgende linje som det første
+kallet inne i <code>ConfigureFsaWeb</code>-metoden:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode csharp"><code class="sourceCode cs"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">static</span> <span class="dt">void</span> <span class="fu">ConfigureFsaWeb</span><span class="op">(</span><span class="kw">this</span> WebApplication app<span class="op">,</span> WebApplicationBuilder builder<span class="op">)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    app<span class="op">.</span><span class="fu">UseForwardedHeaders</span><span class="op">();</span> <span class="co">// Legg til denne helt øverst</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ... rest av koden ...</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<hr />
+<h3 id="bufdirno-site-bufdirno">2. Bufdirno Site (bufdirno)</h3>
+<h4 id="fil-bufdirnosrcsiteprogram.cs">Fil:
+<code>bufdirno/src/Site/Program.cs</code></h4>
+<p><strong>Hva skal gjøres:</strong></p>
+<ol type="1">
+<li><p>Fjern <strong>dobbel logging</strong> ved å fjerne Serilog
+Application Insights Sink.</p></li>
+<li><p>Oppgrader til
+<strong><code>UseAzureMonitor()</code></strong>.</p></li>
+</ol>
+<p><strong>Kodeendring:</strong></p>
+<ol type="1">
+<li><p>Fjern linje 53–58 (der <code>UseSerilog</code> manuelt setter opp
+<code>ApplicationInsightsSink</code>).</p></li>
+<li><p>Erstatt den manuelle <code>AddOpenTelemetry()</code>-blokken
+(linje 67–105) med:</p></li>
+</ol>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode csharp"><code class="sourceCode cs"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>services<span class="op">.</span><span class="fu">AddOpenTelemetry</span><span class="op">().</span><span class="fu">UseAzureMonitor</span><span class="op">(</span>options <span class="op">=&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    options<span class="op">.</span><span class="fu">ConnectionString</span> <span class="op">=</span> azureMonitorConnectionString<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">});</span></span></code></pre></div>
+<p><em>Merk: Du må legge til NuGet-pakken
+<code>Azure.Monitor.OpenTelemetry.AspNetCore</code> i Site-prosjektet
+først.</em></p>
+<hr />
+<h4 id="fil-bufdirnosrcsiteappsettings.json">Fil:
+<code>bufdirno/src/Site/appsettings.json</code></h4>
+<p><strong>Hva skal gjøres:</strong> Fjern Serilog sin kobling til
+Application Insights for å unngå dobbel fakturering.</p>
+<p><strong>Kodeendring:</strong> Slett seksjonen
+<code>ApplicationInsightsSink</code> under
+<code>Serilog:WriteTo</code>:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;ApplicationInsightsSink&quot;</span><span class="er">:</span> <span class="fu">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;Name&quot;</span><span class="fu">:</span> <span class="st">&quot;ApplicationInsights&quot;</span><span class="fu">,</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;Args&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;telemetryConverter&quot;</span><span class="fu">:</span> <span class="st">&quot;BufdirWeb.Site.Infrastructure.ApplicationInsights.AppInsightsTraceTelemetryConverter, BufdirWeb.Site&quot;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<hr />
+<h4 id="fil-bufdirnosrcsitestartup.cs">Fil:
+<code>bufdirno/src/Site/Startup.cs</code></h4>
+<p><strong>Hva skal gjøres:</strong> Konfigurer <strong>Forwarded
+Headers</strong> i <code>ConfigureServices</code> slik at backenden
+stoler på headere fra Application Gateway.</p>
+<p><strong>Kodeendring:</strong> Legg til følgende i
+<code>ConfigureServices</code>-metoden:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode csharp"><code class="sourceCode cs"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>services<span class="op">.</span><span class="fu">Configure</span><span class="op">&lt;</span>ForwardedHeadersOptions<span class="op">&gt;(</span>options <span class="op">=&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    options<span class="op">.</span><span class="fu">ForwardedHeaders</span> <span class="op">=</span> ForwardedHeaders<span class="op">.</span><span class="fu">XForwardedFor</span> <span class="op">|</span> ForwardedHeaders<span class="op">.</span><span class="fu">XForwardedProto</span><span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    options<span class="op">.</span><span class="fu">KnownNetworks</span><span class="op">.</span><span class="fu">Clear</span><span class="op">();</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    options<span class="op">.</span><span class="fu">KnownProxies</span><span class="op">.</span><span class="fu">Clear</span><span class="op">();</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">});</span></span></code></pre></div>
+<hr />
+<h3 id="frontend-og-strapi-node.js">3. Frontend og Strapi (Node.js)</h3>
+<h4 id="sikkerhet-fsa-frontend">Sikkerhet (FSA Frontend)</h4>
+<ul>
+<li><p><strong>Fil:</strong>
+<code>bufdirno-fsa/FSA.Frontend.React/src/monitoring/appInsights.ts</code>
+(eller lignende)</p></li>
+<li><p><strong>Tiltak:</strong> Sørg for at
+<code>connectionString</code> ikke logges til konsollen i
+produksjon.</p></li>
+<li><p><strong>Se også:</strong> <a
+href="#verifisering-av-jsts-monitorering">Verifisering av JS/TS
+Monitorering</a></p></li>
+</ul>
+<h4 id="strapi-loggstøy">Strapi Loggstøy</h4>
+<ul>
+<li><p><strong>Fil:</strong> <code>instrumentation.ts</code> i
+Strapi-prosjekter.</p></li>
+<li><p><strong>Tiltak:</strong> Deaktiver
+<code>CustomConsoleSpanExporter</code> eller
+<code>DiagConsoleLogger</code> i produksjon.</p></li>
+</ul>
+<hr />
+<h3 id="azure-portal-infrastruktur">4. Azure Portal (Infrastruktur)</h3>
+<h4 id="application-gateway-waf">Application Gateway (WAF)</h4>
+<ul>
+<li><p>Sjekk at WAF ikke blokkerer <code>traceparent</code>-headeren
+(W3C Standard).</p></li>
+<li><p>Sjekk at <code>X-Forwarded-For</code> og
+<code>X-Forwarded-Proto</code> sendes videre til backend.</p></li>
+</ul>
+<h4 id="application-insights">Application Insights</h4>
+<ul>
+<li>Vurder <strong>Sampling</strong> (f.eks. 10-20%) i stedet for
+aggressiv filtrering i koden (<code>ErrorOnlySpanExporter</code>), for å
+få bedre innsikt i systemets helse uten ekstreme kostnader.</li>
+</ul>
+<h1
+id="fallgruver-ved-bruk-av-azure-application-gateway-og-monitorering">Fallgruver
+ved bruk av Azure Application Gateway og Monitorering</h1>
+<p>Dette dokumentet beskriver utfordringer og kritiske fallgruver ved
+bruk av Azure Application Gateway (AGW) sammen med den nye
+monitoreringsstrategien.</p>
+<hr />
+<h3 id="manglende-forwardedheaders-kritisk">1. Manglende
+<code>ForwardedHeaders</code> (Kritisk)</h3>
+<p>Backenden må konfigureres til å stole på headere fra Application
+Gateway.</p>
+<ul>
+<li><p><strong>Problem:</strong> Uten <code>UseForwardedHeaders()</code>
+ser backenden kun IP-adressen til Application Gateway, ikke den faktiske
+brukeren. Dette gjør feilsøking i loggene umulig for IP-baserte
+problemer.</p></li>
+<li><p><strong>HTTPS-støtte:</strong> Manglende
+<code>X-Forwarded-Proto</code> kan føre til at OIDC-redirects
+(innlogging) bruker HTTP i stedet for HTTPS, som feiler i
+nettleseren.</p></li>
+</ul>
+<h3 id="støy-fra-health-probes-helsesjekker">2. Støy fra Health Probes
+(Helsesjekker)</h3>
+<p>Application Gateway sender hyppige helsesjekker til backend.</p>
+<ul>
+<li><strong>Risiko:</strong> Disse genererer store mengder sporingsdata
+i Azure Monitor, som øker kostnader uten å gi verdi. FSA Backend mangler
+i dag filtrering for disse.</li>
+</ul>
+<h3 id="waf-regler-og-traceparent">3. WAF-regler og Traceparent</h3>
+<p>Dersom Web Application Firewall (WAF) er strengt konfigurert, kan den
+blokkere forespørsler med ukjente headere.</p>
+<ul>
+<li><strong>Tiltak:</strong> Verifiser at <code>traceparent</code> (W3C
+standard) er tillatt i WAF-oppsettet for både test og produksjon.</li>
+</ul>
+<h3 id="miljøforskjeller-test-vs.-prod">4. Miljøforskjeller (Test
+vs. Prod)</h3>
+<p>Det har blitt observert at løsninger som fungerer i testmiljøet i
+Azure, feiler i produksjon.</p>
+<ul>
+<li><p><strong>Sannsynlig årsak:</strong> Forskjeller i Application
+Gateway-konfigurasjon (f.eks. WAF-modus “Prevention” vs “Detection”,
+eller manglende <code>KnownProxies</code>-oppsett i prod).</p></li>
+<li><p><strong>Anbefaling:</strong> Sjekk at
+<code>KnownProxies.Clear()</code> brukes dersom man stoler på
+Application Gateway, slik at alle innkommende proxy-headere
+aksepteres.</p></li>
+</ul>
+<h1 id="serilog-og-opentelemetry-i-bufdir.no">Serilog og OpenTelemetry i
+Bufdir.no</h1>
+<p>Dette dokumentet beskriver hvordan vi kombinerer den eksisterende
+Serilog-konfigurasjonen med det nye OpenTelemetry-oppsettet for best
+mulig effekt.</p>
+<hr />
+<h3 id="målsetning">Målsetning</h3>
+<ul>
+<li><p>Beholde Serilog som motor for strukturert logging i
+koden.</p></li>
+<li><p>Beholde lokale sinks (Console/File) for lokal utvikling.</p></li>
+<li><p>Bytte ut <code>Serilog.Sinks.ApplicationInsights</code> med
+OpenTelemetry for sending til Azure Monitor.</p></li>
+</ul>
+<hr />
+<h3 id="hvorfor-bytte-ut-serilog-ai-sink">Hvorfor bytte ut Serilog AI
+Sink?</h3>
+<ol type="1">
+<li><p><strong>Dobbel Logging:</strong> Når både Serilog AI Sink og
+OpenTelemetry er aktive, sendes loggene to ganger til Azure, som dobler
+kostnadene.</p></li>
+<li><p><strong>Korrelasjon:</strong> OpenTelemetry er designet for å
+koble logger direkte sammen med Traces (sporing). Dette fungerer best
+når OpenTelemetry selv håndterer eksporten.</p></li>
+<li><p><strong>Fremtidsrettet:</strong> Microsoft anbefaler
+OpenTelemetry som den primære måten å sende telemetri til Azure på i
+moderne .NET-applikasjoner.</p></li>
+</ol>
+<hr />
+<h3 id="implementasjonsstrategi">Implementasjonsstrategi</h3>
+<ul>
+<li><p>Fjern <code>Serilog.Sinks.ApplicationInsights</code>
+NuGet-pakken.</p></li>
+<li><p>Fjern AI-sink konfigurasjonen i <code>appsettings.json</code>
+under <code>Serilog:WriteTo</code>.</p></li>
+<li><p>Bruk <code>.UseAzureMonitor()</code> fra
+<code>Azure.Monitor.OpenTelemetry.AspNetCore</code> i
+<code>Program.cs</code>.</p></li>
+</ul>
+<p>OpenTelemetry vil automatisk fange opp alle logger som sendes via
+<code>ILogger</code> (inkludert de som går via Serilog-pipelinen) og
+sende dem til Azure Monitor med full korrelasjonsdata.</p>
+<h1 id="verifisering-av-jsts-monitorering">Verifisering av JS/TS
+Monitorering</h1>
+<p>Dette dokumentet beskriver verifiseringen av
+monitorerings-implementasjonen for JavaScript/TypeScript (Next.js,
+React, Node.js).</p>
+<hr />
+<h3 id="sikkerhetsrisiko-eksponering-av-connectionstring">1.
+Sikkerhetsrisiko: Eksponering av <code>ConnectionString</code></h3>
+<p>I <code>FSA.Frontend.React</code> har det blitt funnet kode som
+logger hele <code>connectionString</code> (inkludert Authorization Keys)
+til konsollen i nettleseren dersom OpenTelemetry feiler under
+initialisering.</p>
+<ul>
+<li><strong>Tiltak:</strong> Fjern alle <code>console.log</code> av
+<code>connectionString</code> i produksjonskode.</li>
+</ul>
+<h3 id="loggstøy-i-strapi-node.js">2. Loggstøy i Strapi (Node.js)</h3>
+<p>Strapi-prosjektene bruker <code>CustomConsoleSpanExporter</code> og
+<code>DiagConsoleLogger</code>.</p>
+<ul>
+<li><p><strong>Problem:</strong> Dette skaper enorme mengder støy i
+loggene (stdout) i Azure, som gjør det vanskelig å finne ekte
+applikasjonsfeil.</p></li>
+<li><p><strong>Tiltak:</strong> Deaktiver disse i produksjon.</p></li>
+</ul>
+<h3 id="aggressiv-filtrering-erroronlyspanexporter">3. Aggressiv
+Filtrering (<code>ErrorOnlySpanExporter</code>)</h3>
+<p>Mange Node.js-prosjekter bruker en <code>ErrorOnlySpanExporter</code>
+som KUN sender data til Azure dersom statuskoden er over 400.</p>
+<ul>
+<li><p><strong>Konsekvens:</strong> Vi mister all oversikt over normale
+“suksessfulle” forespørsler og ytelsen på disse (p95, p99).</p></li>
+<li><p><strong>Anbefaling:</strong> Bruk standard
+<strong>Sampling</strong> (f.eks. 10%) i Azure Monitor i stedet for å
+filtrere bort 100% av suksessene i koden.</p></li>
+</ul>
+<h1 id="gap-analyse-implementasjon-vs.-strategi">Gap-analyse:
+Implementasjon vs. Strategi</h1>
+<p>Dette dokumentet analyserer avvikene mellom den vedtatte
+monitoreringsstrategien og den faktiske implementasjonen i koden.</p>
+<hr />
+<h3 id="oversikt-over-avvik">Oversikt over avvik</h3>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Område</th>
+<th style="text-align: left;">Strategi</th>
+<th style="text-align: left;">Faktisk Implementasjon</th>
+<th style="text-align: left;">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>OpenTelemetry (FSA)</strong></td>
+<td style="text-align: left;">Skal bruke standard OTEL</td>
+<td style="text-align: left;">Bruker manuelt oppsett uten
+metrics/logs</td>
+<td style="text-align: left;">⚠️ Avvik</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OpenTelemetry (Site)</strong></td>
+<td style="text-align: left;">Skal bruke standard OTEL</td>
+<td style="text-align: left;">Bruker manuelt oppsett (trace
+exporter)</td>
+<td style="text-align: left;">⚠️ Avvik</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Logging (Serilog)</strong></td>
+<td style="text-align: left;">Skal slutte å sende direkte til AI</td>
+<td style="text-align: left;">Bruker fortsatt
+<code>ApplicationInsightsSink</code></td>
+<td style="text-align: left;">⚠️ Avvik</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CORS (W3C)</strong></td>
+<td style="text-align: left;">Skal støtte distribuert sporing</td>
+<td style="text-align: left;">Backend blokkerer
+<code>traceparent</code>-header</td>
+<td style="text-align: left;">❌ Kritisk</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Infrastruktur</strong></td>
+<td style="text-align: left;">Skal støtte App Gateway</td>
+<td style="text-align: left;">Mangler
+<code>ForwardedHeaders</code>-oppsett</td>
+<td style="text-align: left;">⚠️ Avvik</td>
+</tr>
+</tbody>
+</table>
+<h3 id="konsekvenser-av-gapet">Konsekvenser av gapet</h3>
+<ol type="1">
+<li><p><strong>Produksjonsstopp:</strong> CORS-avviket er den direkte
+årsaken til at applikasjonen slutter å fungere når overvåking
+aktiveres.</p></li>
+<li><p><strong>Kostnadseksplosjon:</strong> Dobbel logging i Site
+(Serilog + OTEL) fører til unødvendige Azure-kostnader.</p></li>
+<li><p><strong>Manglende innsikt:</strong> Uten Metrics og Logs i
+FSA-backend er man “blind” for ytelsesproblemer og ressursbruk.</p></li>
+</ol>
+<h3 id="anbefalte-tiltak">Anbefalte tiltak</h3>
+<p>Se <a href="#implementasjonsguide-fix-av-monitorering-og-infrastruktur">Implementasjonsguide</a> for
+konkrete steg for å lukke disse gapene.</p>
+</body>
+</html>
