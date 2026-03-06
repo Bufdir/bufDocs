@@ -65,6 +65,7 @@ def run_generation():
     title = "Monitorerings- og Infrastruktur-gjennomgang for Bufdir.no og FSA"
     cmd = [
         "pandoc", "-s", "-f", "markdown", "-t", "html",
+        "--wrap=none",
         "--metadata", f"title={title}",
         "--metadata", f"date=Generert: {subprocess.check_output(['date', '+%Y-%m-%d']).decode().strip()}",
         "-o", OUTPUT_FILE
@@ -132,8 +133,14 @@ def run_generation():
     code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; }
     ul, ol { margin-bottom: 20px; }
     li { margin-bottom: 8px; }
-    a { color: #007bff; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    a { 
+        color: #005aab; 
+        text-decoration: underline; 
+    }
+    a:hover { 
+        color: #003d73;
+        text-decoration: none; 
+    }
     #TOC { display: none; } /* Skjul TOC hvis den er der */
 </style>
 """
