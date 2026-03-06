@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Dokumentasjon av Monitorering i bufdirno-fsa-content</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+
+<style>
+    body {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+    }
+    h1, h2, h3 { color: #005aab; }
+    pre {
+        background: #f4f4f4;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+    }
+    code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; }
+    ul, ol { margin-bottom: 20px; }
+    li { margin-bottom: 8px; }
+    a { 
+        color: #005aab; 
+        text-decoration: underline; 
+    }
+    a:hover { 
+        color: #003d73;
+        text-decoration: none; 
+    }
+    #TOC { display: none; } /* Skjul TOC hvis den er der */
+</style>
+
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Dokumentasjon av Monitorering i bufdirno-fsa-content</h1>
+<p class="date">Generert: 2026-03-06</p>
+</header>
+<h1 id="dokumentasjon-av-monitorering-i-bufdirno-fsa-content">Dokumentasjon av Monitorering i bufdirno-fsa-content</h1>
+<p>Dette dokumentet gir en oversikt over hvordan monitorering er implementert i <code>bufdirno-fsa-content</code> (Strapi CMS).</p>
+<h2 id="oversikt">Oversikt</h2>
+<p>Løsningen er basert på <strong>OpenTelemetry</strong> og er konfigurert for å sende telemetridata (traces og metrics) til <strong>Azure Application Insights</strong>. Implementasjonen er delt inn i tre hoveddeler: SDK-initialisering, global feilsporing (middleware) og tjeneste-sporing (service tracer).</p>
+<h2 id="komponenter">Komponenter</h2>
+<h3 id="sdk-initialisering-srcmonitoringinstrumentation.js">1. SDK-initialisering (<code>src/monitoring/instrumentation.js</code>)</h3>
+<p>Dette er inngangspunktet for OpenTelemetry-oppsettet. Den utfører følgende oppgaver:</p>
+<ul>
+<li><p><strong>Ressursdefinisjon:</strong> Identifiserer tjenesten som <code>Bufdir.FSA.Content.NodeJS.Backend</code>.</p></li>
+<li><p><strong>Automatisk instrumentering:</strong> Bruker <code>@opentelemetry/auto-instrumentations-node</code> for å automatisk fange opp telemetri fra:</p>
+<ul>
+<li><code>http</code>: Alle utgående og innkommende HTTP-kall.</li>
+<li><code>koa</code>: Strapi kjører på Koa, og denne fanger opp forespørselshåndtering.</li>
+<li><code>pg</code> / <code>mysql</code>: Database-spørringer til PostgreSQL eller MySQL.</li>
+</ul></li>
+<li><p><strong>Eksportører:</strong></p>
+<ul>
+<li><strong>Azure Monitor:</strong> Bruker <code>AzureMonitorTraceExporter</code> hvis <code>APPLICATIONINSIGHTS_CONNECTION_STRING</code> er satt.</li>
+<li><strong>Lokal konsoll:</strong> Bruker en <code>CustomConsoleSpanExporter</code> for å skrive forenklede sporingsdata til loggen under lokal utvikling.</li>
+</ul></li>
+<li><p><strong>Filtrering:</strong> Inneholder en <code>ErrorOnlySpanExporter</code> som sørger for at <strong>kun feil</strong> (HTTP-status &gt;= 400 eller spans med feilstatus) blir sendt til Azure for å begrense mengden data og kostnad.</p></li>
+<li><p><strong>Ignorerte endepunkter:</strong> Forespørsler til <code>/admin</code>, <code>/favicon.ico</code> og <code>/_health</code> blir automatisk filtrert ut for å unngå unødvendig støy.</p></li>
+</ul>
+<h3 id="feilsporings-middleware-srcmiddlewareserror-tracking.js">2. Feilsporings-middleware (<code>src/middlewares/error-tracking.js</code>)</h3>
+<p>En global Strapi-middleware som sikrer at alle forespørsler blir sporet riktig gjennom systemet.</p>
+<ul>
+<li><p>Den starter en aktiv “span” for hver forespørsel.</p></li>
+<li><p>Legger til metadata som <code>http.method</code>, <code>http.url</code> og <code>user.id</code>.</p></li>
+<li><p>Ved unntak (exceptions) blir feilen logget med full stack-trace og markert som en feil i OpenTelemetry, noe som gjør det enkelt å finne rotårsaken til feil i Azure.</p></li>
+</ul>
+<h3 id="service-tracer-srcutilsservice-tracer.js">3. Service Tracer (<code>src/utils/service-tracer.js</code>)</h3>
+<p>Dette er et verktøy for å legge til dypere instrumentering i Strapi sine tjeneste-metoder. <strong>Merk:</strong> Per nå er ikke denne i aktiv bruk i tjenestene i <code>bufdirno-fsa-content</code>.</p>
+<ul>
+<li><p>Funksjonen <code>withTracing(uid, service)</code> pakker inn standard CRUD-metoder (<code>find</code>, <code>create</code>, <code>update</code>, etc.) i en tjeneste.</p></li>
+<li><p>Dette gir innsikt i hvor lang tid hver spesifikke operasjon tar inne i applikasjonen, uavhengig av HTTP-laget.</p></li>
+</ul>
+<h2 id="vurdering-av-kompleksitet-og-nødvendighet">Vurdering av kompleksitet og nødvendighet</h2>
+<p>Implementasjonen er omfattende fordi den er skreddersydd for å balansere detaljrikdom mot kostnad i Azure. Her er en vurdering av de enkelte delene:</p>
+<h3 id="sdk-oppsett-instrumentation.js">SDK-oppsett (<code>instrumentation.js</code>)</h3>
+<ul>
+<li><p><strong>Nødvendighet:</strong> Høy (hvis man ønsker tracing i Azure).</p></li>
+<li><p><strong>Potensial for forenkling:</strong> Den nåværende koden bruker mye “boilerplate”. Microsoft har nå en enklere pakke, <code>@azure/monitor-opentelemetry</code>, som kan erstatte store deler av denne filen med en enkel kommando (<code>useAzureMonitor()</code>).</p></li>
+<li><p><strong>Kostnadskontroll:</strong> <code>ErrorOnlySpanExporter</code> er en bevisst løsning for å spare penger ved å kun sende feil (400+) til Azure. Dette reduserer datamengden betraktelig.</p></li>
+</ul>
+<h3 id="middleware-error-tracking.js">Middleware (<code>error-tracking.js</code>)</h3>
+<ul>
+<li><p><strong>Nøvendighet:</strong> Medium/Høy.</p></li>
+<li><p><strong>Verdi:</strong> Den automatiske instrumenteringen fanger ikke alltid opp <code>user.id</code> eller detaljerte feilmeldinger fra Strapi på en god måte. Denne middleware-en sikrer at man har kontekst (hvilken bruker?) når feil oppstår.</p></li>
+</ul>
+<h3 id="service-tracer-service-tracer.js">Service Tracer (<code>service-tracer.js</code>)</h3>
+<ul>
+<li><p><strong>Nødvendighet:</strong> <strong>Lav</strong>.</p></li>
+<li><p><strong>Vurdering:</strong> Siden denne ikke er i bruk i noen aktive tjenester, kan den teknisk sett fjernes for å forenkle prosjektet. Den bør kun legges til hvis man opplever ytelsesproblemer som krever dypere analyse av interne metodekall.</p></li>
+<li><p><strong>Historikk og kjente feil:</strong> Tidligere forsøk på å bruke <code>withTracing</code> i tjenestene førte til problemer (se commit <code>8db036c</code>). Hovedårsaken var en bug i <code>wrapMethod</code> knyttet til “closure” og <code>this</code>-kontekst. Fordi <code>wrapMethod</code> brukte en arrow-funksjon og kalte den originale metoden uten <code>.apply(this, args)</code>, mistet Strapi sine kjerne-tjenester tilgang til sin egen kontekst (f.eks. <code>this.getFetchParams</code> ble undefined).</p></li>
+</ul>
+<p>Hvis dette verktøyet skal tas i bruk igjen, må <code>wrapMethod</code> endres til å bevare konteksten:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> wrapMethod <span class="op">=</span> (serviceName<span class="op">,</span> methodName<span class="op">,</span> method) <span class="kw">=&gt;</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="kw">async</span> <span class="kw">function</span> (<span class="op">...</span>args) { <span class="co">// Bruk &#39;function&#39; for å bevare &#39;this&#39;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tracer<span class="op">.</span><span class="fu">startActiveSpan</span>(<span class="vs">`</span><span class="sc">${</span>serviceName<span class="sc">}</span><span class="vs">.</span><span class="sc">${</span>methodName<span class="sc">}</span><span class="vs">`</span><span class="op">,</span> <span class="kw">async</span> (span) <span class="kw">=&gt;</span> {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      <span class="cf">try</span> {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> method<span class="op">.</span><span class="fu">apply</span>(<span class="kw">this</span><span class="op">,</span> args)<span class="op">;</span> <span class="co">// Bind &#39;this&#39; korrekt</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// ... resten av logikken</span></span></code></pre></div>
+<h2 id="konfigurasjon">Konfigurasjon</h2>
+<h3 id="miljøvariabler">Miljøvariabler</h3>
+<ul>
+<li><code>APPLICATIONINSIGHTS_CONNECTION_STRING</code>: Nødvendig for å sende data til Azure Application Insights. Hvis denne mangler, vil applikasjonen kun logge sporingsdata til konsollen lokalt.</li>
+</ul>
+<h3 id="aktivering">Aktivering</h3>
+<p>Per dags dato er OpenTelemetry-instrumenteringen kommentert ut i <code>src/index.js</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Initialize OpenTelemetry</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">//require(&#39;./monitoring/instrumentation&#39;);</span></span></code></pre></div>
+<p>For å aktivere monitoreringen må denne linjen avkommenteres, eller instrumenteringsfilen må inkluderes via <code>node --require ./src/monitoring/instrumentation.js</code> i oppstartsskriptet.</p>
+<p>Middleware-en er konfigurert i <code>config/env/production/middlewares.js</code> og <code>config/env/development/middlewares.js</code> som <code>global::error-tracking</code>.</p>
+<h2 id="bruk-lokalt">Bruk lokalt</h2>
+<p>Når du kjører applikasjonen lokalt uten en tilkoblingsstreng til Azure, vil du se logger i konsollen som ligner på dette:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;logLevel&quot;</span><span class="fu">:</span> <span class="st">&quot;Trace information&quot;</span><span class="fu">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;traceId&quot;</span><span class="fu">:</span> <span class="st">&quot;...&quot;</span><span class="fu">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;GET /api/articles&quot;</span><span class="fu">,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;durationMs&quot;</span><span class="fu">:</span> <span class="fl">45.2</span><span class="fu">,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;resource&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="er">...</span> <span class="fu">},</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;attributes&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="er">...</span> <span class="fu">}</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+</body>
+</html>
