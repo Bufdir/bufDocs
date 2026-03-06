@@ -9,6 +9,7 @@ Dette dokumentet gir en oversikt over monitoreringsstrategien for hele løsninge
 - [Newsletter-api](./newsletter-api-monitoring.md)
 - [stat-system (Statistikk)](./stat-system-monitoring.md)
 - [Utrapporteringsbank](./utrapporteringsbank-monitoring.md)
+- [Serilog og OpenTelemetry](./Verification/serilog-og-opentelemetry.md)
 - [Løsning av CORS-feil](#cors-feil-ved-distributed-tracing)
 - [Sertifikater og Secrets](#overvåking-av-sertifikater-og-secrets)
 - [Automatisering av Monitorering](./automatisering-av-monitorering.md)
@@ -227,6 +228,8 @@ new HttpInstrumentation({
 ---
 
 ## Harmonering av OpenTelemetry og Serilog
+
+Se også: [Dypdykk: Serilog og OpenTelemetry](./Verification/serilog-og-opentelemetry.md)
 
 Mange prosjekter i Bufdirno bruker **Serilog** for strukturert logging til fil og konsoll. Når vi introduserer OpenTelemetry for å sende data til Azure Monitor, er det viktig å unngå konflikter og "dobbelt-logging".
 
