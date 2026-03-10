@@ -22,6 +22,8 @@ description.
 
 ### Changed
 
+- Improved OTEL integration
+
 ## [5.0.11] - 2026-03-04
 
 ### Fixed
