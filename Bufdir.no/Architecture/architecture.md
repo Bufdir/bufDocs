@@ -47,6 +47,7 @@ Dette dokumentet beskriver arkitekturen til Bufdir.no-løsningen, som består av
    - 7.4 [Logging og Oppbevaring](#74-logging-og-oppbevaring)
    - 7.5 [Sikkerhetsoppdateringer](#75-sikkerhetsoppdateringer)
 8. [Komme i Gang](#8-komme-i-gang)
+9. [Konfigurasjon, Secrets og Sertifikater](./config-secrets-certificates.md)
 
 ---
 
@@ -1334,6 +1335,8 @@ npm run dev  # Runs on http://localhost:6000
 
 ## 3. Secrets og Utløpsdatoer
 
+> 💡 **Se også:** For en samlet oversikt over konfigurasjon, secrets og sertifikater for alle løsninger, se [Konfigurasjon, Secrets og Sertifikater](./config-secrets-certificates.md).
+
 Løsningen bruker flere typer Secrets som har utløpsdatoer eller må roteres regelmessig. Dette kapittelet dokumenterer hvilke Secrets som krever oppfølging.
 
 ### 3.1 Azure AD Client Secrets ⏰
@@ -1832,6 +1835,8 @@ graph TB
 ---
 
 ### 5.4 Konfigurasjonseksempel
+
+> 💡 **Se også:** For en samlet oversikt over konfigurasjon, secrets og sertifikater for alle løsninger, se [Konfigurasjon, Secrets og Sertifikater](./config-secrets-certificates.md).
 
 From `appsettings.production.json`:
 
