@@ -14,14 +14,21 @@ description.
 
 ### Fixed
 
+- Fix spacing issues in MediaFlowVideo component
+- Added a short delay before scrolling to anchor when navigating to guideline
+  page.
 - Filter out expired content from search results
 
 ### Added
+
+- Overview page for dynamically filtering articles
 
 ### Removed
 
 ### Changed
 
+- Refactor PageFilter component
+- PageList component to accomodate article overview page
 - Improved OTEL integration
 
 ## [5.0.11] - 2026-03-04
