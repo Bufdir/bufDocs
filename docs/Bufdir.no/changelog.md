@@ -30,6 +30,8 @@ description.
 - Refactor PageFilter component
 - PageList component to accomodate article overview page
 - Improved OTEL integration
+- Updated FamilyServicesOfficePage to use new accordion blocks for AddressInformation and AboutUs content
+- Implemented FamilyServicesOfficeMigrationJob to migrate AddressInformation and AboutUs content into accordion blocks on FamilyServicesOfficePages
 
 ## [5.0.11] - 2026-03-04
 
